@@ -1,6 +1,6 @@
 # faker.js - generate massive amounts of fake data in the browser and node.js
 
-![Faker.js](https://raw.githubusercontent.com/Marak/faker.js/master/logo.png)
+![Faker.js](logo.png)
 
 [![Build Status](https://travis-ci.org/Marak/faker.js.svg?branch=master)](https://travis-ci.org/Marak/faker.js) [![Coverage Status](https://coveralls.io/repos/github/Marak/faker.js/badge.svg?branch=master)](https://coveralls.io/github/Marak/faker.js?branch=master)
 
@@ -476,6 +476,9 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+<a href="https://iconscout.com/icons/jester-hat" target="_blank">Jester Hat Icon</a> by <a href="https://iconscout.com/contributors/iconscout">Iconscout Store</a> on <a href="https://iconscout.com">Iconscout</a>
 
 ## Backers
 
