@@ -1,10 +1,18 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/luciferreeves/bluffmaster/master/logos/logo-96.png">
+</p>
+
 # BluffMaster - generate massive amounts of fake data in the browser and node.js
 
-![BluffMaster](https://raw.githubusercontent.com/luciferreeves/bluffmaster/master/logos/logo-96.png)
+BluffMaster is a JavaScript library built on top of the [Faker.JS](https://github.com/marak/Faker.js) library. It generates massive amounts of fake data in the browser and node.js. 
+
+Fake data is useful when building and testing our application. BluffMaster can generate fake data for various areas, including address, commerce, company, date, finance, image, random, or name.
 
 ## What happened to the original faker.js?
 
-This project was originally created and hosted at https://github.com/marak/Faker.js/ - however around 4th Jan, 2022 - the author decided to delete the repository (for unknown reasons).
+This project was originally created and hosted at https://github.com/marak/Faker.js/ - however around 4th Jan, 2022 - the author decided to delete the repository along with the code, for unknown reasons.
+
+BluffMaster is a fork of the original Faker.js library. The original library was created by [Marak Squires](https://github.com/marak/) in 2011. BluffMaster aims to maintain the original library's functionality and add new features. 
 
 
 <!-- [![Build Status](https://travis-ci.org/Marak/faker.js.svg?branch=master)](https://travis-ci.org/Marak/faker.js) [![Coverage Status](https://coveralls.io/repos/github/Marak/faker.js/badge.svg?branch=master)](https://coveralls.io/github/Marak/faker.js?branch=master)
@@ -23,29 +31,29 @@ This project was originally created and hosted at https://github.com/marak/Faker
 ### Browser
 
 ```html
-    <script src = "faker.js" type = "text/javascript"></script>
-    <script>
-      var randomName = faker.name.findName(); // Caitlyn Kerluke
-      var randomEmail = faker.internet.email(); // Rusty@arne.info
-      var randomCard = faker.helpers.createCard(); // random contact card containing many properties
-    </script>
+<script src = "bluffmaster.js" type = "text/javascript"></script>
+<script>
+  var randomName = bluffmaster.name.findName(); // Caitlyn Kerluke
+  var randomEmail = bluffmaster.internet.email(); // Rusty@arne.info
+  var randomCard = bluffmaster.helpers.createCard(); // random contact card containing many properties
+</script>
 ```
 
 ### Node.js
 
 ```js
-    var faker = require('faker');
+var bluffmaster = require('bluffmaster');
 
-    var randomName = faker.name.findName(); // Rowan Nikolaus
-    var randomEmail = faker.internet.email(); // Kassandra.Haley@erich.biz
-    var randomCard = faker.helpers.createCard(); // random contact card containing many properties
+var randomName = bluffmaster.name.findName(); // Rowan Nikolaus
+var randomEmail = bluffmaster.internet.email(); // Kassandra.Haley@erich.biz
+var randomCard = bluffmaster.helpers.createCard(); // random contact card containing many properties
 ```
 
 ## API
 
 ### JSDoc API Browser
 
-[http://marak.github.io/faker.js/](http://marak.github.io/faker.js/)
+You can browse all API methods by going to the [JSDoc API Browser](http://thatcomputerscientist.com/bluffmaster/).
 
 ### API Methods
 
@@ -300,15 +308,15 @@ This project was originally created and hosted at https://github.com/marak/Faker
   * verb
 
 
-### Faker.fake()
+### BluffMaster.fake()
 
-faker.js contains a super useful generator method `Faker.fake` for combining faker API methods using a mustache string format.
+BluffMaster contains a super useful generator method `BluffMaster.fake` for combining faker API methods using a mustache string format.
 
 **Example:**
 
 
 ``` js
-console.log(faker.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
+console.log(bluffmaster.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
 // outputs: "Marks, Dean Sr."
 ```
 
@@ -317,7 +325,7 @@ This will interpolate the format string with the value of methods `name.lastName
 
 ## Localization
 
-As of version `v2.0.0` faker.js has support for multiple localities.
+BluffMaster has support for multiple localities – ported directly from the orginal faker.js library (version `v2.0.0`).
 
 The default language locale is set to English.
 
@@ -325,7 +333,7 @@ Setting a new locale is simple:
 
 ```js
 // sets locale to de
-faker.locale = "de";
+bluffmaster.locale = "de";
 ```
 
  * az
@@ -380,15 +388,15 @@ faker.locale = "de";
 
 ### Individual Localization Packages
 
-faker.js supports incremental loading of locales.
+BluffMaster supports incremental loading of locales.
 
-By default, requiring `faker` will include *all* locale data.
+By default, requiring `bluffmaster` will include *all* locale data.
 
 In a production environment, you may only want to include the locale data for a specific set of locales.
 
 ```js
 // loads only de locale
-var faker = require('faker/locale/de');
+var bluffmaster = require('bluffmaster/locale/de');
 ```
 
 ## Setting a randomness seed
@@ -396,14 +404,14 @@ var faker = require('faker/locale/de');
 If you want consistent results, you can set your own seed:
 
 ```js
-faker.seed(123);
+bluffmaster.seed(123);
 
-var firstRandom = faker.random.number();
+var firstRandom = bluffmaster.random.number();
 
 // Setting the seed again resets the sequence.
-faker.seed(123);
+bluffmaster.seed(123);
 
-var secondRandom = faker.random.number();
+var secondRandom = bluffmaster.random.number();
 
 console.log(firstRandom === secondRandom);
 ```
@@ -417,9 +425,9 @@ make test
 
 You can view a code coverage report generated in coverage/lcov-report/index.html.
 
-## Building faker.js
+## Building BluffMaster
 
-faker uses [gulp](http://gulpjs.com/) to automate its build process. Each build operation is a separate task which can be run independently.
+BluffMaster uses [gulp](http://gulpjs.com/) to automate its build process. Each build operation is a separate task which can be run independently.
 
 ### Browser Bundle
 
@@ -435,19 +443,19 @@ npm run browser
 npm run jsdoc
 ```
 
-### Building ReadMe
+### Building Readme
 
-The `ReadMe.md` file for `faker.js` is automatically generated and should not be modified directly. All updates to `ReadMe.md` should be performed in `./build/src/docs.md` and then the build script should be run.
+The `Readme.md` file for `bluffmaster` is automatically generated and should not be modified directly. All updates to `Readme.md` should be performed in `./build/src/docs.md` and then the build script should be run.
 
 ```shell
 npm run readme
 ```
 
-## Version Release Schedule
+<!-- ## Version Release Schedule
 
 faker.js is a popular project used by many organizations and individuals in production settings. Major and Minor version releases are generally on a monthly schedule. Bugs fixes are addressed by severity and fixed as soon as possible.
 
-If you require the absolute latest version of `faker.js` the `master` branch @ <http://github.com/marak/faker.js/> should always be up to date and working.
+If you require the absolute latest version of `faker.js` the `master` branch @ <http://github.com/marak/faker.js/> should always be up to date and working. -->
 
 <!-- ## Maintainer
 
