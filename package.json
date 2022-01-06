@@ -1,11 +1,11 @@
 {
-  "name": "@withshepherd/faker",
+  "name": "bluffmaster",
   "description": "Generate massive amounts of fake contextual data",
   "private": false,
   "version": "5.5.4",
   "repository": {
     "type": "git",
-    "url": "http://github.com/withshepherd/faker.js.git"
+    "url": "https://github.com/luciferreeves/bluffmaster.git"
   },
   "scripts": {
     "browser": "./node_modules/.bin/gulp browser",
