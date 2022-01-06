@@ -2,6 +2,8 @@
   <img src="https://raw.githubusercontent.com/luciferreeves/bluffmaster/master/logos/logo-96.png">
 </p>
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/bluffmaster/Build)
+
 # BluffMaster - generate massive amounts of fake data in the browser and node.js
 
 BluffMaster is a JavaScript library built on top of the [Faker.JS](https://github.com/marak/Faker.js) library. It generates massive amounts of fake data in the browser and node.js. 
