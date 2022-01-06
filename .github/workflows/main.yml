@@ -21,5 +21,3 @@ jobs:
         with:
           node-version: '${{ matrix.node-version }}'
       - uses: actions/checkout@v2
-      - name: Codecov
-        uses: codecov/codecov-action@v2.1.0
