@@ -16,6 +16,8 @@ This project was originally created and hosted at https://github.com/marak/Faker
 
 BluffMaster is a fork of the original Faker.js library. The original library was created by [Marak Squires](https://github.com/marak/) in 2011. BluffMaster aims to maintain the original library's functionality and add new features. 
 
+You can also access unofficial Faker.js documentation at [https://fakerjsdocs.netlify.com/](https://fakerjsdocs.netlify.com/)
+
 
 <!-- [![Build Status](https://travis-ci.org/Marak/faker.js.svg?branch=master)](https://travis-ci.org/Marak/faker.js) [![Coverage Status](https://coveralls.io/repos/github/Marak/faker.js/badge.svg?branch=master)](https://coveralls.io/github/Marak/faker.js?branch=master)
 
