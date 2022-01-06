@@ -31,7 +31,7 @@ describe("commerce.js", function () {
         bluffmaster.random.arrayElement.restore();
     });
 
-    it("should return the maxiumum value if we specify the fixed value", function() {
+    it("should return the maximum value if we specify the fixed value", function() {
         sinon.spy(bluffmaster.random, 'arrayElement');
 
         var department = bluffmaster.commerce.department(5, true);

@@ -34,13 +34,13 @@ describe("system.js", function () {
   });
 
   describe("fileName()", function () {
-    it("returns filenames without system path seperators", function () {
+    it("returns filenames without system path separators", function () {
       sinon.stub(bluffmaster.random, "words").returns("24/7");
       var fileName = bluffmaster.system.fileName();
       assert.equal(
         fileName.indexOf("/"),
         -1,
-        "generated fileNames should not have path seperators"
+        "generated fileNames should not have path separators"
       );
 
       bluffmaster.random.words.restore();
@@ -48,13 +48,13 @@ describe("system.js", function () {
   });
 
   describe("commonFileName()", function () {
-    it("returns filenames without system path seperators", function () {
+    it("returns filenames without system path separators", function () {
       sinon.stub(bluffmaster.random, "words").returns("24/7");
       var fileName = bluffmaster.system.commonFileName();
       assert.equal(
         fileName.indexOf("/"),
         -1,
-        "generated commonFileNames should not have path seperators"
+        "generated commonFileNames should not have path separators"
       );
 
       bluffmaster.random.words.restore();
