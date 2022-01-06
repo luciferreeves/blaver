@@ -13,7 +13,7 @@
     "readme": "./node_modules/.bin/gulp readme",
     "lint": "node_modules/.bin/jshint ./lib --config ./.jshintrc",
     "test": "node_modules/.bin/mocha test/*.*.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "nyc": {
