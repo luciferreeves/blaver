@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 Npm.depends({
   faker: "3.0.1",
 });
