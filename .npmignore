@@ -3,7 +3,7 @@ build/*
 build/build/*
 !build/build/bluffmaster.js
 !build/build/bluffmaster.min.js
-doc/
+docs/
 examples/
 meteor/
 test/
