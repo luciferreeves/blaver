@@ -1,30 +1,31 @@
-if (typeof module !== "undefined") {
-  var assert = require("assert");
-  var sinon = require("sinon");
-  var bluffmaster = require("../index");
+if (typeof module !== 'undefined') {
+  var assert = require('assert');
+  var sinon = require('sinon');
+  var bluffmaster = require('../index');
 }
 
 describe("lorem.js", function () {
   describe("word()", function () {
+
     context("when no 'length' param passed in", function () {
       it("returns a word with a random length", function () {
         var str = bluffmaster.lorem.word();
-        assert.ok(typeof str === "string");
+        assert.ok(typeof str === 'string');
       });
     });
 
     context("when 'length' param passed in", function () {
       it("returns a word with the requested length", function () {
         var str = bluffmaster.lorem.word(5);
-        assert.ok(typeof str === "string");
-        assert.equal(str.length, 5);
+        assert.ok(typeof str === 'string');
+        assert.strictEqual(str.length, 5);
       });
     });
   });
-
+    
   describe("words()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.helpers, "shuffle");
+      sinon.spy(bluffmaster.helpers, 'shuffle');
     });
 
     afterEach(function () {
@@ -34,9 +35,9 @@ describe("lorem.js", function () {
     context("when no 'num' param passed in", function () {
       it("returns three words", function () {
         var str = bluffmaster.lorem.words();
-        var words = str.split(" ");
+        var words = str.split(' ');
         assert.ok(Array.isArray(words));
-        assert.equal(true, words.length >= 3);
+        assert.strictEqual(true, words.length >= 3);
         // assert.ok(bluffmaster.helpers.shuffle.called);
       });
     });
@@ -44,16 +45,16 @@ describe("lorem.js", function () {
     context("when 'num' param passed in", function () {
       it("returns requested number of words", function () {
         var str = bluffmaster.lorem.words(7);
-        var words = str.split(" ");
+        var words = str.split(' ');
         assert.ok(Array.isArray(words));
-        assert.equal(words.length, 7);
+        assert.strictEqual(words.length, 7);
       });
     });
   });
 
   describe("slug()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.helpers, "shuffle");
+      sinon.spy(bluffmaster.helpers, 'shuffle');
     });
 
     afterEach(function () {
@@ -61,8 +62,8 @@ describe("lorem.js", function () {
     });
 
     var validateSlug = function (wordCount, str) {
-      assert.equal(1, str.match(/^[a-z][a-z-]*[a-z]$/).length);
-      assert.equal(wordCount - 1, str.match(/-/g).length);
+      assert.strictEqual(1, str.match(/^[a-z][a-z-]*[a-z]$/).length);
+      assert.strictEqual(wordCount - 1, str.match(/-/g).length);
     };
 
     context("when no 'wordCount' param passed in", function () {
@@ -78,6 +79,7 @@ describe("lorem.js", function () {
         validateSlug(7, str);
       });
     });
+
   });
 
   /*
@@ -89,7 +91,7 @@ describe("lorem.js", function () {
                 var sentence = bluffmaster.lorem.sentence();
                 assert.ok(typeof sentence === 'string');
                 var parts = sentence.split(' ');
-                assert.equal(parts.length, 5); // default 3 plus stubbed 2.
+                assert.strictEqual(parts.length, 5); // default 3 plus stubbed 2.
                 assert.ok(bluffmaster.lorem.words.calledWith(5));
 
                 bluffmaster.lorem.words.restore();
@@ -105,7 +107,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof sentence === 'string');
                 var parts = sentence.split(' ');
-                assert.equal(parts.length, 12); // requested 10 plus stubbed 2.
+                assert.strictEqual(parts.length, 12); // requested 10 plus stubbed 2.
                 assert.ok(bluffmaster.lorem.words.calledWith(12));
 
                 bluffmaster.lorem.words.restore();
@@ -122,7 +124,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof sentence === 'string');
                 var parts = sentence.split(' ');
-                assert.equal(parts.length, 14); // requested 10 plus stubbed 4.
+                assert.strictEqual(parts.length, 14); // requested 10 plus stubbed 4.
                 assert.ok(bluffmaster.random.number.calledWith(4)); // random.number should be called with the 'range' we passed. 
                 assert.ok(bluffmaster.lorem.words.calledWith(14));
 
@@ -143,7 +145,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof sentences === 'string');
                 var parts = sentences.split('\n');
-                assert.equal(parts.length, 3);
+                assert.strictEqual(parts.length, 3);
                 assert.ok(bluffmaster.lorem.sentence.calledThrice);
 
                 bluffmaster.lorem.sentence.restore();
@@ -157,7 +159,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof sentences === 'string');
                 var parts = sentences.split('\n');
-                assert.equal(parts.length, 5);
+                assert.strictEqual(parts.length, 5);
 
                 bluffmaster.lorem.sentence.restore();
             });
@@ -174,7 +176,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof paragraph === 'string');
                 var parts = paragraph.split('\n');
-                assert.equal(parts.length, 5); // default 3 plus stubbed 2.
+                assert.strictEqual(parts.length, 5); // default 3 plus stubbed 2.
                 assert.ok(bluffmaster.lorem.sentences.calledWith(5));
 
                 bluffmaster.lorem.sentences.restore();
@@ -190,7 +192,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof paragraph === 'string');
                 var parts = paragraph.split('\n');
-                assert.equal(parts.length, 12); // requested 10 plus stubbed 2.
+                assert.strictEqual(parts.length, 12); // requested 10 plus stubbed 2.
                 assert.ok(bluffmaster.lorem.sentences.calledWith(12));
 
                 bluffmaster.lorem.sentences.restore();
@@ -199,7 +201,7 @@ describe("lorem.js", function () {
         });
     });
     */
-
+    
   /*
 
     describe("paragraphs()", function () {
@@ -210,7 +212,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof paragraphs === 'string');
                 var parts = paragraphs.split('\n \r');
-                assert.equal(parts.length, 3);
+                assert.strictEqual(parts.length, 3);
                 assert.ok(bluffmaster.lorem.paragraph.calledThrice);
 
                 bluffmaster.lorem.paragraph.restore();
@@ -224,7 +226,7 @@ describe("lorem.js", function () {
 
                 assert.ok(typeof paragraphs === 'string');
                 var parts = paragraphs.split('\n \r');
-                assert.equal(parts.length, 5);
+                assert.strictEqual(parts.length, 5);
 
                 bluffmaster.lorem.paragraph.restore();
             });
