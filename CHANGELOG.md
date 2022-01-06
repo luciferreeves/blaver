@@ -1,5 +1,10 @@
 # BluffMaster Changelog
 
+## v5.5.7
+
+  - Fixed JSDoc Build Errors
+  - Replaced fakercloud.com with pravatar.cc
+
 ## v5.5.6
   - fix typos referencing from commit https://github.com/9renpoto/faker.js/commit/29234378807c4141588861f69421bf20b5ac635
 
