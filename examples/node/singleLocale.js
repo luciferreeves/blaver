@@ -1,7 +1,7 @@
-var faker = require('../locale/en');
+var bluffmaster = require('../locale/en');
 
-console.log(faker.name.findName());
+console.log(bluffmaster.name.findName());
 
-var faker = require('../locale/uk');
+var bluffmaster = require('../locale/uk');
 
-console.log(faker.name.findName());
+console.log(bluffmaster.name.findName());
