@@ -1,6 +1,6 @@
 # BluffMaster Changelog
 
-## v 5.5.5
+## v5.5.5
 
 - Update all faker instances to `bluffmaster`.
 
