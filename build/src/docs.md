@@ -1,17 +1,22 @@
-# faker.js - generate massive amounts of fake data in the browser and node.js
+# BluffMaster - generate massive amounts of fake data in the browser and node.js
 
-![Faker.js](https://raw.githubusercontent.com/Marak/faker.js/master/logo.png)
+![BluffMaster](https://raw.githubusercontent.com/luciferreeves/bluffmaster/master/logos/logo-96.png)
 
-[![Build Status](https://travis-ci.org/Marak/faker.js.svg?branch=master)](https://travis-ci.org/Marak/faker.js) [![Coverage Status](https://coveralls.io/repos/github/Marak/faker.js/badge.svg?branch=master)](https://coveralls.io/github/Marak/faker.js?branch=master)
+## What happened to the original faker.js?
+
+This project was originally created and hosted at https://github.com/marak/Faker.js/ - however around 4th Jan, 2022 - the author decided to delete the repository (for unknown reasons).
+
+
+<!-- [![Build Status](https://travis-ci.org/Marak/faker.js.svg?branch=master)](https://travis-ci.org/Marak/faker.js) [![Coverage Status](https://coveralls.io/repos/github/Marak/faker.js/badge.svg?branch=master)](https://coveralls.io/github/Marak/faker.js?branch=master)
 
 [![npm version](https://badge.fury.io/js/faker.svg)](http://badge.fury.io/js/faker)
 
 [![OpenCollective](https://opencollective.com/fakerjs/backers/badge.svg)](#backers)
-[![OpenCollective](https://opencollective.com/fakerjs/sponsors/badge.svg)](#sponsors)
+[![OpenCollective](https://opencollective.com/fakerjs/sponsors/badge.svg)](#sponsors) -->
 
-## Demo
+<!-- ## Demo
 
-[https://rawgit.com/Marak/faker.js/master/examples/browser/index.html](https://rawgit.com/Marak/faker.js/master/examples/browser/index.html)
+[https://rawgit.com/Marak/faker.js/master/examples/browser/index.html](https://rawgit.com/Marak/faker.js/master/examples/browser/index.html) -->
 
 ## Usage
 
@@ -149,7 +154,7 @@ faker.js is a popular project used by many organizations and individuals in prod
 
 If you require the absolute latest version of `faker.js` the `master` branch @ <http://github.com/marak/faker.js/> should always be up to date and working.
 
-## Maintainer
+<!-- ## Maintainer
 
 #### Marak Squires
 
@@ -250,4 +255,4 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 <a href="https://opencollective.com/fakerjs/sponsor/26/website" target="_blank"><img src="https://opencollective.com/fakerjs/sponsor/26/avatar.svg"></a>
 <a href="https://opencollective.com/fakerjs/sponsor/27/website" target="_blank"><img src="https://opencollective.com/fakerjs/sponsor/27/avatar.svg"></a>
 <a href="https://opencollective.com/fakerjs/sponsor/28/website" target="_blank"><img src="https://opencollective.com/fakerjs/sponsor/28/avatar.svg"></a>
-<a href="https://opencollective.com/fakerjs/sponsor/29/website" target="_blank"><img src="https://opencollective.com/fakerjs/sponsor/29/avatar.svg"></a>
+<a href="https://opencollective.com/fakerjs/sponsor/29/website" target="_blank"><img src="https://opencollective.com/fakerjs/sponsor/29/avatar.svg"></a> -->
