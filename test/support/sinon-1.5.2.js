@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-empty */
+/* eslint-disable no-use-before-define */
 /**
  * Sinon.JS 1.5.2, 2012/11/27
  *
@@ -84,15 +87,15 @@ var sinon = function () {
       },
 
       functionName: function functionName(func) {
-        if (!func) return "";
-        if (func.displayName) return func.displayName;
-        if (func.name) return func.name;
+        if (!func) {return "";}
+        if (func.displayName) {return func.displayName;}
+        if (func.name) {return func.name;}
         var matches = func.toString().match(/function\s+([^\(]+)/m);
         return (matches && matches[1]) || "";
       },
 
       isNode: function isNode(obj) {
-        if (!div) return false;
+        if (!div) {return false;}
         try {
           obj.appendChild(div);
           obj.removeChild(div);
@@ -172,14 +175,14 @@ var sinon = function () {
         var remaining = fns.slice();
         var results = [];
         function callNext() {
-          if (remaining.length == 0) return cb(null, results);
+          if (remaining.length == 0) {return cb(null, results);}
           var promise = remaining.shift()(next);
           if (promise && typeof promise.then == "function") {
             promise.then(buster.partial(next, null), next);
           }
         }
         function next(err, result) {
-          if (err) return cb(err);
+          if (err) {return cb(err);}
           results.push(result);
           callNext();
         }
@@ -188,7 +191,7 @@ var sinon = function () {
 
       countdown: function countdown(num, done) {
         return function () {
-          if (--num == 0) done();
+          if (--num == 0) {done();}
         };
       },
     };
@@ -3197,10 +3200,10 @@ var sinon = function () {
     xhr.workingXHR = xhr.supportsXHR
       ? xhr.GlobalXMLHttpRequest
       : xhr.supportsActiveX
-      ? function () {
+        ? function () {
           return new xhr.GlobalActiveXObject("MSXML2.XMLHTTP.3.0");
         }
-      : false;
+        : false;
 
     /*jsl:ignore*/
     var unsafeHeaders = {
@@ -3250,14 +3253,14 @@ var sinon = function () {
     // filtering to enable a white-list version of Sinon FakeXhr,
     // where whitelisted requests are passed through to real XHR
     function each(collection, callback) {
-      if (!collection) return;
+      if (!collection) {return;}
       for (var i = 0, l = collection.length; i < l; i += 1) {
         callback(collection[i]);
       }
     }
     function some(collection, callback) {
       for (var index = 0; index < collection.length; index++) {
-        if (callback(collection[index]) === true) return true;
+        if (callback(collection[index]) === true) {return true;}
       }
       return false;
     }
@@ -3310,7 +3313,7 @@ var sinon = function () {
           try {
             fakeXhr[attr] = xhr[attr];
           } catch (e) {
-            if (!IE6Re.test(navigator.userAgent)) throw e;
+            if (!IE6Re.test(navigator.userAgent)) {throw e;}
           }
         });
       };
@@ -3327,7 +3330,7 @@ var sinon = function () {
           copyAttrs(["responseXML"]);
         }
         if (fakeXhr.onreadystatechange)
-          fakeXhr.onreadystatechange.call(fakeXhr);
+        {fakeXhr.onreadystatechange.call(fakeXhr);}
       };
       if (xhr.addEventListener) {
         for (var event in fakeXhr.eventListeners) {
@@ -3836,7 +3839,7 @@ var sinon = function () {
       },
 
       respond: function respond() {
-        if (arguments.length > 0) this.respondWith.apply(this, arguments);
+        if (arguments.length > 0) {this.respondWith.apply(this, arguments);}
         var queue = this.queue || [];
         var request;
 

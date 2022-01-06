@@ -3,9 +3,11 @@ name: Build
   push:
     branches:
       - master
+      - dev
   pull_request:
     branches:
       - master
+      - dev
 jobs:
   Build:
     runs-on: '${{ matrix.os }}'

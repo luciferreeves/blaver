@@ -1,14 +1,17 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-caller */
+/* eslint-disable no-undef */
 !(function (name, definition) {
   if (typeof define == "function" && typeof define.amd == "object")
-    define(definition);
-  else this[name] = definition();
+  {define(definition);}
+  else {this[name] = definition();}
 })("chai", function () {
   // CommonJS require()
 
   function require(p) {
     var path = require.resolve(p),
       mod = require.modules[path];
-    if (!mod) throw new Error('failed to require "' + p + '"');
+    if (!mod) {throw new Error('failed to require "' + p + '"');}
     if (!mod.exports) {
       mod.exports = {};
       mod.call(mod.exports, mod, mod.exports, require.relative(path));
@@ -33,7 +36,7 @@
 
   require.relative = function (parent) {
     return function (p) {
-      if ("." != p[0]) return require(p);
+      if ("." != p[0]) {return require(p);}
 
       var path = parent.split("/"),
         segs = p.split("/");
@@ -41,8 +44,8 @@
 
       for (var i = 0; i < segs.length; i++) {
         var seg = segs[i];
-        if (".." == seg) path.pop();
-        else if ("." != seg) path.push(seg);
+        if (".." == seg) {path.pop();}
+        else if ("." != seg) {path.push(seg);}
       }
 
       return require(path.join("/"));
@@ -904,7 +907,7 @@
       keys =
         keys instanceof Array ? keys : Array.prototype.slice.call(arguments);
 
-      if (!keys.length) throw new Error("keys required");
+      if (!keys.length) {throw new Error("keys required");}
 
       var actual = Object.keys(obj),
         len = keys.length;
@@ -1035,7 +1038,7 @@
               " was thrown",
             "expected #{this} to not throw " + name
           );
-          if (!msg) return this;
+          if (!msg) {return this;}
         }
         // next, check message
         if (err.message && msg && msg instanceof RegExp) {
@@ -1065,8 +1068,8 @@
       var expectedThrown = name
         ? name
         : desiredError
-        ? util.inspect(desiredError)
-        : "an error";
+          ? util.inspect(desiredError)
+          : "an error";
 
       this.assert(
         thrown === true,
@@ -2405,7 +2408,7 @@
 
       module.exports = function (ctx, name, method, chainingBehavior) {
         if (typeof chainingBehavior !== "function")
-          chainingBehavior = function () {};
+        {chainingBehavior = function () {};}
 
         Object.defineProperty(ctx, name, {
           get: function () {
@@ -2425,8 +2428,8 @@
                   asserterName
                 );
               // Avoid trying to overwrite things that we can't, like `length` and `arguments`.
-              if (functionProtoPD && !functionProtoPD.configurable) return;
-              if (asserterName === "arguments") return; // @see chaijs/chai/issues/69
+              if (functionProtoPD && !functionProtoPD.configurable) {return;}
+              if (asserterName === "arguments") {return;} // @see chaijs/chai/issues/69
               Object.defineProperty(assert, asserterName, pd);
             });
 
@@ -2542,10 +2545,10 @@
       if (actual === expected) {
         return true;
       } else if (Buffer.isBuffer(actual) && Buffer.isBuffer(expected)) {
-        if (actual.length != expected.length) return false;
+        if (actual.length != expected.length) {return false;}
 
         for (var i = 0; i < actual.length; i++) {
-          if (actual[i] !== expected[i]) return false;
+          if (actual[i] !== expected[i]) {return false;}
         }
 
         return true;
@@ -2580,9 +2583,9 @@
     }
 
     function objEquiv(a, b) {
-      if (isUndefinedOrNull(a) || isUndefinedOrNull(b)) return false;
+      if (isUndefinedOrNull(a) || isUndefinedOrNull(b)) {return false;}
       // an identical 'prototype' property.
-      if (a.prototype !== b.prototype) return false;
+      if (a.prototype !== b.prototype) {return false;}
       //~~~I've managed to break Object.keys through screwy arguments passing.
       //   Converting to array solves the problem.
       if (isArguments(a)) {
@@ -2604,19 +2607,19 @@
       }
       // having the same number of owned properties (keys incorporates
       // hasOwnProperty)
-      if (ka.length != kb.length) return false;
+      if (ka.length != kb.length) {return false;}
       //the same set of keys (although not necessarily the same order),
       ka.sort();
       kb.sort();
       //~~~cheap key test
       for (i = ka.length - 1; i >= 0; i--) {
-        if (ka[i] != kb[i]) return false;
+        if (ka[i] != kb[i]) {return false;}
       }
       //equivalent values for every corresponding key, and
       //~~~possibly expensive deep test
       for (i = ka.length - 1; i >= 0; i--) {
         key = ka[i];
-        if (!_deepEqual(a[key], b[key])) return false;
+        if (!_deepEqual(a[key], b[key])) {return false;}
       }
       return true;
     }
@@ -2744,7 +2747,7 @@
      */
 
     module.exports = function (func) {
-      if (func.name) return func.name;
+      if (func.name) {return func.name;}
 
       var match = /^\s?function ([^(]*)\(/.exec(func);
       return match && match[1] ? match[1] : "";
@@ -2820,7 +2823,7 @@
           var re = /([A-Za-z0-9]+)\[(\d+)\]$/,
             mArr = re.exec(value),
             val;
-          if (mArr) val = { p: mArr[1], i: parseFloat(mArr[2]) };
+          if (mArr) {val = { p: mArr[1], i: parseFloat(mArr[2]) };}
           return val || value;
         });
       }
@@ -2850,7 +2853,7 @@
             } else {
               tmp = tmp[part];
             }
-            if (i == l - 1) res = tmp;
+            if (i == l - 1) {res = tmp;}
           } else {
             res = undefined;
           }
@@ -3239,7 +3242,7 @@
       var numLinesEst = 0;
       var length = output.reduce(function (prev, cur) {
         numLinesEst++;
-        if (cur.indexOf("\n") >= 0) numLinesEst++;
+        if (cur.indexOf("\n") >= 0) {numLinesEst++;}
         return prev + cur.length + 1;
       }, 0);
 
@@ -3329,7 +3332,7 @@
             return this;
           };
 
-        if (_method && "function" === typeof _method) _super = _method;
+        if (_method && "function" === typeof _method) {_super = _method;}
 
         ctx[name] = function () {
           var result = method(_super).apply(this, arguments);
@@ -3385,7 +3388,7 @@
         var _get = Object.getOwnPropertyDescriptor(ctx, name),
           _super = function () {};
 
-        if (_get && "function" === typeof _get.get) _super = _get.get;
+        if (_get && "function" === typeof _get.get) {_super = _get.get;}
 
         Object.defineProperty(ctx, name, {
           get: function () {

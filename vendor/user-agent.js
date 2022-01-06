@@ -252,8 +252,8 @@ exports.generate = function generate(bluffmaster) {
           arch === "win"
             ? "(Windows NT " + version_string.nt() + (proc ? "; " + proc : "")
             : arch === "mac"
-            ? "(Macintosh; " + proc + " Mac OS X " + version_string.osx()
-            : "(X11; Linux " + proc;
+              ? "(Macintosh; " + proc + " Mac OS X " + version_string.osx()
+              : "(X11; Linux " + proc;
 
       return (
         "Mozilla/5.0 " +
@@ -308,12 +308,12 @@ exports.generate = function generate(bluffmaster) {
               randomLang() +
               presto_ver
             : arch === "lin"
-            ? "(X11; Linux " +
+              ? "(X11; Linux " +
               randomProc(arch) +
               "; U; " +
               randomLang() +
               presto_ver
-            : "(Macintosh; Intel Mac OS X " +
+              : "(Macintosh; Intel Mac OS X " +
               version_string.osx() +
               " U; " +
               randomLang() +
@@ -364,8 +364,8 @@ exports.generate = function generate(bluffmaster) {
               version_string.osx("_") +
               ") "
             : arch === "win"
-            ? "(Windows; U; Windows NT " + version_string.nt() + ")"
-            : "(X11; Linux " + randomProc(arch);
+              ? "(Windows; U; Windows NT " + version_string.nt() + ")"
+              : "(X11; Linux " + randomProc(arch);
 
       return (
         "Mozilla/5.0 " +

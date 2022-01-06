@@ -1,20 +1,20 @@
-if (typeof module !== "undefined") {
-  var assert = require("assert");
-  var sinon = require("sinon");
-  var bluffmaster = require("../index");
+if (typeof module !== 'undefined') {
+  var assert = require('assert');
+  var sinon = require('sinon');
+  var bluffmaster = require('../index');
 }
 
 describe("address.js", function () {
   describe("city()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.address, "cityPrefix");
-      sinon.spy(bluffmaster.name, "firstName");
-      sinon.spy(bluffmaster.name, "lastName");
-      sinon.spy(bluffmaster.address, "citySuffix");
+      sinon.spy(bluffmaster.address, 'cityPrefix');
+      sinon.spy(bluffmaster.name, 'firstName');
+      sinon.spy(bluffmaster.name, 'lastName');
+      sinon.spy(bluffmaster.address, 'citySuffix');
     });
 
     afterEach(function () {
-      bluffmaster.random.number.restore();
+      bluffmaster.datatype.number.restore();
       bluffmaster.address.cityPrefix.restore();
       bluffmaster.name.firstName.restore();
       bluffmaster.name.lastName.restore();
@@ -22,7 +22,7 @@ describe("address.js", function () {
     });
 
     it("occasionally returns prefix + first name + suffix", function () {
-      sinon.stub(bluffmaster.random, "number").returns(0);
+      sinon.stub(bluffmaster.datatype, 'number').returns(0);
 
       var city = bluffmaster.address.city();
       assert.ok(city);
@@ -33,7 +33,7 @@ describe("address.js", function () {
     });
 
     it("occasionally returns prefix + first name", function () {
-      sinon.stub(bluffmaster.random, "number").returns(1);
+      sinon.stub(bluffmaster.datatype, 'number').returns(1);
 
       var city = bluffmaster.address.city();
       assert.ok(city);
@@ -43,7 +43,7 @@ describe("address.js", function () {
     });
 
     it("occasionally returns first name + suffix", function () {
-      sinon.stub(bluffmaster.random, "number").returns(2);
+      sinon.stub(bluffmaster.datatype, 'number').returns(2);
 
       var city = bluffmaster.address.city();
       assert.ok(city);
@@ -52,7 +52,7 @@ describe("address.js", function () {
     });
 
     it("occasionally returns last name + suffix", function () {
-      sinon.stub(bluffmaster.random, "number").returns(3);
+      sinon.stub(bluffmaster.datatype, 'number').returns(3);
 
       var city = bluffmaster.address.city();
       assert.ok(city);
@@ -64,11 +64,12 @@ describe("address.js", function () {
     });
   });
 
+
   describe("streetName()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.name, "firstName");
-      sinon.spy(bluffmaster.name, "lastName");
-      sinon.spy(bluffmaster.address, "streetSuffix");
+      sinon.spy(bluffmaster.name, 'firstName');
+      sinon.spy(bluffmaster.name, 'lastName');
+      sinon.spy(bluffmaster.address, 'streetSuffix');
     });
 
     afterEach(function () {
@@ -78,7 +79,7 @@ describe("address.js", function () {
     });
 
     it("occasionally returns last name + suffix", function () {
-      sinon.stub(bluffmaster.random, "number").returns(0);
+      sinon.stub(bluffmaster.datatype, 'number').returns(0);
 
       var street_name = bluffmaster.address.streetName();
       assert.ok(street_name);
@@ -86,11 +87,11 @@ describe("address.js", function () {
       assert.ok(bluffmaster.name.lastName.calledOnce);
       assert.ok(bluffmaster.address.streetSuffix.calledOnce);
 
-      bluffmaster.random.number.restore();
+      bluffmaster.datatype.number.restore();
     });
 
     it("occasionally returns first name + suffix", function () {
-      sinon.stub(bluffmaster.random, "number").returns(1);
+      sinon.stub(bluffmaster.datatype, 'number').returns(1);
 
       var street_name = bluffmaster.address.streetName();
       assert.ok(street_name);
@@ -99,22 +100,29 @@ describe("address.js", function () {
       assert.ok(!bluffmaster.name.lastName.called);
       assert.ok(bluffmaster.address.streetSuffix.calledOnce);
 
-      bluffmaster.random.number.restore();
+      bluffmaster.datatype.number.restore();
     });
 
-    it("trims trailing whitespace from the name", function () {
+    it("trims trailing whitespace from the name", function() {
       bluffmaster.address.streetSuffix.restore();
 
-      sinon.stub(bluffmaster.address, "streetSuffix").returns("");
+      sinon.stub(bluffmaster.address, 'streetSuffix').returns("")
       var street_name = bluffmaster.address.streetName();
       assert.ok(!street_name.match(/ $/));
     });
   });
 
+
+
   describe("streetAddress()", function () {
+
+    var errorExpectDigits = function(expected){
+      return "The street number should be had " + expected + " digits"
+    }
+
     beforeEach(function () {
-      sinon.spy(bluffmaster.address, "streetName");
-      sinon.spy(bluffmaster.address, "secondaryAddress");
+      sinon.spy(bluffmaster.address, 'streetName');
+      sinon.spy(bluffmaster.address, 'secondaryAddress');
     });
 
     afterEach(function () {
@@ -123,56 +131,62 @@ describe("address.js", function () {
     });
 
     it("occasionally returns a 5-digit street number", function () {
-      sinon.stub(bluffmaster.random, "number").returns(0);
+      sinon.stub(bluffmaster.datatype, 'number').returns(0);
       var address = bluffmaster.address.streetAddress();
-      var parts = address.split(" ");
+      var expected = 5
+      var parts = address.split(' ');
 
-      assert.equal(parts[0].length, 5);
+      assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
       assert.ok(bluffmaster.address.streetName.called);
 
-      bluffmaster.random.number.restore();
+      bluffmaster.datatype.number.restore();
     });
 
     it("occasionally returns a 4-digit street number", function () {
-      sinon.stub(bluffmaster.random, "number").returns(1);
+      sinon.stub(bluffmaster.datatype, 'number').returns(1);
       var address = bluffmaster.address.streetAddress();
-      var parts = address.split(" ");
+      var parts = address.split(' ');
+      var expected = 4
 
-      assert.equal(parts[0].length, 4);
+      assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
       assert.ok(bluffmaster.address.streetName.called);
 
-      bluffmaster.random.number.restore();
+      bluffmaster.datatype.number.restore();
     });
 
     it("occasionally returns a 3-digit street number", function () {
-      sinon.stub(bluffmaster.random, "number").returns(2);
+      sinon.stub(bluffmaster.datatype, 'number').returns(2);
       var address = bluffmaster.address.streetAddress();
-      var parts = address.split(" ");
+      var parts = address.split(' ');
+      var expected = 3
 
-      assert.equal(parts[0].length, 3);
+      assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
       assert.ok(bluffmaster.address.streetName.called);
       assert.ok(!bluffmaster.address.secondaryAddress.called);
 
-      bluffmaster.random.number.restore();
+      bluffmaster.datatype.number.restore();
     });
 
     context("when useFulladdress is true", function () {
       it("adds a secondary address to the result", function () {
-        var address = bluffmaster.address.streetAddress(true);
-        var parts = address.split(" ");
-
+        bluffmaster.address.streetAddress(true);
+        
         assert.ok(bluffmaster.address.secondaryAddress.called);
       });
     });
   });
 
+
   describe("secondaryAddress()", function () {
     it("randomly chooses an Apt or Suite number", function () {
-      sinon.spy(bluffmaster.random, "arrayElement");
+      sinon.spy(bluffmaster.random, 'arrayElement');
 
       var address = bluffmaster.address.secondaryAddress();
 
-      var expected_array = ["Apt. ###", "Suite ###"];
+      var expected_array = [
+        'Apt. ###',
+        'Suite ###'
+      ];
 
       assert.ok(address);
       assert.ok(bluffmaster.random.arrayElement.calledWith(expected_array));
@@ -182,7 +196,7 @@ describe("address.js", function () {
 
   describe("county()", function () {
     it("returns random county", function () {
-      sinon.spy(bluffmaster.address, "county");
+      sinon.spy(bluffmaster.address, 'county');
       var county = bluffmaster.address.county();
       assert.ok(county);
       assert.ok(bluffmaster.address.county.called);
@@ -192,7 +206,7 @@ describe("address.js", function () {
 
   describe("country()", function () {
     it("returns random country", function () {
-      sinon.spy(bluffmaster.address, "country");
+      sinon.spy(bluffmaster.address, 'country');
       var country = bluffmaster.address.country();
       assert.ok(country);
       assert.ok(bluffmaster.address.country.called);
@@ -201,8 +215,9 @@ describe("address.js", function () {
   });
 
   describe("countryCode()", function () {
+
     it("returns random countryCode", function () {
-      sinon.spy(bluffmaster.address, "countryCode");
+      sinon.spy(bluffmaster.address, 'countryCode');
       var countryCode = bluffmaster.address.countryCode();
       assert.ok(countryCode);
       assert.ok(bluffmaster.address.countryCode.called);
@@ -210,18 +225,19 @@ describe("address.js", function () {
     });
 
     it("returns random alpha-3 countryCode", function () {
-      sinon.spy(bluffmaster.address, "countryCode");
+      sinon.spy(bluffmaster.address, 'countryCode');
       var countryCode = bluffmaster.address.countryCode("alpha-3");
       assert.ok(countryCode);
       assert.ok(bluffmaster.address.countryCode.called);
-      assert.equal(countryCode.length, 3);
+      assert.strictEqual(countryCode.length, 3, "The countryCode should be had 3 characters");
       bluffmaster.address.countryCode.restore();
     });
+        
   });
 
   describe("state()", function () {
     it("returns random state", function () {
-      sinon.spy(bluffmaster.address, "state");
+      sinon.spy(bluffmaster.address, 'state');
       var state = bluffmaster.address.state();
       assert.ok(state);
       assert.ok(bluffmaster.address.state.called);
@@ -231,7 +247,7 @@ describe("address.js", function () {
 
   describe("zipCode()", function () {
     it("returns random zipCode", function () {
-      sinon.spy(bluffmaster.address, "zipCode");
+      sinon.spy(bluffmaster.address, 'zipCode');
       var zipCode = bluffmaster.address.zipCode();
       assert.ok(zipCode);
       assert.ok(bluffmaster.address.zipCode.called);
@@ -272,8 +288,8 @@ describe("address.js", function () {
 
     it("returns undefined if state is invalid", function () {
       var state = "XX";
-      sinon.spy(bluffmaster.address, "zipCode");
-      var zipCode = bluffmaster.address.zipCodeByState(state);
+      sinon.spy(bluffmaster.address, 'zipCode');
+      bluffmaster.address.zipCodeByState(state);
       assert.ok(bluffmaster.address.zipCode.called);
       bluffmaster.address.zipCode.restore();
     });
@@ -281,8 +297,8 @@ describe("address.js", function () {
     it("returns undefined if state is valid but localeis invalid", function () {
       bluffmaster.locale = "zh_CN";
       var state = "IL";
-      sinon.spy(bluffmaster.address, "zipCode");
-      var zipCode = bluffmaster.address.zipCodeByState(state);
+      sinon.spy(bluffmaster.address, 'zipCode');
+      bluffmaster.address.zipCodeByState(state);
       assert.ok(bluffmaster.address.zipCode.called);
       bluffmaster.address.zipCode.restore();
     });
@@ -291,42 +307,42 @@ describe("address.js", function () {
   describe("latitude()", function () {
     it("returns random latitude", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.random, "number");
+        sinon.spy(bluffmaster.datatype, 'number');
         var latitude = bluffmaster.address.latitude();
-        assert.ok(typeof latitude === "string");
+        assert.ok(typeof latitude === 'string');
         var latitude_float = parseFloat(latitude);
         assert.ok(latitude_float >= -90.0);
         assert.ok(latitude_float <= 90.0);
-        assert.ok(bluffmaster.random.number.called);
-        bluffmaster.random.number.restore();
+        assert.ok(bluffmaster.datatype.number.called);
+        bluffmaster.datatype.number.restore();
       }
     });
 
     it("returns latitude with min and max and default precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.random, "number");
+        sinon.spy(bluffmaster.datatype, 'number');
         var latitude = bluffmaster.address.latitude(-5, 5);
-        assert.ok(typeof latitude === "string");
-        assert.equal(latitude.split(".")[1].length, 4);
+        assert.ok(typeof latitude === 'string');
+        assert.strictEqual(latitude.split('.')[1].length, 4, "The precision of latitude should be had of 4 digits");
         var latitude_float = parseFloat(latitude);
         assert.ok(latitude_float >= -5);
         assert.ok(latitude_float <= 5);
-        assert.ok(bluffmaster.random.number.called);
-        bluffmaster.random.number.restore();
+        assert.ok(bluffmaster.datatype.number.called);
+        bluffmaster.datatype.number.restore();
       }
     });
 
     it("returns random latitude with custom precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.random, "number");
+        sinon.spy(bluffmaster.datatype, 'number');
         var latitude = bluffmaster.address.latitude(undefined, undefined, 7);
-        assert.ok(typeof latitude === "string");
-        assert.equal(latitude.split(".")[1].length, 7);
+        assert.ok(typeof latitude === 'string');
+        assert.strictEqual(latitude.split('.')[1].length, 7, "The precision of latitude should be had of 7 digits");
         var latitude_float = parseFloat(latitude);
         assert.ok(latitude_float >= -180);
         assert.ok(latitude_float <= 180);
-        assert.ok(bluffmaster.random.number.called);
-        bluffmaster.random.number.restore();
+        assert.ok(bluffmaster.datatype.number.called);
+        bluffmaster.datatype.number.restore();
       }
     });
   });
@@ -334,160 +350,175 @@ describe("address.js", function () {
   describe("longitude()", function () {
     it("returns random longitude", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.random, "number");
+        sinon.spy(bluffmaster.datatype, 'number');
         var longitude = bluffmaster.address.longitude();
-        assert.ok(typeof longitude === "string");
+        assert.ok(typeof longitude === 'string');
         var longitude_float = parseFloat(longitude);
         assert.ok(longitude_float >= -180.0);
         assert.ok(longitude_float <= 180.0);
-        assert.ok(bluffmaster.random.number.called);
-        bluffmaster.random.number.restore();
+        assert.ok(bluffmaster.datatype.number.called);
+        bluffmaster.datatype.number.restore();
       }
     });
 
     it("returns random longitude with min and max and default precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.random, "number");
+        sinon.spy(bluffmaster.datatype, 'number');
         var longitude = bluffmaster.address.longitude(100, -30);
-        assert.ok(typeof longitude === "string");
-        assert.equal(longitude.split(".")[1].length, 4);
+        assert.ok(typeof longitude === 'string');
+        assert.strictEqual(longitude.split('.')[1].length, 4, "The precision of longitude should be had of 4 digits");
         var longitude_float = parseFloat(longitude);
         assert.ok(longitude_float >= -30);
         assert.ok(longitude_float <= 100);
-        assert.ok(bluffmaster.random.number.called);
-        bluffmaster.random.number.restore();
+        assert.ok(bluffmaster.datatype.number.called);
+        bluffmaster.datatype.number.restore();
       }
     });
 
     it("returns random longitude with custom precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.random, "number");
+        sinon.spy(bluffmaster.datatype, 'number');
         var longitude = bluffmaster.address.longitude(undefined, undefined, 7);
-        assert.ok(typeof longitude === "string");
-        assert.equal(longitude.split(".")[1].length, 7);
+        assert.ok(typeof longitude === 'string');
+        assert.strictEqual(longitude.split('.')[1].length, 7, "The precision of longitude should be had of 7 digits");
         var longitude_float = parseFloat(longitude);
         assert.ok(longitude_float >= -180);
         assert.ok(longitude_float <= 180);
-        assert.ok(bluffmaster.random.number.called);
-        bluffmaster.random.number.restore();
+        assert.ok(bluffmaster.datatype.number.called);
+        bluffmaster.datatype.number.restore();
       }
     });
   });
 
   describe("direction()", function () {
     it("returns random direction", function () {
-      sinon.stub(bluffmaster.address, "direction").returns("North");
+      sinon.stub(bluffmaster.address, 'direction').returns('North');
       var direction = bluffmaster.address.direction();
+      var expected = 'North';
 
-      assert.equal(direction, "North");
+      assert.strictEqual(direction, expected, "The random direction should be equals " + expected);
       bluffmaster.address.direction.restore();
-    });
+    })
 
     it("returns abbreviation when useAbbr is false", function () {
-      sinon.stub(bluffmaster.address, "direction").returns("N");
+      sinon.stub(bluffmaster.address, 'direction').returns('N');
       var direction = bluffmaster.address.direction(false);
-      assert.equal(direction, "N");
+      var expected = 'N';
+      assert.strictEqual(direction, expected, "The abbreviation of direction when useAbbr is false should be equals " + expected+ ". Current is " + direction);
       bluffmaster.address.direction.restore();
-    });
+    })
 
     it("returns abbreviation when useAbbr is true", function () {
       var direction = bluffmaster.address.direction(true);
-      assert.equal(typeof direction, "string");
-      assert.equal(direction.length <= 2, true);
-    });
+      var expectedType = 'string';
+      var lengthDirection = direction.length
+      var prefixErrorMessage = "The abbreviation of direction when useAbbr is true should"
+      assert.strictEqual(typeof direction, expectedType, prefixErrorMessage + " be typeof string. Current is" + typeof direction);
+      assert.strictEqual(lengthDirection <= 2, true, prefixErrorMessage + " have a length less or equals 2. Current is " + lengthDirection);
+    })
 
     it("returns abbreviation when useAbbr is true", function () {
-      sinon.stub(bluffmaster.address, "direction").returns("N");
+      sinon.stub(bluffmaster.address, 'direction').returns('N');
       var direction = bluffmaster.address.direction(true);
-      assert.equal(direction, "N");
+      var expected = 'N';
+      assert.strictEqual(direction, expected, "The abbreviation of direction when useAbbr is true should be equals " + expected + ". Current is " + direction);
       bluffmaster.address.direction.restore();
-    });
-  });
+    })
+
+  })
 
   describe("ordinalDirection()", function () {
     it("returns random ordinal direction", function () {
-      sinon.stub(bluffmaster.address, "ordinalDirection").returns("West");
+      sinon.stub(bluffmaster.address, 'ordinalDirection').returns('West');
       var ordinalDirection = bluffmaster.address.ordinalDirection();
+      var expected = 'West';
 
-      assert.equal(ordinalDirection, "West");
+      assert.strictEqual(ordinalDirection, expected, "The ransom ordinal direction should be equals " + expected + ". Current is " + ordinalDirection);
       bluffmaster.address.ordinalDirection.restore();
-    });
+    })
 
     it("returns abbreviation when useAbbr is true", function () {
-      sinon.stub(bluffmaster.address, "ordinalDirection").returns("W");
+      sinon.stub(bluffmaster.address, 'ordinalDirection').returns('W');
       var ordinalDirection = bluffmaster.address.ordinalDirection(true);
+      var expected = 'W';
 
-      assert.equal(ordinalDirection, "W");
+      assert.strictEqual(ordinalDirection, expected, "The ordinal direction when useAbbr is true should be equals " + expected + ". Current is " + ordinalDirection);
       bluffmaster.address.ordinalDirection.restore();
-    });
+    })
 
     it("returns abbreviation when useAbbr is true", function () {
       var ordinalDirection = bluffmaster.address.ordinalDirection(true);
-      assert.equal(typeof ordinalDirection, "string");
-      assert.equal(ordinalDirection.length <= 2, true);
-    });
-  });
+      var expectedType = 'string';
+      var ordinalDirectionLength = ordinalDirection.length;
+      var prefixErrorMessage = "The ordinal direction when useAbbr is true should"
+
+      assert.strictEqual(typeof ordinalDirection, expectedType, prefixErrorMessage + " be had typeof equals " + expectedType + ".Current is " + typeof ordinalDirection);
+      assert.strictEqual(ordinalDirectionLength <= 2, true, prefixErrorMessage + " have a length less or equals 2. Current is " + ordinalDirectionLength);
+    })
+
+
+  })
 
   describe("cardinalDirection()", function () {
     it("returns random cardinal direction", function () {
-      sinon.stub(bluffmaster.address, "cardinalDirection").returns("Northwest");
+      sinon.stub(bluffmaster.address, 'cardinalDirection').returns('Northwest');
       var cardinalDirection = bluffmaster.address.cardinalDirection();
+      var expected = 'Northwest';
 
-      assert.equal(cardinalDirection, "Northwest");
+      assert.strictEqual(cardinalDirection, expected, "The random cardinal direction should be equals " + expected + ". Current is " + cardinalDirection);
       bluffmaster.address.cardinalDirection.restore();
-    });
+    })
 
     it("returns abbreviation when useAbbr is true", function () {
-      sinon.stub(bluffmaster.address, "cardinalDirection").returns("NW");
+      sinon.stub(bluffmaster.address, 'cardinalDirection').returns('NW');
       var cardinalDirection = bluffmaster.address.cardinalDirection(true);
+      var expected = 'NW';
 
-      assert.equal(cardinalDirection, "NW");
+      assert.strictEqual(cardinalDirection, expected, "The cardinal direction when useAbbr is true should be equals " + expected + ". Current is " + cardinalDirection);
       bluffmaster.address.cardinalDirection.restore();
-    });
+    })
 
     it("returns abbreviation when useAbbr is true", function () {
       var cardinalDirection = bluffmaster.address.cardinalDirection(true);
-      assert.equal(typeof cardinalDirection, "string");
-      assert.equal(cardinalDirection.length <= 2, true);
-    });
-  });
+      var expectedType = 'string';
+      var cardinalDirectionLength = cardinalDirection.length;
+      var prefixErrorMessage = "The cardinal direction when useAbbr is true should"
+
+      assert.strictEqual(typeof cardinalDirection, expectedType, prefixErrorMessage + " be had typeof equals " + expectedType + ".Current is " + typeof ordinalDirection);
+      assert.strictEqual(cardinalDirectionLength <= 2, true, prefixErrorMessage + " have a length less or equals 2. Current is " + cardinalDirectionLength);
+    })
+
+  })
 
   describe("nearbyGPSCoordinate()", function () {
     it("returns random gps coordinate within a distance of another one", function () {
       function haversine(lat1, lon1, lat2, lon2, isMetric) {
         function degreesToRadians(degrees) {
-          return degrees * (Math.PI / 180.0);
+          return degrees * (Math.PI/180.0);
         }
         function kilometersToMiles(miles) {
           return miles * 0.621371;
         }
         var R = 6378.137;
-        var dLat = degreesToRadians(lat2 - lat1);
-        var dLon = degreesToRadians(lon2 - lon1);
-        var a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(degreesToRadians(lat1)) *
-            Math.cos(degreesToRadians(lat2)) *
-            Math.sin(dLon / 2) *
-            Math.sin(dLon / 2);
-        var distance = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var dLat = degreesToRadians(lat2-lat1);
+        var dLon = degreesToRadians(lon2-lon1);
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2)
+                    + Math.cos(degreesToRadians(lat1)) * Math.cos(degreesToRadians(lat2))
+                    * Math.sin(dLon/2) * Math.sin(dLon/2);
+        var distance = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
         return isMetric ? distance : kilometersToMiles(distance);
       }
       for (var i = 0; i < 10000; i++) {
         var latFloat1 = parseFloat(bluffmaster.address.latitude());
         var lonFloat1 = parseFloat(bluffmaster.address.longitude());
-        var radius = Math.random() * 99 + 1; // range of [1, 100)
-        var isMetric = Math.round(Math.random()) == 1;
+        var radius = (Math.random() * 99) + 1; // range of [1, 100)
+        var isMetric = (Math.round(Math.random()) == 1);
 
-        var coordinate = bluffmaster.address.nearbyGPSCoordinate(
-          [latFloat1, lonFloat1],
-          radius,
-          isMetric
-        );
+        var coordinate = bluffmaster.address.nearbyGPSCoordinate([latFloat1, lonFloat1], radius, isMetric);
         assert.ok(coordinate.length === 2);
-        assert.ok(typeof coordinate[0] === "string");
-        assert.ok(typeof coordinate[1] === "string");
+        assert.ok(typeof coordinate[0] === 'string');
+        assert.ok(typeof coordinate[1] === 'string');
 
         var latFloat2 = parseFloat(coordinate[0]);
         assert.ok(latFloat2 >= -90.0);
@@ -501,35 +532,27 @@ describe("address.js", function () {
         // returned points will not be strictly within the given radius of the input
         // coordinate. Using a error of 1.0 to compensate.
         var error = 1.0;
-        var actualDistance = haversine(
-          latFloat1,
-          lonFloat1,
-          latFloat2,
-          lonFloat2,
-          isMetric
-        );
-        assert.ok(actualDistance <= radius + error);
+        var actualDistance = haversine(latFloat1, lonFloat1, latFloat2, lonFloat2, isMetric);
+        assert.ok(actualDistance <= (radius + error));
       }
 
       // test once with undefined radius
-      var coordinate = bluffmaster.address.nearbyGPSCoordinate(
-        [latFloat1, lonFloat1],
-        undefined,
-        isMetric
-      );
+      var coordinate = bluffmaster.address.nearbyGPSCoordinate([latFloat1, lonFloat1], undefined, isMetric);
       assert.ok(coordinate.length === 2);
-      assert.ok(typeof coordinate[0] === "string");
-      assert.ok(typeof coordinate[1] === "string");
+      assert.ok(typeof coordinate[0] === 'string');
+      assert.ok(typeof coordinate[1] === 'string');
+
     });
   });
 
   describe("timeZone()", function () {
     it("returns random timeZone", function () {
-      sinon.spy(bluffmaster.address, "timeZone");
+      sinon.spy(bluffmaster.address, 'timeZone');
       var timeZone = bluffmaster.address.timeZone();
       assert.ok(timeZone);
       assert.ok(bluffmaster.address.timeZone.called);
       bluffmaster.address.timeZone.restore();
     });
   });
+
 });

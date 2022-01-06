@@ -11,10 +11,9 @@
     "browser": "./node_modules/.bin/gulp browser",
     "jsdoc": "./node_modules/.bin/gulp jsdoc",
     "readme": "./node_modules/.bin/gulp readme",
-    "lint": "node_modules/.bin/jshint ./lib --config ./.jshintrc",
+    "lint": "node_modules/.bin/eslint ./lib/animal.js",
     "test": "node_modules/.bin/mocha test/*.*.js",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "all": false,
@@ -44,6 +43,7 @@
   "devDependencies": {
     "browserify": "^16.5.2",
     "coveralls": "^3.1.1",
+    "eslint": "^8.6.0",
     "gulp": "^4.0.2",
     "gulp-gh-pages": "^0.5.4",
     "gulp-jsdoc3": "^3.0.0",
@@ -52,13 +52,11 @@
     "gulp-uglify": "^3.0.2",
     "ink-docstrap": "1.1.4",
     "jsdoc": "^3.4.0",
-    "jshint": "0.9.0",
     "lodash": "^4.6.1",
     "mocha": "^8.1.1",
     "node-minify": "*",
     "nyc": "^15.1.0",
     "optimist": "0.3.5",
-    "prettier": "^2.5.1",
     "sinon": "^9.0.3",
     "through2": "2.0.0",
     "vinyl-buffer": "^1.0.1",

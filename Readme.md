@@ -136,6 +136,7 @@ You can browse all API methods by going to the [JSDoc API Browser](http://thatco
   * hexaDecimal
   * json
   * array
+  * bigInt
 * date
   * past
   * future
@@ -186,6 +187,7 @@ You can browse all API methods by going to the [JSDoc API Browser](http://thatco
   * repeatString
   * regexpStyleStringParse
   * shuffle
+  * uniqueArray
   * mustache
   * createCard
   * contextualCard
