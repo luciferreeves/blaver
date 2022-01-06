@@ -1,274 +1,283 @@
-if (typeof module !== 'undefined') {
-    var assert = require('assert');
-    var sinon = require('sinon');
-    var bluffmaster = require('../index');
-
+if (typeof module !== "undefined") {
+  var assert = require("assert");
+  var sinon = require("sinon");
+  var bluffmaster = require("../index");
 }
 
 function assertInArray(value, array) {
-    var idx = array.indexOf(value);
-    assert.notEqual(idx, -1);
+  var idx = array.indexOf(value);
+  assert.notEqual(idx, -1);
 }
 
 describe("name.js", function () {
-    describe("firstName()", function () {
-        it("returns a random name", function () {
-            sinon.stub(bluffmaster.name, 'firstName').returns('foo');
-            var first_name = bluffmaster.name.firstName();
+  describe("firstName()", function () {
+    it("returns a random name", function () {
+      sinon.stub(bluffmaster.name, "firstName").returns("foo");
+      var first_name = bluffmaster.name.firstName();
 
-            assert.equal(first_name, 'foo');
+      assert.equal(first_name, "foo");
 
-            bluffmaster.name.firstName.restore();
-        });
-        
-        it("returns a gender-specific name when passed a number", function () {
-            for (var q = 0; q < 30; q++) {
-                var gender = Math.floor(Math.random() * 2);
-                var name = bluffmaster.name.firstName(gender);
-                if (gender === 0) assertInArray(name, bluffmaster.definitions.name.male_first_name);
-                else assertInArray(name, bluffmaster.definitions.name.female_first_name);
-            }
-        });
-        
-        it("returns a gender-specific name when passed a string", function () {
-            for (var q = 0; q < 30; q++) {
-                var gender = Math.floor(Math.random() * 2);
-                var genderString = (gender === 0 ? 'male' : 'female');
-                var name = bluffmaster.name.firstName(genderString);
-                assertInArray(name, bluffmaster.definitions.name[genderString + '_first_name']);
-            }
-        });
+      bluffmaster.name.firstName.restore();
     });
 
-    describe("lastName()", function () {
-        it("returns a random name", function () {
-            sinon.stub(bluffmaster.name, 'lastName').returns('foo');
-
-            var last_name = bluffmaster.name.lastName();
-
-            assert.equal(last_name, 'foo');
-
-            bluffmaster.name.lastName.restore();
-        });
+    it("returns a gender-specific name when passed a number", function () {
+      for (var q = 0; q < 30; q++) {
+        var gender = Math.floor(Math.random() * 2);
+        var name = bluffmaster.name.firstName(gender);
+        if (gender === 0)
+          assertInArray(name, bluffmaster.definitions.name.male_first_name);
+        else
+          assertInArray(name, bluffmaster.definitions.name.female_first_name);
+      }
     });
 
-    describe("middleName()", function () {
+    it("returns a gender-specific name when passed a string", function () {
+      for (var q = 0; q < 30; q++) {
+        var gender = Math.floor(Math.random() * 2);
+        var genderString = gender === 0 ? "male" : "female";
+        var name = bluffmaster.name.firstName(genderString);
+        assertInArray(
+          name,
+          bluffmaster.definitions.name[genderString + "_first_name"]
+        );
+      }
+    });
+  });
 
-        it("returns a random middle name", function () {
-            sinon.stub(bluffmaster.name, 'middleName').returns('foo');
+  describe("lastName()", function () {
+    it("returns a random name", function () {
+      sinon.stub(bluffmaster.name, "lastName").returns("foo");
 
-            var middle_name = bluffmaster.name.middleName();
+      var last_name = bluffmaster.name.lastName();
 
-            assert.equal(middle_name, 'foo');
+      assert.equal(last_name, "foo");
 
-            bluffmaster.name.middleName.restore();
-        });
+      bluffmaster.name.lastName.restore();
+    });
+  });
 
-        describe('when using a locale with gender specific middle names', function () {
-            beforeEach(function(){
-                this.oldLocale = bluffmaster.locale;
-                bluffmaster.locale = 'TEST';
+  describe("middleName()", function () {
+    it("returns a random middle name", function () {
+      sinon.stub(bluffmaster.name, "middleName").returns("foo");
 
-                bluffmaster.locales['TEST'] = {
-                    name: {
-                        male_middle_name: ['Genaddiesvich'],
-                        female_middle_name: ['Genaddievna']
-                    }
-                };
-            });
+      var middle_name = bluffmaster.name.middleName();
 
-            afterEach(function () {
-                bluffmaster.locale = this.oldLocale;
-                delete bluffmaster.locale['TEST'];
-            })
+      assert.equal(middle_name, "foo");
 
-            it("returns male prefix", function () {
-                var middle_name = bluffmaster.name.middleName(0);
-
-                assert.equal(middle_name, 'Genaddiesvich')
-            });
-
-            it("returns female prefix", function () {
-                var middle_name = bluffmaster.name.middleName(1);
-
-                assert.equal(middle_name, 'Genaddievna');
-            });
-        });
+      bluffmaster.name.middleName.restore();
     });
 
+    describe("when using a locale with gender specific middle names", function () {
+      beforeEach(function () {
+        this.oldLocale = bluffmaster.locale;
+        bluffmaster.locale = "TEST";
 
-    describe("findName()", function () {
-        it("usually returns a first name and last name", function () {
-            sinon.stub(bluffmaster.random, 'number').returns(5);
-            var name = bluffmaster.name.findName();
-            assert.ok(name);
-            var parts = name.split(' ');
+        bluffmaster.locales["TEST"] = {
+          name: {
+            male_middle_name: ["Genaddiesvich"],
+            female_middle_name: ["Genaddievna"],
+          },
+        };
+      });
 
-            assert.strictEqual(parts.length, 2);
+      afterEach(function () {
+        bluffmaster.locale = this.oldLocale;
+        delete bluffmaster.locale["TEST"];
+      });
 
-            bluffmaster.random.number.restore();
-        });
+      it("returns male prefix", function () {
+        var middle_name = bluffmaster.name.middleName(0);
 
-        it("occasionally returns a first name and last name with a prefix", function () {
-            sinon.stub(bluffmaster.random, 'number').returns(0);
-            var name = bluffmaster.name.findName();
-            var parts = name.split(' ');
+        assert.equal(middle_name, "Genaddiesvich");
+      });
 
-            assert.ok(parts.length >= 3);
+      it("returns female prefix", function () {
+        var middle_name = bluffmaster.name.middleName(1);
 
-            bluffmaster.random.number.restore();
-        });
+        assert.equal(middle_name, "Genaddievna");
+      });
+    });
+  });
 
-        it("occasionally returns a male full name with a prefix", function () {
-            sinon.stub(bluffmaster.random, 'number')
-                .withArgs(8).returns(0) // with prefix
-                .withArgs(1).returns(0); // gender male
+  describe("findName()", function () {
+    it("usually returns a first name and last name", function () {
+      sinon.stub(bluffmaster.random, "number").returns(5);
+      var name = bluffmaster.name.findName();
+      assert.ok(name);
+      var parts = name.split(" ");
 
-            sinon.stub(bluffmaster.name, 'prefix').withArgs(0).returns('X');
-            sinon.stub(bluffmaster.name, 'firstName').withArgs(0).returns('Y');
-            sinon.stub(bluffmaster.name, 'lastName').withArgs(0).returns('Z');
+      assert.strictEqual(parts.length, 2);
 
-            var name = bluffmaster.name.findName();
-
-            assert.equal(name, 'X Y Z');
-
-            bluffmaster.random.number.restore();
-            bluffmaster.name.prefix.restore();
-            bluffmaster.name.firstName.restore();
-            bluffmaster.name.lastName.restore();
-        });
-
-        it("occasionally returns a female full name with a prefix", function () {
-            sinon.stub(bluffmaster.random, 'number')
-                .withArgs(8).returns(0) // with prefix
-                .withArgs(1).returns(1); // gender female
-
-            sinon.stub(bluffmaster.name, 'prefix').withArgs(1).returns('J');
-            sinon.stub(bluffmaster.name, 'firstName').withArgs(1).returns('K');
-            sinon.stub(bluffmaster.name, 'lastName').withArgs(1).returns('L');
-
-            var name = bluffmaster.name.findName();
-
-            assert.equal(name, 'J K L');
-
-            bluffmaster.random.number.restore();
-            bluffmaster.name.prefix.restore();
-            bluffmaster.name.firstName.restore();
-            bluffmaster.name.lastName.restore();
-        });
-
-        it("occasionally returns a first name and last name with a suffix", function () {
-            sinon.stub(bluffmaster.random, 'number').returns(1);
-            sinon.stub(bluffmaster.name, 'suffix').returns('Jr.');
-            var name = bluffmaster.name.findName();
-            var parts = name.split(' ');
-
-            assert.ok(parts.length >= 3);
-            assert.equal(parts[parts.length-1], 'Jr.');
-
-            bluffmaster.name.suffix.restore();
-            bluffmaster.random.number.restore();
-        });
-
-        it("needs to work with specific locales and respect the fallbacks", function () {
-            bluffmaster.locale = 'en_US';
-            // this will throw if this is broken
-            var name = bluffmaster.name.findName();
-        });
+      bluffmaster.random.number.restore();
     });
 
-    describe("title()", function () {
-      it("returns a random title", function () {
-          sinon.stub(bluffmaster.name, 'title').returns('Lead Solutions Supervisor');
+    it("occasionally returns a first name and last name with a prefix", function () {
+      sinon.stub(bluffmaster.random, "number").returns(0);
+      var name = bluffmaster.name.findName();
+      var parts = name.split(" ");
 
-          var title = bluffmaster.name.title();
+      assert.ok(parts.length >= 3);
 
-          assert.equal(title, 'Lead Solutions Supervisor');
-
-          bluffmaster.name.title.restore();
-        });
+      bluffmaster.random.number.restore();
     });
 
-    describe("jobTitle()", function () {
-        it("returns a job title consisting of a descriptor, area, and type", function () {
-            sinon.spy(bluffmaster.random, 'arrayElement');
-            sinon.spy(bluffmaster.name, 'jobDescriptor');
-            sinon.spy(bluffmaster.name, 'jobArea');
-            sinon.spy(bluffmaster.name, 'jobType');
-            var jobTitle = bluffmaster.name.jobTitle();
+    it("occasionally returns a male full name with a prefix", function () {
+      sinon
+        .stub(bluffmaster.random, "number")
+        .withArgs(8)
+        .returns(0) // with prefix
+        .withArgs(1)
+        .returns(0); // gender male
 
-            assert.ok(typeof jobTitle === 'string');
-            assert.ok(bluffmaster.random.arrayElement.calledThrice);
-            assert.ok(bluffmaster.name.jobDescriptor.calledOnce);
-            assert.ok(bluffmaster.name.jobArea.calledOnce);
-            assert.ok(bluffmaster.name.jobType.calledOnce);
+      sinon.stub(bluffmaster.name, "prefix").withArgs(0).returns("X");
+      sinon.stub(bluffmaster.name, "firstName").withArgs(0).returns("Y");
+      sinon.stub(bluffmaster.name, "lastName").withArgs(0).returns("Z");
 
-            bluffmaster.random.arrayElement.restore();
-            bluffmaster.name.jobDescriptor.restore();
-            bluffmaster.name.jobArea.restore();
-            bluffmaster.name.jobType.restore();
-        });
+      var name = bluffmaster.name.findName();
+
+      assert.equal(name, "X Y Z");
+
+      bluffmaster.random.number.restore();
+      bluffmaster.name.prefix.restore();
+      bluffmaster.name.firstName.restore();
+      bluffmaster.name.lastName.restore();
     });
 
-    describe("prefix()", function () {
-        describe('when using a locale with gender specific name prefixes', function () {
-            beforeEach(function(){
-                this.oldLocale = bluffmaster.locale;
-                bluffmaster.locale = 'TEST';
+    it("occasionally returns a female full name with a prefix", function () {
+      sinon
+        .stub(bluffmaster.random, "number")
+        .withArgs(8)
+        .returns(0) // with prefix
+        .withArgs(1)
+        .returns(1); // gender female
 
-                bluffmaster.locales['TEST'] = {
-                    name: {
-                        male_prefix: ['Mp'],
-                        female_prefix: ['Fp']
-                    }
-                };
-            });
+      sinon.stub(bluffmaster.name, "prefix").withArgs(1).returns("J");
+      sinon.stub(bluffmaster.name, "firstName").withArgs(1).returns("K");
+      sinon.stub(bluffmaster.name, "lastName").withArgs(1).returns("L");
 
-            afterEach(function () {
-                bluffmaster.locale = this.oldLocale;
-                delete bluffmaster.locale['TEST'];
-            })
+      var name = bluffmaster.name.findName();
 
-            it("returns male prefix", function () {
-                var prefix = bluffmaster.name.prefix(0);
-                assert.equal(prefix, 'Mp')
-            });
+      assert.equal(name, "J K L");
 
-            it("returns female prefix", function () {
-                var prefix = bluffmaster.name.prefix(1);
-
-                assert.equal(prefix, 'Fp');
-            });
-
-            it("returns either prefix", function () {
-                var prefix = bluffmaster.name.prefix();
-                assert(['Mp', 'Fp'].indexOf(prefix) >= 0)
-            });
-
-        });
-
-        describe('when using a locale without gender specific name prefixes', function () {
-            beforeEach(function(){
-                this.oldLocale = bluffmaster.locale;
-                bluffmaster.locale = 'TEST';
-
-                bluffmaster.locales['TEST'] = {
-                    name: {
-                        prefix: ['P']
-                    }
-                };
-            });
-
-            afterEach(function () {
-                bluffmaster.locale = this.oldLocale;
-                delete bluffmaster.locale['TEST'];
-            })
-
-            it("returns a prefix", function () {
-                var prefix = bluffmaster.name.prefix();
-
-                assert.equal(prefix, 'P');
-            });
-        });
+      bluffmaster.random.number.restore();
+      bluffmaster.name.prefix.restore();
+      bluffmaster.name.firstName.restore();
+      bluffmaster.name.lastName.restore();
     });
+
+    it("occasionally returns a first name and last name with a suffix", function () {
+      sinon.stub(bluffmaster.random, "number").returns(1);
+      sinon.stub(bluffmaster.name, "suffix").returns("Jr.");
+      var name = bluffmaster.name.findName();
+      var parts = name.split(" ");
+
+      assert.ok(parts.length >= 3);
+      assert.equal(parts[parts.length - 1], "Jr.");
+
+      bluffmaster.name.suffix.restore();
+      bluffmaster.random.number.restore();
+    });
+
+    it("needs to work with specific locales and respect the fallbacks", function () {
+      bluffmaster.locale = "en_US";
+      // this will throw if this is broken
+      var name = bluffmaster.name.findName();
+    });
+  });
+
+  describe("title()", function () {
+    it("returns a random title", function () {
+      sinon
+        .stub(bluffmaster.name, "title")
+        .returns("Lead Solutions Supervisor");
+
+      var title = bluffmaster.name.title();
+
+      assert.equal(title, "Lead Solutions Supervisor");
+
+      bluffmaster.name.title.restore();
+    });
+  });
+
+  describe("jobTitle()", function () {
+    it("returns a job title consisting of a descriptor, area, and type", function () {
+      sinon.spy(bluffmaster.random, "arrayElement");
+      sinon.spy(bluffmaster.name, "jobDescriptor");
+      sinon.spy(bluffmaster.name, "jobArea");
+      sinon.spy(bluffmaster.name, "jobType");
+      var jobTitle = bluffmaster.name.jobTitle();
+
+      assert.ok(typeof jobTitle === "string");
+      assert.ok(bluffmaster.random.arrayElement.calledThrice);
+      assert.ok(bluffmaster.name.jobDescriptor.calledOnce);
+      assert.ok(bluffmaster.name.jobArea.calledOnce);
+      assert.ok(bluffmaster.name.jobType.calledOnce);
+
+      bluffmaster.random.arrayElement.restore();
+      bluffmaster.name.jobDescriptor.restore();
+      bluffmaster.name.jobArea.restore();
+      bluffmaster.name.jobType.restore();
+    });
+  });
+
+  describe("prefix()", function () {
+    describe("when using a locale with gender specific name prefixes", function () {
+      beforeEach(function () {
+        this.oldLocale = bluffmaster.locale;
+        bluffmaster.locale = "TEST";
+
+        bluffmaster.locales["TEST"] = {
+          name: {
+            male_prefix: ["Mp"],
+            female_prefix: ["Fp"],
+          },
+        };
+      });
+
+      afterEach(function () {
+        bluffmaster.locale = this.oldLocale;
+        delete bluffmaster.locale["TEST"];
+      });
+
+      it("returns male prefix", function () {
+        var prefix = bluffmaster.name.prefix(0);
+        assert.equal(prefix, "Mp");
+      });
+
+      it("returns female prefix", function () {
+        var prefix = bluffmaster.name.prefix(1);
+
+        assert.equal(prefix, "Fp");
+      });
+
+      it("returns either prefix", function () {
+        var prefix = bluffmaster.name.prefix();
+        assert(["Mp", "Fp"].indexOf(prefix) >= 0);
+      });
+    });
+
+    describe("when using a locale without gender specific name prefixes", function () {
+      beforeEach(function () {
+        this.oldLocale = bluffmaster.locale;
+        bluffmaster.locale = "TEST";
+
+        bluffmaster.locales["TEST"] = {
+          name: {
+            prefix: ["P"],
+          },
+        };
+      });
+
+      afterEach(function () {
+        bluffmaster.locale = this.oldLocale;
+        delete bluffmaster.locale["TEST"];
+      });
+
+      it("returns a prefix", function () {
+        var prefix = bluffmaster.name.prefix();
+
+        assert.equal(prefix, "P");
+      });
+    });
+  });
 });

@@ -1,1 +1,1 @@
-bluffmaster = Npm.require('bluffmaster');
+bluffmaster = Npm.require("bluffmaster");

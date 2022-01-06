@@ -1,42 +1,41 @@
-var bluffmaster = require('../');
+var bluffmaster = require("../");
 
 var items = Object.keys(bluffmaster);
 
-items = items.filter(function(i){
-  if(['locales', 'definitions', 'locale', 'localeFallback'].indexOf(i) === -1) {
+items = items.filter(function (i) {
+  if (
+    ["locales", "definitions", "locale", "localeFallback"].indexOf(i) === -1
+  ) {
     return i;
   }
 });
 
 var schema = {
-  "methods": {
-    "type": "string",
-    "enum": []
-  }
+  methods: {
+    type: "string",
+    enum: [],
+  },
 };
 
 schema.modules = {
-  "type": "string",
-  "enum": []
+  type: "string",
+  enum: [],
 };
 
-schema.methodSchemas = {
-};
+schema.methodSchemas = {};
 
-items.forEach(function(item){
-
+items.forEach(function (item) {
   schema.modules.enum.push(item);
   for (var q in bluffmaster[item]) {
-
     //console.log(item + '.' + q);
 
     // check to see if an existing schema existing on the function
-    var fnLine = bluffmaster[item][q].toString().split('\n').slice(0,1)[0];
+    var fnLine = bluffmaster[item][q].toString().split("\n").slice(0, 1)[0];
     var prop;
 
     if (typeof bluffmaster[item][q].schema === "object") {
       // if so, we'll want to merge that onto the exported schemas here
-      prop =  bluffmaster[item][q].schema;
+      prop = bluffmaster[item][q].schema;
     } else {
       // if not, fall back to the ones we can parse from the method itself
 
@@ -47,30 +46,28 @@ items.forEach(function(item){
       var end = fnLine.search(/\)/);
 
       // substr on those positions
-      fnLine = fnLine.substr(start + 1, end - start - 1)
+      fnLine = fnLine.substr(start + 1, end - start - 1);
       if (fnLine === "") {
         //console.log(item + '.' + q, 'no arguments')
-        prop = {
-        };
+        prop = {};
       } else {
         // split on ,
-        fnLine = fnLine.split(',');
+        fnLine = fnLine.split(",");
         //console.log(item + '.' + q, fnLine);
         prop = {};
         prop.properties = {};
-        fnLine.forEach(function(arg){
+        fnLine.forEach(function (arg) {
           prop.properties[arg] = {
-            type: "any"
+            type: "any",
           };
         });
       }
     }
 
-    schema.methods.enum.push(item + '.' + q);
-    schema.methodSchemas[item + '.' + q] = prop;
+    schema.methods.enum.push(item + "." + q);
+    schema.methodSchemas[item + "." + q] = prop;
   }
-
 });
 
-var util = require('util');
+var util = require("util");
 console.log(util.inspect(schema, false, null));

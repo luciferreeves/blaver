@@ -2,23 +2,9 @@
   "name": "bluffmaster",
   "main": "./build/build/bluffmaster.js",
   "homepage": "https://github.com/luciferreeves/bluffmaster.js",
-  "authors": [
-    "Kumar Priyansh <bobbyskhs@gmail.com>"
-  ],
+  "authors": ["Kumar Priyansh <bobbyskhs@gmail.com>"],
   "description": "Generate massive amounts of fake contextual data",
-  "keywords": [
-    "bluffmaster",
-    "faker",
-    "fake",
-    "dummy",
-    "identity",
-    "test"
-  ],
+  "keywords": ["bluffmaster", "faker", "fake", "dummy", "identity", "test"],
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test"
-  ]
+  "ignore": ["**/.*", "node_modules", "bower_components", "test"]
 }
