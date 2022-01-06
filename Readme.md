@@ -453,25 +453,36 @@ The `Readme.md` file for `bluffmaster` is automatically generated and should not
 npm run readme
 ```
 
-<!-- ## Version Release Schedule
+## Maintainers
 
-faker.js is a popular project used by many organizations and individuals in production settings. Major and Minor version releases are generally on a monthly schedule. Bugs fixes are addressed by severity and fixed as soon as possible.
+### Kumar Priyansh
 
-If you require the absolute latest version of `faker.js` the `master` branch @ <http://github.com/marak/faker.js/> should always be up to date and working. -->
+BluffMaster - Copyright (c) 2022 - Present
 
-<!-- ## Maintainer
+https://github.com/luciferreeves/bluffmaster
 
-#### Marak Squires
+https://npmjs.com/package/bluffmaster
 
-faker.js - Copyright (c) 2020
-Marak Squires
-www.marak.com
+### Marak Squires
+
+faker.js - Copyright (c) 2011 - 2022
+
 http://github.com/marak/faker.js/
 
 faker.js was inspired by and has used data definitions from:
 
  * <https://github.com/stympy/faker/> - Copyright (c) 2007-2010 Benjamin Curtis
  * <http://search.cpan.org/~jasonk/Data-Faker-0.07/> - Copyright 2004-2005 by Jason Kohles
+
+
+
+<!-- ## Version Release Schedule
+
+faker.js is a popular project used by many organizations and individuals in production settings. Major and Minor version releases are generally on a monthly schedule. Bugs fixes are addressed by severity and fixed as soon as possible.
+
+If you require the absolute latest version of `faker.js` the `master` branch @ <http://github.com/marak/faker.js/> should always be up to date and working. -->
+
+<!--
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
