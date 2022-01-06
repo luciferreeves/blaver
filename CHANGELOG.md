@@ -1,7 +1,10 @@
-# CHANGELOG
+# BluffMaster Changelog
 
-See commit history on Github for change history
-http://github.com/marak/faker.js
+## v 5.5.5
+
+- Update all faker instances to `bluffmaster`.
+
+# Faker Changelog
 
 ## v4.0.0
 
