@@ -1,21 +1,21 @@
 if (typeof module !== 'undefined') {
     var assert = require('assert');
     var sinon = require('sinon');
-    var faker = require('../index');
+    var bluffmaster = require('../index');
 }
 
 describe("helpers.js", function () {
     describe("replaceSymbolWithNumber()", function () {
         context("when no symbol passed in", function () {
             it("uses '#' by default", function () {
-                var num = faker.helpers.replaceSymbolWithNumber('#AB');
+                var num = bluffmaster.helpers.replaceSymbolWithNumber('#AB');
                 assert.ok(num.match(/\dAB/));
             });
         });
 
         context("when symbol passed in", function () {
             it("replaces that symbol with integers", function () {
-                var num = faker.helpers.replaceSymbolWithNumber('#AB', 'A');
+                var num = bluffmaster.helpers.replaceSymbolWithNumber('#AB', 'A');
                 assert.ok(num.match(/#\dB/));
             });
         });
@@ -24,7 +24,7 @@ describe("helpers.js", function () {
     describe("replaceSymbols()", function () {
         context("when '*' passed", function () {
             it("replaces it with alphanumeric", function(){
-                var num = faker.helpers.replaceSymbols('*AB');
+                var num = bluffmaster.helpers.replaceSymbols('*AB');
                 assert.ok(num.match(/\wAB/));
             });
         });
@@ -32,82 +32,82 @@ describe("helpers.js", function () {
 
     describe("shuffle()", function () {
         it("the output is the same length as the input", function () {
-            sinon.spy(faker.random, 'number');
-            var shuffled = faker.helpers.shuffle(["a", "b"]);
+            sinon.spy(bluffmaster.random, 'number');
+            var shuffled = bluffmaster.helpers.shuffle(["a", "b"]);
             assert.ok(shuffled.length === 2);
-            assert.ok(faker.random.number.calledWith(1));
-            faker.random.number.restore();
+            assert.ok(bluffmaster.random.number.calledWith(1));
+            bluffmaster.random.number.restore();
         });
 
         it("empty array returns empty array", function () {
-            var shuffled = faker.helpers.shuffle([]);
+            var shuffled = bluffmaster.helpers.shuffle([]);
             assert.ok(shuffled.length === 0);
         });
 
         it("mutates the input array in place", function () {
             var input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
-            var shuffled = faker.helpers.shuffle(input);
+            var shuffled = bluffmaster.helpers.shuffle(input);
             assert.deepEqual(shuffled, input);
         });
 
         it("all items shuffled as expected when seeded", function () {
             var input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
-            faker.seed(100);
-            var shuffled = faker.helpers.shuffle(input);
+            bluffmaster.seed(100);
+            var shuffled = bluffmaster.helpers.shuffle(input);
             assert.deepEqual(shuffled, ["b", "e", "a", "d", "j", "i", "h", "c", "g", "f"]);
         });
     });
 
     describe("slugify()", function () {
         it("removes unwanted characters from URI string", function () {
-            assert.equal(faker.helpers.slugify("Aiden.Harªann"), "Aiden.Harann");
-            assert.equal(faker.helpers.slugify("d'angelo.net"), "dangelo.net");
+            assert.equal(bluffmaster.helpers.slugify("Aiden.Harªann"), "Aiden.Harann");
+            assert.equal(bluffmaster.helpers.slugify("d'angelo.net"), "dangelo.net");
         });
     });
 
     describe("mustache()", function () {
         it("returns empty string with no arguments", function () {
-            assert.equal(faker.helpers.mustache(), "");
+            assert.equal(bluffmaster.helpers.mustache(), "");
         });
     });
 
     describe("repeatString()", function () {
         it("returns empty string with no arguments", function () {
-            assert.equal(faker.helpers.repeatString(), "");
+            assert.equal(bluffmaster.helpers.repeatString(), "");
         });
     });
 
     describe("replaceSymbols()", function () {
         it("returns empty string with no arguments", function () {
-            assert.equal(faker.helpers.replaceSymbols(), "");
+            assert.equal(bluffmaster.helpers.replaceSymbols(), "");
         });
     });
 
     /*
     describe("replaceCreditCardSymbols()", function () {
         it("returns empty string with no arguments", function () {
-            assert.equal(faker.helpers.replaceCreditCardSymbols(), "");
+            assert.equal(bluffmaster.helpers.replaceCreditCardSymbols(), "");
         });
     });
     */
 
     describe("createCard()", function () {
         it("returns an object", function () {
-            var card = faker.helpers.createCard();
+            var card = bluffmaster.helpers.createCard();
             assert.ok(typeof card === 'object');
         });
     });
 
     describe("contextualCard()", function () {
         it("returns an object", function () {
-            var card = faker.helpers.contextualCard();
+            var card = bluffmaster.helpers.contextualCard();
             assert.ok(typeof card === 'object');
         });
     });
 
     describe("userCard()", function () {
         it("returns an object", function () {
-            var card = faker.helpers.userCard();
+            var card = bluffmaster.helpers.userCard();
             assert.ok(typeof card === 'object');
         });
     });
@@ -116,7 +116,7 @@ describe("helpers.js", function () {
     describe("randomize()", function () {
         it("returns a random element from an array", function () {
             var arr = ['a', 'b', 'c'];
-            var elem = faker.helpers.randomize(arr);
+            var elem = bluffmaster.helpers.randomize(arr);
             assert.ok(elem);
             assert.ok(arr.indexOf(elem) !== -1);
         });
@@ -125,20 +125,20 @@ describe("helpers.js", function () {
     describe("replaceCreditCardSymbols()", function () {
       var luhnCheck = require("./support/luhnCheck.js");
       it("returns a credit card number given a schema", function () {
-        var number = faker.helpers.replaceCreditCardSymbols("6453-####-####-####-###L");
+        var number = bluffmaster.helpers.replaceCreditCardSymbols("6453-####-####-####-###L");
         assert.ok(number.match(/^6453\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}$/));
         assert.ok(luhnCheck(number));
       });
       it("supports different symbols", function () {
-        var number = faker.helpers.replaceCreditCardSymbols("6453-****-****-****-***L","*");
+        var number = bluffmaster.helpers.replaceCreditCardSymbols("6453-****-****-****-***L","*");
         assert.ok(number.match(/^6453\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}$/));
         assert.ok(luhnCheck(number));
       });
       it("handles regexp style input", function () {
-        var number = faker.helpers.replaceCreditCardSymbols("6453-*{4}-*{4}-*{4}-*{3}L","*");
+        var number = bluffmaster.helpers.replaceCreditCardSymbols("6453-*{4}-*{4}-*{4}-*{3}L","*");
         assert.ok(number.match(/^6453\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}$/));
         assert.ok(luhnCheck(number));
-        number = faker.helpers.replaceCreditCardSymbols("645[5-9]-#{4,6}-#{1,2}-#{4,6}-#{3}L");
+        number = bluffmaster.helpers.replaceCreditCardSymbols("645[5-9]-#{4,6}-#{1,2}-#{4,6}-#{3}L");
         assert.ok(number.match(/^645[5-9]\-([0-9]){4,6}\-([0-9]){1,2}\-([0-9]){4,6}\-([0-9]){4}$/));
         assert.ok(luhnCheck(number));
       });
@@ -146,36 +146,36 @@ describe("helpers.js", function () {
 
     describe("regexpStyleStringParse()", function () {
       it("returns an empty string when called without param", function () {
-        assert.ok(faker.helpers.regexpStyleStringParse() === "");
+        assert.ok(bluffmaster.helpers.regexpStyleStringParse() === "");
       });
       it("deals with range repeat", function () {
-        var string = faker.helpers.regexpStyleStringParse("#{5,10}");
+        var string = bluffmaster.helpers.regexpStyleStringParse("#{5,10}");
         assert.ok(string.length <= 10 && string.length >= 5);
         assert.ok(string.match(/^\#{5,10}$/));
       });
       it("flips the range when min > max", function () {
-        var string = faker.helpers.regexpStyleStringParse("#{10,5}");
+        var string = bluffmaster.helpers.regexpStyleStringParse("#{10,5}");
         assert.ok(string.length <= 10 && string.length >= 5);
         assert.ok(string.match(/^\#{5,10}$/));
       });
       it("repeats string {n} number of times", function () {
-        assert.ok(faker.helpers.regexpStyleStringParse("%{10}") === faker.helpers.repeatString("%",10));
-        assert.ok(faker.helpers.regexpStyleStringParse("%{30}") === faker.helpers.repeatString("%",30));
-        assert.ok(faker.helpers.regexpStyleStringParse("%{5}") === faker.helpers.repeatString("%",5));
+        assert.ok(bluffmaster.helpers.regexpStyleStringParse("%{10}") === bluffmaster.helpers.repeatString("%",10));
+        assert.ok(bluffmaster.helpers.regexpStyleStringParse("%{30}") === bluffmaster.helpers.repeatString("%",30));
+        assert.ok(bluffmaster.helpers.regexpStyleStringParse("%{5}") === bluffmaster.helpers.repeatString("%",5));
       });
       it("creates a numerical range", function () {
-        var string = faker.helpers.regexpStyleStringParse("Hello[0-9]");
+        var string = bluffmaster.helpers.regexpStyleStringParse("Hello[0-9]");
         assert.ok(string.match(/^Hello[0-9]$/));
       });
       it("deals with multiple tokens in one string", function () {
-        var string = faker.helpers.regexpStyleStringParse("Test#{5}%{2,5}Testing**[1-5]**{10}END");
+        var string = bluffmaster.helpers.regexpStyleStringParse("Test#{5}%{2,5}Testing**[1-5]**{10}END");
         assert.ok(string.match(/^Test\#{5}%{2,5}Testing\*\*[1-5]\*\*{10}END$/));
       });
     });
 
   describe("createTransaction()", function() {
     it("should create a random transaction", function() {
-      var transaction = faker.helpers.createTransaction();
+      var transaction = bluffmaster.helpers.createTransaction();
       assert.ok(transaction);
       assert.ok(transaction.amount);
       assert.ok(transaction.date);

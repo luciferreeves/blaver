@@ -1,5 +1,5 @@
-var Faker = require('../lib');
-var faker = new Faker({ locale: 'vi', localeFallback: 'en' });
-faker.locales['vi'] = require('../lib/locales/vi');
-faker.locales['en'] = require('../lib/locales/en');
-module['exports'] = faker;
+var BluffMaster = require('../lib');
+var bluffmaster = new BluffMaster({ locale: 'vi', localeFallback: 'en' });
+bluffmaster.locales['vi'] = require('../lib/locales/vi');
+bluffmaster.locales['en'] = require('../lib/locales/en');
+module['exports'] = bluffmaster;

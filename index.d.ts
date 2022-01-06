@@ -1,5 +1,5 @@
-// Type definitions for faker 5.5
-// Project: http://marak.com/faker.js/
+// Type definitions for bluffmaster 5.5
+// Project: http://marak.com/bluffmaster.js/
 // Definitions by: Ben Swartz <https://github.com/bensw>
 //                 Bas Pennings <https://github.com/basp>
 //                 Yuki Kokubun <https://github.com/Kuniwak>
@@ -12,10 +12,10 @@
 //                 Jérémie Parker <https://github.com/p-j>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare const fakerStatic: Faker.FakerStatic;
+declare const bluffmasterStatic: BluffMaster.BluffMasterStatic;
 
-declare namespace Faker {
-  interface FakerStatic {
+declare namespace BluffMaster {
+  interface BluffMasterStatic {
     locale: string;
     setLocale(locale: string): void;
 
@@ -281,17 +281,17 @@ declare namespace Faker {
     };
 
     random: {
-      /** @deprecated faker.random.number is now located in faker.datatype.number */
+      /** @deprecated bluffmaster.random.number is now located in bluffmaster.datatype.number */
       number(max?: number): number;
-      /** @deprecated faker.random.number is now located in faker.datatype.number */
+      /** @deprecated bluffmaster.random.number is now located in bluffmaster.datatype.number */
       number(options?: {
         min?: number | undefined;
         max?: number | undefined;
         precision?: number | undefined;
       }): number;
-      /** @deprecated faker.random.float is now located in faker.datatype.float */
+      /** @deprecated bluffmaster.random.float is now located in bluffmaster.datatype.float */
       float(max?: number): number;
-      /** @deprecated faker.random.float is now located in faker.datatype.float */
+      /** @deprecated bluffmaster.random.float is now located in bluffmaster.datatype.float */
       float(options?: {
         min?: number | undefined;
         max?: number | undefined;
@@ -305,9 +305,9 @@ declare namespace Faker {
       arrayElements<T>(array: ReadonlyArray<T>, count?: number): ReadonlyArray<T>;
       objectElement(object?: { [key: string]: any }, field?: 'key'): string;
       objectElement<T>(object?: { [key: string]: T }, field?: any): T;
-      /** @deprecated faker.random.uuid is now located in faker.datatype.uuid */
+      /** @deprecated bluffmaster.random.uuid is now located in bluffmaster.datatype.uuid */
       uuid(): string;
-      /** @deprecated faker.random.boolean is now located in faker.datatype.boolean */
+      /** @deprecated bluffmaster.random.boolean is now located in bluffmaster.datatype.boolean */
       boolean(): boolean;
       word(type?: string): string;
       words(count?: number): string;
@@ -315,7 +315,7 @@ declare namespace Faker {
       locale(): string;
       alpha(options?: { count?: number | undefined; upcase?: boolean | undefined }): string;
       alphaNumeric(count?: number): string;
-      /** @deprecated faker.random.hexaDecimal is now located in faker.datatype.hexaDecimal */
+      /** @deprecated bluffmaster.random.hexaDecimal is now located in bluffmaster.datatype.hexaDecimal */
       hexaDecimal(count?: number): string;
     };
 
@@ -443,182 +443,182 @@ declare namespace Faker {
   }
 }
 
-declare module '@withshepherd/faker' {
-  export = fakerStatic;
+declare module '@withshepherd/bluffmaster' {
+  export = bluffmasterStatic;
 }
 
-declare module '@withshepherd/faker/locale/az' {
-  export = fakerStatic;
+declare module '@withshepherd/bluffmaster/locale/az' {
+  export = bluffmasterStatic;
 }
 
-declare module '@withshepherd/faker/locale/ar' {
-  export = fakerStatic;
+declare module '@withshepherd/bluffmaster/locale/ar' {
+  export = bluffmasterStatic;
 }
 
-declare module '@withshepherd/faker/locale/cz' {
-  export = fakerStatic;
+declare module '@withshepherd/bluffmaster/locale/cz' {
+  export = bluffmasterStatic;
 }
 
-declare module '@withshepherd/faker/locale/de' {
-  export = fakerStatic;
+declare module '@withshepherd/bluffmaster/locale/de' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/de_AT' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/de_AT' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/de_CH' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/de_CH' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_AU' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_AU' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_AU_ocker' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_AU_ocker' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_BORK' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_BORK' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_CA' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_CA' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_GB' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_GB' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_IE' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_IE' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_IND' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_IND' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_US' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_US' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/en_ZA' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/en_ZA' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/es' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/es' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/es_MX' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/es_MX' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/fa' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/fa' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/fi' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/fi' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/fr' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/fr' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/fr_CA' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/fr_CA' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/fr_CH' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/fr_CH' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/ge' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/ge' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/id_ID' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/id_ID' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/it' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/it' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/ja' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/ja' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/ko' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/ko' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/nb_NO' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/nb_NO' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/nep' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/nep' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/nl' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/nl' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/nl_BE' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/nl_BE' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/pl' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/pl' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/pt_BR' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/pt_BR' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/pt_PT' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/pt_PT' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/ro' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/ro' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/ru' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/ru' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/sk' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/sk' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/sv' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/sv' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/tr' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/tr' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/uk' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/uk' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/vi' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/vi' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/zh_CN' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/zh_CN' {
+  export = bluffmasterStatic;
 }
 
-declare module 'faker/locale/zh_TW' {
-  export = fakerStatic;
+declare module 'bluffmaster/locale/zh_TW' {
+  export = bluffmasterStatic;
 }

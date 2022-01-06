@@ -2,7 +2,7 @@ if (typeof module !== 'undefined') {
     var assert = require('assert');
     var sinon = require('sinon');
     var _ = require('lodash');
-    var faker = require('../index');
+    var bluffmaster = require('../index');
     var mersenne = require('../vendor/mersenne');
 }
 
@@ -12,28 +12,28 @@ describe("random.js", function () {
 
     it("returns a random number given a maximum value as Number", function() {
       var max = 10;
-      assert.ok(faker.random.number(max) <= max);
+      assert.ok(bluffmaster.random.number(max) <= max);
     });
 
     it("returns a random number given a maximum value as Object", function() {
       var options = { max: 10 };
-      assert.ok(faker.random.number(options) <= options.max);
+      assert.ok(bluffmaster.random.number(options) <= options.max);
     });
 
     it("returns a random number given a maximum value of 0", function() {
       var options = { max: 0 };
-      assert.ok(faker.random.number(options) === 0);
+      assert.ok(bluffmaster.random.number(options) === 0);
     });
 
     it("returns a random number given a negative number minimum and maximum value of 0", function() {
       var options = { min: -100, max: 0 };
-      assert.ok(faker.random.number(options) <= options.max);
+      assert.ok(bluffmaster.random.number(options) <= options.max);
     });
 
     it("returns a random number between a range", function() {
       var options = { min: 22, max: 33 };
       for(var i = 0; i < 100; i++) {
-        var randomNumber = faker.random.number(options);
+        var randomNumber = bluffmaster.random.number(options);
         assert.ok(randomNumber >= options.min);
         assert.ok(randomNumber <= options.max);
       }
@@ -43,7 +43,7 @@ describe("random.js", function () {
       var options = { min: 0, max: 1.5, precision: 0.5 };
       var results = _.chain(_.range(50))
         .map(function() {
-          return faker.random.number(options);
+          return bluffmaster.random.number(options);
         })
         .uniq()
         .value()
@@ -60,7 +60,7 @@ describe("random.js", function () {
     it("provides numbers with a with exact precision", function() {
       var options = { min: 0.5, max: 0.99, precision: 0.01 };
       for(var i = 0; i < 100; i++) {
-        var number = faker.random.number(options);
+        var number = bluffmaster.random.number(options);
         assert.equal(number, Number(number.toFixed(2)));
       }
     });
@@ -73,27 +73,27 @@ describe("random.js", function () {
         max: max
       };
 
-      faker.random.number(opts);
+      bluffmaster.random.number(opts);
 
       assert.equal(opts.min, min);
       assert.equal(opts.max, max);
     });
 
     it('should return deterministic results when seeded with integer', function() {
-      faker.seed(100);
-      var name = faker.name.findName();
+      bluffmaster.seed(100);
+      var name = bluffmaster.name.findName();
       assert.equal(name, 'Eva Jenkins');
     })
 
     it('should return deterministic results when seeded with array - one element', function() {
-      faker.seed([10]);
-      var name = faker.name.findName();
+      bluffmaster.seed([10]);
+      var name = bluffmaster.name.findName();
       assert.equal(name, 'Duane Kub');
     })
 
     it('should return deterministic results when seeded with array - multiple elements', function() {
-      faker.seed([10, 100, 1000]);
-      var name = faker.name.findName();
+      bluffmaster.seed([10, 100, 1000]);
+      var name = bluffmaster.name.findName();
       assert.equal(name, 'Alma Shanahan');
     })
 
@@ -102,34 +102,34 @@ describe("random.js", function () {
   describe("float", function() {
 
     it("returns a random float with a default precision value (0.01)", function() {
-      var number = faker.random.float();
+      var number = bluffmaster.random.float();
       assert.equal(number, Number(number.toFixed(2)));
     });
 
     it("returns a random float given a precision value", function() {
-      var number = faker.random.float(0.001);
+      var number = bluffmaster.random.float(0.001);
       assert.equal(number, Number(number.toFixed(3)));
     });
 
     it("returns a random number given a maximum value as Object", function() {
       var options = { max: 10 };
-      assert.ok(faker.random.float(options) <= options.max);
+      assert.ok(bluffmaster.random.float(options) <= options.max);
     });
 
     it("returns a random number given a maximum value of 0", function() {
       var options = { max: 0 };
-      assert.ok(faker.random.float(options) === 0);
+      assert.ok(bluffmaster.random.float(options) === 0);
     });
 
     it("returns a random number given a negative number minimum and maximum value of 0", function() {
       var options = { min: -100, max: 0 };
-      assert.ok(faker.random.float(options) <= options.max);
+      assert.ok(bluffmaster.random.float(options) <= options.max);
     });
 
     it("returns a random number between a range", function() {
       var options = { min: 22, max: 33 };
       for(var i = 0; i < 5; i++) {
-        var randomNumber = faker.random.float(options);
+        var randomNumber = bluffmaster.random.float(options);
         assert.ok(randomNumber >= options.min);
         assert.ok(randomNumber <= options.max);
       }
@@ -139,7 +139,7 @@ describe("random.js", function () {
       var options = { min: 0, max: 1.5, precision: 0.5 };
       var results = _.chain(_.range(50))
         .map(function() {
-          return faker.random.float(options);
+          return bluffmaster.random.float(options);
         })
         .uniq()
         .value()
@@ -156,7 +156,7 @@ describe("random.js", function () {
     it("provides numbers with a with exact precision", function() {
       var options = { min: 0.5, max: 0.99, precision: 0.01 };
       for(var i = 0; i < 100; i++) {
-        var number = faker.random.float(options);
+        var number = bluffmaster.random.float(options);
         assert.equal(number, Number(number.toFixed(2)));
       }
     });
@@ -169,7 +169,7 @@ describe("random.js", function () {
         max: max
       };
 
-      faker.random.float(opts);
+      bluffmaster.random.float(opts);
 
       assert.equal(opts.min, min);
       assert.equal(opts.max, max);
@@ -179,19 +179,19 @@ describe("random.js", function () {
   describe('arrayElement', function() {
     it('returns a random element in the array', function() {
       var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      assert.ok(testArray.indexOf(faker.random.arrayElement(testArray)) > -1);
+      assert.ok(testArray.indexOf(bluffmaster.random.arrayElement(testArray)) > -1);
     });
 
     it('returns a random element in the array when there is only 1', function() {
       var testArray = ['hello'];
-      assert.ok(testArray.indexOf(faker.random.arrayElement(testArray)) > -1);
+      assert.ok(testArray.indexOf(bluffmaster.random.arrayElement(testArray)) > -1);
     });
   });
 
   describe('arrayElements', function() {
     it('returns a subset with random elements in the array', function() {
       var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      var subset = faker.random.arrayElements(testArray);
+      var subset = bluffmaster.random.arrayElements(testArray);
 
       // Check length
       assert.ok(subset.length >= 1 && subset.length <= testArray.length);
@@ -210,7 +210,7 @@ describe("random.js", function () {
 
     it('returns a subset of fixed length with random elements in the array', function() {
       var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      var subset = faker.random.arrayElements(testArray, 3);
+      var subset = bluffmaster.random.arrayElements(testArray, 3);
 
       // Check length
       assert.ok(subset.length === 3);
@@ -230,7 +230,7 @@ describe("random.js", function () {
 
   describe('UUID', function() {
     it('should generate a valid UUID', function() {
-      var UUID = faker.random.uuid();
+      var UUID = bluffmaster.random.uuid();
       var RFC4122 = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
       assert.ok(RFC4122.test(UUID));
     })
@@ -238,13 +238,13 @@ describe("random.js", function () {
 
   describe('boolean', function() {
     it('should generate a boolean value', function() {
-      var bool = faker.random.boolean();
+      var bool = bluffmaster.random.boolean();
       assert.ok(typeof bool == 'boolean');
     });
   });
 
   describe('semver', function() {
-    var semver = faker.system.semver();
+    var semver = bluffmaster.system.semver();
 
     it('should generate a string', function() {
       assert.ok(typeof semver === 'string');
@@ -256,7 +256,7 @@ describe("random.js", function () {
   });
 
   describe('alpha', function() {
-    var alpha = faker.random.alpha;
+    var alpha = bluffmaster.random.alpha;
 
     it('should return single letter when no count provided', function() {
       assert.ok(alpha().length === 1);
@@ -276,7 +276,7 @@ describe("random.js", function () {
   })
 
   describe('alphaNumeric', function() {
-    var alphaNumeric = faker.random.alphaNumeric;
+    var alphaNumeric = bluffmaster.random.alphaNumeric;
 
     it('should generate single character when no additional argument was provided', function() {
       assert.ok(alphaNumeric().length === 1);
@@ -288,7 +288,7 @@ describe("random.js", function () {
   })
 
   describe('hexaDecimal', function() {
-    var hexaDecimal = faker.random.hexaDecimal;
+    var hexaDecimal = bluffmaster.random.hexaDecimal;
 
     it('should generate single hex character when no additional argument was provided', function() {
       var hex = hexaDecimal();

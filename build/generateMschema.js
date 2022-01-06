@@ -1,6 +1,6 @@
-var faker = require('../');
+var bluffmaster = require('../');
 
-var items = Object.keys(faker);
+var items = Object.keys(bluffmaster);
 
 items = items.filter(function(i){
   if(['locales', 'definitions', 'locale', 'localeFallback'].indexOf(i) === -1) {
@@ -26,17 +26,17 @@ schema.methodSchemas = {
 items.forEach(function(item){
 
   schema.modules.enum.push(item);
-  for (var q in faker[item]) {
+  for (var q in bluffmaster[item]) {
 
     //console.log(item + '.' + q);
 
     // check to see if an existing schema existing on the function
-    var fnLine = faker[item][q].toString().split('\n').slice(0,1)[0];
+    var fnLine = bluffmaster[item][q].toString().split('\n').slice(0,1)[0];
     var prop;
 
-    if (typeof faker[item][q].schema === "object") {
+    if (typeof bluffmaster[item][q].schema === "object") {
       // if so, we'll want to merge that onto the exported schemas here
-      prop =  faker[item][q].schema;
+      prop =  bluffmaster[item][q].schema;
     } else {
       // if not, fall back to the ones we can parse from the method itself
 

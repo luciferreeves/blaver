@@ -2,9 +2,9 @@
 var unique = {};
 
 // global results store
-// currently uniqueness is global to entire faker instance
-// this means that faker should currently *never* return duplicate values across all API methods when using `Faker.unique`
-// it's possible in the future that some users may want to scope found per function call instead of faker instance
+// currently uniqueness is global to entire bluffmaster instance
+// this means that bluffmaster should currently *never* return duplicate values across all API methods when using `Faker.unique`
+// it's possible in the future that some users may want to scope found per function call instead of bluffmaster instance
 var found = {};
 
 // global exclude list of results
@@ -27,7 +27,7 @@ var defaultCompare = function(obj, key) {
 unique.errorMessage = function (now, code, opts) {
   console.error('error', code);
   console.log('found', Object.keys(found).length, 'unique entries before throwing error. \nretried:', currentIterations, '\ntotal time:', now - opts.startTime, 'ms');
-  throw new Error(code + ' for uniqueness check \n\nMay not be able to generate any more unique values with current settings. \nTry adjusting maxTime or maxRetries parameters for faker.unique()')
+  throw new Error(code + ' for uniqueness check \n\nMay not be able to generate any more unique values with current settings. \nTry adjusting maxTime or maxRetries parameters for bluffmaster.unique()')
 };
 
 unique.exec = function (method, args, opts) {

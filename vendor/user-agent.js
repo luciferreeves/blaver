@@ -28,7 +28,7 @@ If we meet some day, and you think this stuff is worth it, you can buy me a beer
 
 */
 
-exports.generate = function generate(faker) {
+exports.generate = function generate(bluffmaster) {
 
   function rnd(a, b) {
     //calling rnd() with no arguments is identical to rnd(0, 100)
@@ -37,14 +37,14 @@ exports.generate = function generate(faker) {
 
     if (typeof b === 'number' && typeof a === 'number') {
 
-      // 9/2018 - Added faker random to ensure mersenne and seed
-      return faker.datatype.number({ min: a, max: b});
+      // 9/2018 - Added bluffmaster random to ensure mersenne and seed
+      return bluffmaster.datatype.number({ min: a, max: b});
 
     }
 
     if (Object.prototype.toString.call(a) === "[object Array]") {
       //returns a random element from array (a), even weighting
-      return faker.random.arrayElement(a);
+      return bluffmaster.random.arrayElement(a);
     }
 
     if (a && typeof a === 'object') {

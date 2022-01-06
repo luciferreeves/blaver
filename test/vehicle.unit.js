@@ -1,64 +1,64 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
   var sinon = require('sinon');
-  var faker = require('../index');
+  var bluffmaster = require('../index');
 }
 
 describe("vehicle.js", function () {
   describe("vehicle()", function () {
       it("returns a random vehicle", function () {
-          sinon.stub(faker.vehicle, 'vehicle').returns('Ford Explorer');
-          var vehicle = faker.vehicle.vehicle();
+          sinon.stub(bluffmaster.vehicle, 'vehicle').returns('Ford Explorer');
+          var vehicle = bluffmaster.vehicle.vehicle();
 
           assert.equal(vehicle, 'Ford Explorer');
-          faker.vehicle.vehicle.restore();
+          bluffmaster.vehicle.vehicle.restore();
       });
   });
 
   describe("manufacturer()", function () {
       it("returns random manufacturer", function () {
-          sinon.stub(faker.vehicle, 'manufacturer').returns('Porsche');
-          var manufacturer = faker.vehicle.manufacturer();
+          sinon.stub(bluffmaster.vehicle, 'manufacturer').returns('Porsche');
+          var manufacturer = bluffmaster.vehicle.manufacturer();
 
           assert.equal(manufacturer, 'Porsche');
-          faker.vehicle.manufacturer.restore();
+          bluffmaster.vehicle.manufacturer.restore();
       });
   });
 
   describe("type()", function () {
     it("returns random vehicle type", function () {
-      sinon.stub(faker.vehicle, 'type').returns('Minivan');
-          var type = faker.vehicle.type();
+      sinon.stub(bluffmaster.vehicle, 'type').returns('Minivan');
+          var type = bluffmaster.vehicle.type();
 
           assert.equal(type, 'Minivan');
-          faker.vehicle.type.restore();
+          bluffmaster.vehicle.type.restore();
       });
   });
 
   describe("fuel()", function () {
       it("returns a fuel type", function () {
-          sinon.stub(faker.vehicle, 'fuel').returns('Hybrid');
-          var fuel = faker.vehicle.fuel();
+          sinon.stub(bluffmaster.vehicle, 'fuel').returns('Hybrid');
+          var fuel = bluffmaster.vehicle.fuel();
 
           assert.equal(fuel, 'Hybrid');
-          faker.vehicle.fuel.restore();
+          bluffmaster.vehicle.fuel.restore();
       });
   });
 
   describe("vin()", function () {
       it("returns valid vin number", function () {
-        var vin = faker.vehicle.vin();
+        var vin = bluffmaster.vehicle.vin();
         assert.ok(vin.match(/^[A-Z0-9]{10}[A-Z]{1}[A-Z0-9]{1}\d{5}$/));
       });
   });
 
   describe("color()", function () {
       it("returns a random color", function () {
-          sinon.stub(faker.vehicle, 'color').returns('black');
-          var color = faker.vehicle.color();
+          sinon.stub(bluffmaster.vehicle, 'color').returns('black');
+          var color = bluffmaster.vehicle.color();
 
           assert.equal(color, 'black');
-          faker.vehicle.color.restore();
+          bluffmaster.vehicle.color.restore();
       });
   });
 });

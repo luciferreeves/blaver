@@ -17,14 +17,14 @@ Package.onUse(function (api) {
 
   api.addFiles('meteor/npm-require.js', 'server');
 
-  api.addFiles('build/build/faker.js', 'client');
+  api.addFiles('build/build/bluffmaster.js', 'client');
 
-  api.export("faker", "server");
+  api.export("bluffmaster", "server");
 });
 
 
 Package.onTest(function(api) {
   api.use(['practicalmeteor:faker', "coffeescript", "tinytest", 'practicalmeteor:chai']);
 
-  api.addFiles("meteor/tests/faker-export-test.coffee");
+  api.addFiles("meteor/tests/bluffmaster-export-test.coffee");
 });
