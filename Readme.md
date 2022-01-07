@@ -18,6 +18,18 @@ Blaver is a fork of the original Faker.js library. The original library was crea
 
 You can also access unofficial Faker.js documentation at [https://fakerjsdocs.netlify.com/](https://fakerjsdocs.netlify.com/)
 
+## Installation
+
+### Via CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/blaver@6.6.7/dist/blaver.min.js"></script>
+```
+
+### Via NPM
+```bash
+npm i blaver
+```
 
 <!-- [![Build Status](https://travis-ci.org/Marak/faker.js.svg?branch=master)](https://travis-ci.org/Marak/faker.js) [![Coverage Status](https://coveralls.io/repos/github/Marak/faker.js/badge.svg?branch=master)](https://coveralls.io/github/Marak/faker.js?branch=master)
 
