@@ -13,7 +13,7 @@
     "readme": "./node_modules/.bin/gulp readme",
     "lint": "node_modules/.bin/eslint ./lib/animal.js",
     "test": "node_modules/.bin/mocha test/*.*.js",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov"
   },
   "nyc": {
     "all": false,
