@@ -1,12 +1,12 @@
 .npm/
 build/*
 build/build/*
-!build/build/faker.js
-!build/build/faker.min.js
+!build/build/bluffmaster.js
+!build/build/bluffmaster.min.js
 docs/
 examples/
 meteor/
 test/
-logo.png
+logos/
 reports/
 .nyc_output/
