@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/luciferreeves/bluffmaster/master/logos/logo-96.png">
+  <img src="https://raw.githubusercontent.com/luciferreeves/blaver/master/logos/logo-96.png">
 </p>
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/bluffmaster/Build) ![npm](https://img.shields.io/npm/v/bluffmaster) ![NPM](https://img.shields.io/npm/l/bluffmaster) ![GitHub issues](https://img.shields.io/github/issues-raw/luciferreeves/bluffmaster) ![npm](https://img.shields.io/npm/dw/bluffmaster) ![GitHub deployments](https://img.shields.io/github/deployments/luciferreeves/bluffmaster/github-pages?label=JSDoc%20Deployment) [![Coverage Status](https://coveralls.io/repos/github/luciferreeves/bluffmaster/badge.svg?branch=master)](https://coveralls.io/github/luciferreeves/bluffmaster?branch=master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/blaver/Build) ![npm](https://img.shields.io/npm/v/blaver) ![NPM](https://img.shields.io/npm/l/blaver) ![GitHub issues](https://img.shields.io/github/issues-raw/luciferreeves/blaver) ![GitHub deployments](https://img.shields.io/github/deployments/luciferreeves/blaver/github-pages?label=JSDoc%20Deployment) [![Coverage Status](https://coveralls.io/repos/github/luciferreeves/blaver/badge.svg?branch=master)](https://coveralls.io/github/luciferreeves/blaver?branch=master)
 
 # Blaver - generate massive amounts of fake data in the browser and node.js
 
@@ -35,29 +35,29 @@ You can also access unofficial Faker.js documentation at [https://fakerjsdocs.ne
 ### Browser
 
 ```html
-<script src = "bluffmaster.js" type = "text/javascript"></script>
+<script src = "blaver.js" type = "text/javascript"></script>
 <script>
-  var randomName = bluffmaster.name.findName(); // Caitlyn Kerluke
-  var randomEmail = bluffmaster.internet.email(); // Rusty@arne.info
-  var randomCard = bluffmaster.helpers.createCard(); // random contact card containing many properties
+  var randomName = blaver.name.findName(); // Caitlyn Kerluke
+  var randomEmail = blaver.internet.email(); // Rusty@arne.info
+  var randomCard = blaver.helpers.createCard(); // random contact card containing many properties
 </script>
 ```
 
 ### Node.js
 
 ```js
-var bluffmaster = require('bluffmaster');
+var blaver = require('blaver');
 
-var randomName = bluffmaster.name.findName(); // Rowan Nikolaus
-var randomEmail = bluffmaster.internet.email(); // Kassandra.Haley@erich.biz
-var randomCard = bluffmaster.helpers.createCard(); // random contact card containing many properties
+var randomName = blaver.name.findName(); // Rowan Nikolaus
+var randomEmail = blaver.internet.email(); // Kassandra.Haley@erich.biz
+var randomCard = blaver.helpers.createCard(); // random contact card containing many properties
 ```
 
 ## API
 
 ### JSDoc API Browser
 
-You can browse all API methods by going to the [JSDoc API Browser](http://thatcomputerscientist.com/bluffmaster/).
+You can browse all API methods by going to the [JSDoc API Browser](http://thatcomputerscientist.com/blaver/).
 
 ### API Methods
 
@@ -322,7 +322,7 @@ Blaver contains a super useful generator method `Blaver.fake` for combining fake
 
 
 ``` js
-console.log(bluffmaster.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
+console.log(blaver.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
 // outputs: "Marks, Dean Sr."
 ```
 
@@ -339,7 +339,7 @@ Setting a new locale is simple:
 
 ```js
 // sets locale to de
-bluffmaster.locale = "de";
+blaver.locale = "de";
 ```
 
  * az
@@ -396,13 +396,13 @@ bluffmaster.locale = "de";
 
 Blaver supports incremental loading of locales.
 
-By default, requiring `bluffmaster` will include *all* locale data.
+By default, requiring `blaver` will include *all* locale data.
 
 In a production environment, you may only want to include the locale data for a specific set of locales.
 
 ```js
 // loads only de locale
-var bluffmaster = require('bluffmaster/locale/de');
+var blaver = require('blaver/locale/de');
 ```
 
 ## Setting a randomness seed
@@ -410,14 +410,14 @@ var bluffmaster = require('bluffmaster/locale/de');
 If you want consistent results, you can set your own seed:
 
 ```js
-bluffmaster.seed(123);
+blaver.seed(123);
 
-var firstRandom = bluffmaster.random.number();
+var firstRandom = blaver.random.number();
 
 // Setting the seed again resets the sequence.
-bluffmaster.seed(123);
+blaver.seed(123);
 
-var secondRandom = bluffmaster.random.number();
+var secondRandom = blaver.random.number();
 
 console.log(firstRandom === secondRandom);
 ```
@@ -451,7 +451,7 @@ npm run jsdoc
 
 ### Building Readme
 
-The `Readme.md` file for `bluffmaster` is automatically generated and should not be modified directly. All updates to `Readme.md` should be performed in `./build/src/docs.md` and then the build script should be run.
+The `Readme.md` file for `blaver` is automatically generated and should not be modified directly. All updates to `Readme.md` should be performed in `./build/src/docs.md` and then the build script should be run.
 
 ```shell
 npm run readme
@@ -463,9 +463,9 @@ npm run readme
 
 Blaver - Copyright (c) 2022 - Present
 
-https://github.com/luciferreeves/bluffmaster
+https://github.com/luciferreeves/blaver
 
-https://npmjs.com/package/bluffmaster
+https://npmjs.com/package/blaver
 
 ### Marak Squires
 
