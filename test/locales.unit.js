@@ -1,6 +1,5 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
-  var sinon = require('sinon');
   var blaver = require('../index');
 }
 
@@ -11,7 +10,7 @@ if (typeof module !== 'undefined') {
 describe("locale", function () {
   describe("setLocale()", function () {
     it("setLocale() changes blaver.locale", function () {
-      for(var locale in blaver.locales) {
+      for(const locale in blaver.locales) {
         blaver.setLocale(locale)
         assert.strictEqual(blaver.locale, locale);
       }

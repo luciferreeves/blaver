@@ -8,7 +8,7 @@ describe("system.js", function () {
   describe("directoryPath()", function () {
     it("returns unix fs directory full path", function () {
       sinon.stub(blaver.random, 'words').returns('24/7');
-      var directoryPath = blaver.system.directoryPath();
+      const directoryPath = blaver.system.directoryPath();
       assert.strictEqual(directoryPath.indexOf('/'), 0, 'generated directoryPath should start with /');
     
       blaver.random.words.restore();
@@ -18,7 +18,7 @@ describe("system.js", function () {
   describe("filePath()", function () {
     it("returns unix fs file full path", function () {
       sinon.stub(blaver.random, 'words').returns('24/7');
-      var filePath = blaver.system.filePath();
+      const filePath = blaver.system.filePath();
       assert.strictEqual(filePath.indexOf('/'), 0, 'generated filePath should start with /');
     
       blaver.random.words.restore();
@@ -28,7 +28,7 @@ describe("system.js", function () {
   describe("fileName()", function () {
     it("returns filenames without system path separators", function () {
       sinon.stub(blaver.random, 'words').returns('24/7');
-      var fileName = blaver.system.fileName();
+      const fileName = blaver.system.fileName();
       assert.strictEqual(fileName.indexOf('/'), -1, 'generated fileNames should not have path separators');
 
       blaver.random.words.restore();
@@ -38,7 +38,7 @@ describe("system.js", function () {
   describe("commonFileName()", function () {
     it("returns filenames without system path separators", function () {
       sinon.stub(blaver.random, 'words').returns('24/7');
-      var fileName = blaver.system.commonFileName();
+      const fileName = blaver.system.commonFileName();
       assert.strictEqual(fileName.indexOf('/'), -1, 'generated commonFileNames should not have path separators');
 
       blaver.random.words.restore();

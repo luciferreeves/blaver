@@ -6,7 +6,7 @@ if (typeof module !== 'undefined') {
 }
 
 function assertInArray(value, array) {
-  var idx = array.indexOf(value);
+  const idx = array.indexOf(value);
   assert.notEqual(idx, -1);
 }
 
@@ -14,7 +14,7 @@ describe("name.js", function () {
   describe("firstName()", function () {
     it("returns a random name", function () {
       sinon.stub(blaver.name, 'firstName').returns('foo');
-      var first_name = blaver.name.firstName();
+      const first_name = blaver.name.firstName();
 
       assert.strictEqual(first_name, 'foo');
 
@@ -22,19 +22,19 @@ describe("name.js", function () {
     });
         
     it("returns a gender-specific name when passed a number", function () {
-      for (var q = 0; q < 30; q++) {
-        var gender = Math.floor(Math.random() * 2);
-        var name = blaver.name.firstName(gender);
+      for (let q = 0; q < 30; q++) {
+        const gender = Math.floor(Math.random() * 2);
+        const name = blaver.name.firstName(gender);
         if (gender === 0) {assertInArray(name, blaver.definitions.name.male_first_name);}
         else {assertInArray(name, blaver.definitions.name.female_first_name);}
       }
     });
         
     it("returns a gender-specific name when passed a string", function () {
-      for (var q = 0; q < 30; q++) {
-        var gender = Math.floor(Math.random() * 2);
-        var genderString = (gender === 0 ? 'male' : 'female');
-        var name = blaver.name.firstName(genderString);
+      for (let q = 0; q < 30; q++) {
+        const gender = Math.floor(Math.random() * 2);
+        const genderString = (gender === 0 ? 'male' : 'female');
+        const name = blaver.name.firstName(genderString);
         assertInArray(name, blaver.definitions.name[genderString + '_first_name']);
       }
     });
@@ -44,7 +44,7 @@ describe("name.js", function () {
     it("returns a random name", function () {
       sinon.stub(blaver.name, 'lastName').returns('foo');
 
-      var last_name = blaver.name.lastName();
+      const last_name = blaver.name.lastName();
 
       assert.strictEqual(last_name, 'foo');
 
@@ -57,7 +57,7 @@ describe("name.js", function () {
     it("returns a random middle name", function () {
       sinon.stub(blaver.name, 'middleName').returns('foo');
 
-      var middle_name = blaver.name.middleName();
+      const middle_name = blaver.name.middleName();
 
       assert.strictEqual(middle_name, 'foo');
 
@@ -83,13 +83,13 @@ describe("name.js", function () {
       })
 
       it("returns male prefix", function () {
-        var middle_name = blaver.name.middleName(0);
+        const middle_name = blaver.name.middleName(0);
 
         assert.strictEqual(middle_name, 'Genaddiesvich')
       });
 
       it("returns female prefix", function () {
-        var middle_name = blaver.name.middleName(1);
+        const middle_name = blaver.name.middleName(1);
 
         assert.strictEqual(middle_name, 'Genaddievna');
       });
@@ -100,9 +100,9 @@ describe("name.js", function () {
   describe("findName()", function () {
     it("usually returns a first name and last name", function () {
       sinon.stub(blaver.datatype, 'number').returns(5);
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
       assert.ok(name);
-      var parts = name.split(' ');
+      const parts = name.split(' ');
 
       assert.strictEqual(parts.length, 2);
 
@@ -111,8 +111,8 @@ describe("name.js", function () {
 
     it("occasionally returns a first name and last name with a prefix", function () {
       sinon.stub(blaver.datatype, 'number').returns(0);
-      var name = blaver.name.findName();
-      var parts = name.split(' ');
+      const name = blaver.name.findName();
+      const parts = name.split(' ');
 
       assert.ok(parts.length >= 3);
 
@@ -128,7 +128,7 @@ describe("name.js", function () {
       sinon.stub(blaver.name, 'firstName').withArgs(0).returns('Y');
       sinon.stub(blaver.name, 'lastName').withArgs(0).returns('Z');
 
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
 
       assert.strictEqual(name, 'X Y Z');
 
@@ -147,7 +147,7 @@ describe("name.js", function () {
       sinon.stub(blaver.name, 'firstName').withArgs(1).returns('K');
       sinon.stub(blaver.name, 'lastName').withArgs(1).returns('L');
 
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
 
       assert.strictEqual(name, 'J K L');
 
@@ -160,8 +160,8 @@ describe("name.js", function () {
     it("occasionally returns a first name and last name with a suffix", function () {
       sinon.stub(blaver.datatype, 'number').returns(1);
       sinon.stub(blaver.name, 'suffix').returns('Jr.');
-      var name = blaver.name.findName();
-      var parts = name.split(' ');
+      const name = blaver.name.findName();
+      const parts = name.split(' ');
 
       assert.ok(parts.length >= 3);
       assert.strictEqual(parts[parts.length-1], 'Jr.');
@@ -173,7 +173,7 @@ describe("name.js", function () {
     it("needs to work with specific locales and respect the fallbacks", function () {
       blaver.locale = 'en_US';
       // this will throw if this is broken
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
     });
   });
 
@@ -181,7 +181,7 @@ describe("name.js", function () {
     it("returns a random title", function () {
       sinon.stub(blaver.name, 'title').returns('Lead Solutions Supervisor');
 
-      var title = blaver.name.title();
+      const title = blaver.name.title();
 
       assert.strictEqual(title, 'Lead Solutions Supervisor');
 
@@ -195,7 +195,7 @@ describe("name.js", function () {
       sinon.spy(blaver.name, 'jobDescriptor');
       sinon.spy(blaver.name, 'jobArea');
       sinon.spy(blaver.name, 'jobType');
-      var jobTitle = blaver.name.jobTitle();
+      const jobTitle = blaver.name.jobTitle();
 
       assert.ok(typeof jobTitle === 'string');
       assert.ok(blaver.random.arrayElement.calledThrice);
@@ -230,18 +230,18 @@ describe("name.js", function () {
       })
 
       it("returns male prefix", function () {
-        var prefix = blaver.name.prefix(0);
+        const prefix = blaver.name.prefix(0);
         assert.strictEqual(prefix, 'Mp')
       });
 
       it("returns female prefix", function () {
-        var prefix = blaver.name.prefix(1);
+        const prefix = blaver.name.prefix(1);
 
         assert.strictEqual(prefix, 'Fp');
       });
 
       it("returns either prefix", function () {
-        var prefix = blaver.name.prefix();
+        const prefix = blaver.name.prefix();
         assert(['Mp', 'Fp'].indexOf(prefix) >= 0)
       });
 
@@ -265,7 +265,7 @@ describe("name.js", function () {
       })
 
       it("returns a prefix", function () {
-        var prefix = blaver.name.prefix();
+        const prefix = blaver.name.prefix();
 
         assert.strictEqual(prefix, 'P');
       });

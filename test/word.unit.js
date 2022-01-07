@@ -4,7 +4,7 @@ if (typeof module !== "undefined") {
 }
   
 describe("word.js", function () {
-  var methods = [
+  const methods = [
     "adjective",
     "adverb",
     "conjunction",
@@ -17,18 +17,18 @@ describe("word.js", function () {
   methods.forEach(function (method) {
     describe(method + "()", function () {
       it("returns random value from " + method + " array", function () {
-        var word = blaver.word[method]();
+        const word = blaver.word[method]();
         assert.ok(blaver.definitions.word[method].includes(word));
       });
       it("optional length parameter returns expected result", function () {
-        var wordLength = 5;
-        var word = blaver.word[method](wordLength);
+        const wordLength = 5;
+        const word = blaver.word[method](wordLength);
         assert.ok(blaver.definitions.word[method].includes(word));
         assert.ok(word.length == wordLength);
       });
       it("unresolvable optional length returns random " + method, function () {
-        var wordLength = 1000;
-        var word = blaver.word[method](wordLength);
+        const wordLength = 1000;
+        const word = blaver.word[method](wordLength);
         assert.ok(blaver.definitions.word[method].includes(word));
       });
     });
