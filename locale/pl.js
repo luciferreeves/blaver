@@ -1,5 +1,5 @@
-var Blaver = require("../lib");
-var blaver = new Blaver({ locale: "pl", localeFallback: "en" });
+const Blaver = require("../lib");
+const blaver = new Blaver({ locale: "pl", localeFallback: "en" });
 blaver.locales["pl"] = require("../lib/locales/pl");
 blaver.locales["en"] = require("../lib/locales/en");
 module["exports"] = blaver;
