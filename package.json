@@ -13,7 +13,9 @@
     "readme": "./node_modules/.bin/gulp readme",
     "lint": "node_modules/.bin/eslint ./lib/animal.js",
     "test": "node_modules/.bin/mocha test/*.*.js",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "mocha": "_mocha -b -R spec",
+    "cov": "nyc npm run mocha"
   },
   "nyc": {
     "all": false,
@@ -57,6 +59,7 @@
     "node-minify": "*",
     "nyc": "^15.1.0",
     "optimist": "0.3.5",
+    "shx": "^0.3.3",
     "sinon": "^9.0.3",
     "through2": "2.0.0",
     "vinyl-buffer": "^1.0.1",
