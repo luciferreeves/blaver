@@ -30,7 +30,7 @@ jobs:
       - run: npm test
       
       - name: Run tests
-        run: npm run cov
+        run: npm run coverage
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
