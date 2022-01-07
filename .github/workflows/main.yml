@@ -4,10 +4,12 @@ name: Build
     branches:
       - master
       - dev
+      - coverage-test
   pull_request:
     branches:
       - master
       - dev
+      - coverage-test
 jobs:
   Build:
     runs-on: '${{ matrix.os }}'
@@ -26,3 +28,25 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm test
+      
+      - name: Run tests
+        run: npm run cov
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.COVERALLS_TOKEN }}
+          flag-name: ${{matrix.os}}-node-${{ matrix.node }}
+          parallel: true
+          path-to-lcov: ./reports/coverage/lcov.info
+
+  finish:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.COVERALLS_TOKEN }}
+          parallel-finished: true
+          
