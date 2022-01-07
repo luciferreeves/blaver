@@ -44,3 +44,4 @@ jobs:
         with:
           github-token: ${{ secrets.COVERALLS_TOKEN }}
           parallel-finished: true
+          
