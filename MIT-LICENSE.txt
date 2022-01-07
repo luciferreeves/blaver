@@ -1,6 +1,8 @@
-faker.js - Copyright (c) 2020
-Marak Squires
-http://github.com/marak/faker.js/
+Blaver - Copyright (c) 2022
+
+Built On: 
+  Faker by Marak Squires
+  http://github.com/marak/faker.js/
 
 faker.js was inspired by and has used data definitions from:
 
