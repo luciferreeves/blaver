@@ -1,16 +1,22 @@
-# BluffMaster Changelog
+# Blaver Changelog
 
-## v5.5.7
+## v6.6.7
+[Marak](https://github.com/marak/) left Faker at v6.6.6. So, here I am picking up at v6.6.7. Calling it **Blaver**.
 
-  - Fixed JSDoc Build Errors
-  - Replaced fakercloud.com with pravatar.cc
-
-## v5.5.6
-  - fix typos referencing from commit https://github.com/9renpoto/faker.js/commit/29234378807c4141588861f69421bf20b5ac635
-
-## v5.5.5
-
-- Update all faker instances to `bluffmaster`.
+- Fixed unit test cases
+- Fixed all linting errors
+- Added bigInt() function
+- Fixed test cases for fakercloud
+- Update all locales
+- Added UR locale
+- Fixed `random.unit.js` test case
+- Updated github actions to run lint and test scripts
+- Remove old public API from vendor/mersenne.js
+- [refactor] Unique options into class
+- jshint is replaced by eslint. Remove jshintrc and jshintignore files
+- Add nyc_output to npmignore
+- Working Coveralls Coverage
+- Update all faker instances to `blaver`.
 
 # Faker Changelog
 
