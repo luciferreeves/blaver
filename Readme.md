@@ -4,17 +4,17 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/bluffmaster/Build) ![npm](https://img.shields.io/npm/v/bluffmaster) ![NPM](https://img.shields.io/npm/l/bluffmaster) ![GitHub issues](https://img.shields.io/github/issues-raw/luciferreeves/bluffmaster) ![npm](https://img.shields.io/npm/dw/bluffmaster) ![GitHub deployments](https://img.shields.io/github/deployments/luciferreeves/bluffmaster/github-pages?label=JSDoc%20Deployment) [![Coverage Status](https://coveralls.io/repos/github/luciferreeves/bluffmaster/badge.svg?branch=master)](https://coveralls.io/github/luciferreeves/bluffmaster?branch=master)
 
-# BluffMaster - generate massive amounts of fake data in the browser and node.js
+# Blaver - generate massive amounts of fake data in the browser and node.js
 
-BluffMaster is a JavaScript library built on top of the [Faker.JS](https://github.com/marak/Faker.js) library. It generates massive amounts of fake data in the browser and node.js. 
+Blaver is a JavaScript library built on top of the [Faker.JS](https://github.com/marak/Faker.js) library. It generates massive amounts of fake data in the browser and node.js. 
 
-Fake data is useful when building and testing our application. BluffMaster can generate fake data for various areas, including address, commerce, company, date, finance, image, random, or name.
+Fake data is useful when building and testing our application. Blaver can generate fake data for various areas, including address, commerce, company, date, finance, image, random, or name.
 
 ## What happened to the original faker.js?
 
 This project was originally created and hosted at https://github.com/marak/Faker.js/ - however around 4th Jan, 2022 - the author decided to delete the repository along with the code, for unknown reasons.
 
-BluffMaster is a fork of the original Faker.js library. The original library was created by [Marak Squires](https://github.com/marak/) in 2011. BluffMaster aims to maintain the original library's functionality and add new features. 
+Blaver is a fork of the original Faker.js library. The original library was created by [Marak Squires](https://github.com/marak/) in 2011. Blaver aims to maintain the original library's functionality and add new features. 
 
 You can also access unofficial Faker.js documentation at [https://fakerjsdocs.netlify.com/](https://fakerjsdocs.netlify.com/)
 
@@ -314,9 +314,9 @@ You can browse all API methods by going to the [JSDoc API Browser](http://thatco
   * verb
 
 
-### BluffMaster.fake()
+### Blaver.fake()
 
-BluffMaster contains a super useful generator method `BluffMaster.fake` for combining faker API methods using a mustache string format.
+Blaver contains a super useful generator method `Blaver.fake` for combining faker API methods using a mustache string format.
 
 **Example:**
 
@@ -331,7 +331,7 @@ This will interpolate the format string with the value of methods `name.lastName
 
 ## Localization
 
-BluffMaster has support for multiple localities – ported directly from the orginal faker.js library (version `v2.0.0`).
+Blaver has support for multiple localities – ported directly from the orginal faker.js library (version `v2.0.0`).
 
 The default language locale is set to English.
 
@@ -394,7 +394,7 @@ bluffmaster.locale = "de";
 
 ### Individual Localization Packages
 
-BluffMaster supports incremental loading of locales.
+Blaver supports incremental loading of locales.
 
 By default, requiring `bluffmaster` will include *all* locale data.
 
@@ -431,9 +431,9 @@ make test
 
 You can view a code coverage report generated in coverage/lcov-report/index.html.
 
-## Building BluffMaster
+## Building Blaver
 
-BluffMaster uses [gulp](http://gulpjs.com/) to automate its build process. Each build operation is a separate task which can be run independently.
+Blaver uses [gulp](http://gulpjs.com/) to automate its build process. Each build operation is a separate task which can be run independently.
 
 ### Browser Bundle
 
@@ -461,7 +461,7 @@ npm run readme
 
 ### Kumar Priyansh
 
-BluffMaster - Copyright (c) 2022 - Present
+Blaver - Copyright (c) 2022 - Present
 
 https://github.com/luciferreeves/bluffmaster
 

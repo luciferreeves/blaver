@@ -11,14 +11,14 @@ const rename = require("gulp-rename");
 module.exports = function readme(cb) {
   var API = "",
     LOCALES = "";
-  var bluffmaster = require("../../index");
+  var blaver = require("../../index");
 
   // generate locale list
-  for (var locale in bluffmaster.locales) {
+  for (var locale in blaver.locales) {
     LOCALES += " * " + locale + "\n";
   }
 
-  var keys = Object.keys(bluffmaster);
+  var keys = Object.keys(blaver);
   keys = keys.sort();
 
   // generate nice tree of api for docs
@@ -29,7 +29,7 @@ module.exports = function readme(cb) {
       return;
     }
     API += "* " + module + "\n";
-    for (var method in bluffmaster[module]) {
+    for (var method in blaver[module]) {
       API += "  * " + method + "\n";
     }
   });

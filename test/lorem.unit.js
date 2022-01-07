@@ -1,7 +1,7 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
   var sinon = require('sinon');
-  var bluffmaster = require('../index');
+  var blaver = require('../index');
 }
 
 describe("lorem.js", function () {
@@ -9,14 +9,14 @@ describe("lorem.js", function () {
 
     context("when no 'length' param passed in", function () {
       it("returns a word with a random length", function () {
-        var str = bluffmaster.lorem.word();
+        var str = blaver.lorem.word();
         assert.ok(typeof str === 'string');
       });
     });
 
     context("when 'length' param passed in", function () {
       it("returns a word with the requested length", function () {
-        var str = bluffmaster.lorem.word(5);
+        var str = blaver.lorem.word(5);
         assert.ok(typeof str === 'string');
         assert.strictEqual(str.length, 5);
       });
@@ -25,26 +25,26 @@ describe("lorem.js", function () {
     
   describe("words()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.helpers, 'shuffle');
+      sinon.spy(blaver.helpers, 'shuffle');
     });
 
     afterEach(function () {
-      bluffmaster.helpers.shuffle.restore();
+      blaver.helpers.shuffle.restore();
     });
 
     context("when no 'num' param passed in", function () {
       it("returns three words", function () {
-        var str = bluffmaster.lorem.words();
+        var str = blaver.lorem.words();
         var words = str.split(' ');
         assert.ok(Array.isArray(words));
         assert.strictEqual(true, words.length >= 3);
-        // assert.ok(bluffmaster.helpers.shuffle.called);
+        // assert.ok(blaver.helpers.shuffle.called);
       });
     });
 
     context("when 'num' param passed in", function () {
       it("returns requested number of words", function () {
-        var str = bluffmaster.lorem.words(7);
+        var str = blaver.lorem.words(7);
         var words = str.split(' ');
         assert.ok(Array.isArray(words));
         assert.strictEqual(words.length, 7);
@@ -54,11 +54,11 @@ describe("lorem.js", function () {
 
   describe("slug()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.helpers, 'shuffle');
+      sinon.spy(blaver.helpers, 'shuffle');
     });
 
     afterEach(function () {
-      bluffmaster.helpers.shuffle.restore();
+      blaver.helpers.shuffle.restore();
     });
 
     var validateSlug = function (wordCount, str) {
@@ -68,14 +68,14 @@ describe("lorem.js", function () {
 
     context("when no 'wordCount' param passed in", function () {
       it("returns a slug with three words", function () {
-        var str = bluffmaster.lorem.slug();
+        var str = blaver.lorem.slug();
         validateSlug(3, str);
       });
     });
 
     context("when 'wordCount' param passed in", function () {
       it("returns a slug with requested number of words", function () {
-        var str = bluffmaster.lorem.slug(7);
+        var str = blaver.lorem.slug(7);
         validateSlug(7, str);
       });
     });
@@ -86,50 +86,50 @@ describe("lorem.js", function () {
     describe("sentence()", function () {
         context("when no 'wordCount' or 'range' param passed in", function () {
             it("returns a string of at least three words", function () {
-                sinon.spy(bluffmaster.lorem, 'words');
-                sinon.stub(bluffmaster.random, 'number').returns(2);
-                var sentence = bluffmaster.lorem.sentence();
+                sinon.spy(blaver.lorem, 'words');
+                sinon.stub(blaver.random, 'number').returns(2);
+                var sentence = blaver.lorem.sentence();
                 assert.ok(typeof sentence === 'string');
                 var parts = sentence.split(' ');
                 assert.strictEqual(parts.length, 5); // default 3 plus stubbed 2.
-                assert.ok(bluffmaster.lorem.words.calledWith(5));
+                assert.ok(blaver.lorem.words.calledWith(5));
 
-                bluffmaster.lorem.words.restore();
-                bluffmaster.random.number.restore();
+                blaver.lorem.words.restore();
+                blaver.random.number.restore();
             });
         });
 
         context("when 'wordCount' param passed in", function () {
             it("returns a string of at least the requested number of words", function () {
-                sinon.spy(bluffmaster.lorem, 'words');
-                sinon.stub(bluffmaster.random, 'number').withArgs(7).returns(2);
-                var sentence = bluffmaster.lorem.sentence(10);
+                sinon.spy(blaver.lorem, 'words');
+                sinon.stub(blaver.random, 'number').withArgs(7).returns(2);
+                var sentence = blaver.lorem.sentence(10);
 
                 assert.ok(typeof sentence === 'string');
                 var parts = sentence.split(' ');
                 assert.strictEqual(parts.length, 12); // requested 10 plus stubbed 2.
-                assert.ok(bluffmaster.lorem.words.calledWith(12));
+                assert.ok(blaver.lorem.words.calledWith(12));
 
-                bluffmaster.lorem.words.restore();
-                bluffmaster.random.number.restore();
+                blaver.lorem.words.restore();
+                blaver.random.number.restore();
             });
         });
 
         context("when 'wordCount' and 'range' params passed in", function () {
             it("returns a string of at least the requested number of words", function () {
-                sinon.spy(bluffmaster.lorem, 'words');
-                sinon.stub(bluffmaster.random, 'number').withArgs(4).returns(4);
+                sinon.spy(blaver.lorem, 'words');
+                sinon.stub(blaver.random, 'number').withArgs(4).returns(4);
 
-                var sentence = bluffmaster.lorem.sentence(10, 4);
+                var sentence = blaver.lorem.sentence(10, 4);
 
                 assert.ok(typeof sentence === 'string');
                 var parts = sentence.split(' ');
                 assert.strictEqual(parts.length, 14); // requested 10 plus stubbed 4.
-                assert.ok(bluffmaster.random.number.calledWith(4)); // random.number should be called with the 'range' we passed. 
-                assert.ok(bluffmaster.lorem.words.calledWith(14));
+                assert.ok(blaver.random.number.calledWith(4)); // random.number should be called with the 'range' we passed. 
+                assert.ok(blaver.lorem.words.calledWith(14));
 
-                bluffmaster.lorem.words.restore();
-                bluffmaster.random.number.restore();
+                blaver.lorem.words.restore();
+                blaver.random.number.restore();
             });
 
 
@@ -140,28 +140,28 @@ describe("lorem.js", function () {
     describe("sentences()", function () {
         context("when no 'sentenceCount' param passed in", function () {
             it("returns newline-separated string of three sentences", function () {
-                sinon.spy(bluffmaster.lorem, 'sentence');
-                var sentences = bluffmaster.lorem.sentences();
+                sinon.spy(blaver.lorem, 'sentence');
+                var sentences = blaver.lorem.sentences();
 
                 assert.ok(typeof sentences === 'string');
                 var parts = sentences.split('\n');
                 assert.strictEqual(parts.length, 3);
-                assert.ok(bluffmaster.lorem.sentence.calledThrice);
+                assert.ok(blaver.lorem.sentence.calledThrice);
 
-                bluffmaster.lorem.sentence.restore();
+                blaver.lorem.sentence.restore();
             });
         });
 
         context("when 'sentenceCount' param passed in", function () {
             it("returns newline-separated string of requested number of sentences", function () {
-                sinon.spy(bluffmaster.lorem, 'sentence');
-                var sentences = bluffmaster.lorem.sentences(5);
+                sinon.spy(blaver.lorem, 'sentence');
+                var sentences = blaver.lorem.sentences(5);
 
                 assert.ok(typeof sentences === 'string');
                 var parts = sentences.split('\n');
                 assert.strictEqual(parts.length, 5);
 
-                bluffmaster.lorem.sentence.restore();
+                blaver.lorem.sentence.restore();
             });
         });
     });
@@ -170,33 +170,33 @@ describe("lorem.js", function () {
     describe("paragraph()", function () {
         context("when no 'wordCount' param passed in", function () {
             it("returns a string of at least three sentences", function () {
-                sinon.spy(bluffmaster.lorem, 'sentences');
-                sinon.stub(bluffmaster.random, 'number').returns(2);
-                var paragraph = bluffmaster.lorem.paragraph();
+                sinon.spy(blaver.lorem, 'sentences');
+                sinon.stub(blaver.random, 'number').returns(2);
+                var paragraph = blaver.lorem.paragraph();
 
                 assert.ok(typeof paragraph === 'string');
                 var parts = paragraph.split('\n');
                 assert.strictEqual(parts.length, 5); // default 3 plus stubbed 2.
-                assert.ok(bluffmaster.lorem.sentences.calledWith(5));
+                assert.ok(blaver.lorem.sentences.calledWith(5));
 
-                bluffmaster.lorem.sentences.restore();
-                bluffmaster.random.number.restore();
+                blaver.lorem.sentences.restore();
+                blaver.random.number.restore();
             });
         });
 
         context("when 'wordCount' param passed in", function () {
             it("returns a string of at least the requested number of sentences", function () {
-                sinon.spy(bluffmaster.lorem, 'sentences');
-                sinon.stub(bluffmaster.random, 'number').returns(2);
-                var paragraph = bluffmaster.lorem.paragraph(10);
+                sinon.spy(blaver.lorem, 'sentences');
+                sinon.stub(blaver.random, 'number').returns(2);
+                var paragraph = blaver.lorem.paragraph(10);
 
                 assert.ok(typeof paragraph === 'string');
                 var parts = paragraph.split('\n');
                 assert.strictEqual(parts.length, 12); // requested 10 plus stubbed 2.
-                assert.ok(bluffmaster.lorem.sentences.calledWith(12));
+                assert.ok(blaver.lorem.sentences.calledWith(12));
 
-                bluffmaster.lorem.sentences.restore();
-                bluffmaster.random.number.restore();
+                blaver.lorem.sentences.restore();
+                blaver.random.number.restore();
             });
         });
     });
@@ -207,28 +207,28 @@ describe("lorem.js", function () {
     describe("paragraphs()", function () {
         context("when no 'paragraphCount' param passed in", function () {
             it("returns newline-separated string of three paragraphs", function () {
-                sinon.spy(bluffmaster.lorem, 'paragraph');
-                var paragraphs = bluffmaster.lorem.paragraphs();
+                sinon.spy(blaver.lorem, 'paragraph');
+                var paragraphs = blaver.lorem.paragraphs();
 
                 assert.ok(typeof paragraphs === 'string');
                 var parts = paragraphs.split('\n \r');
                 assert.strictEqual(parts.length, 3);
-                assert.ok(bluffmaster.lorem.paragraph.calledThrice);
+                assert.ok(blaver.lorem.paragraph.calledThrice);
 
-                bluffmaster.lorem.paragraph.restore();
+                blaver.lorem.paragraph.restore();
             });
         });
 
         context("when 'paragraphCount' param passed in", function () {
             it("returns newline-separated string of requested number of paragraphs", function () {
-                sinon.spy(bluffmaster.lorem, 'paragraph');
-                var paragraphs = bluffmaster.lorem.paragraphs(5);
+                sinon.spy(blaver.lorem, 'paragraph');
+                var paragraphs = blaver.lorem.paragraphs(5);
 
                 assert.ok(typeof paragraphs === 'string');
                 var parts = paragraphs.split('\n \r');
                 assert.strictEqual(parts.length, 5);
 
-                bluffmaster.lorem.paragraph.restore();
+                blaver.lorem.paragraph.restore();
             });
         });
     });

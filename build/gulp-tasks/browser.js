@@ -1,7 +1,7 @@
 /*
 
-   this task will generate the bluffmaster.js and bluffmaster.min.js browser bundles
-   these bundles will contain all bluffmaster.js locales
+   this task will generate the blaver.js and blaver.min.js browser bundles
+   these bundles will contain all blaver.js locales
 
 */
 
@@ -14,12 +14,12 @@ const { src, dest } = require("gulp");
 
 const files = {
   jsMain: "./index.js",
-  jsOutput: "bluffmaster.js",
+  jsOutput: "blaver.js",
 };
 
 module.exports = function browser() {
   return browserify(files.jsMain, {
-    standalone: "bluffmaster",
+    standalone: "blaver",
     debug: true,
   })
     .bundle()

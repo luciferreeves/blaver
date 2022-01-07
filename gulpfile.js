@@ -1,7 +1,7 @@
 function defaultTask(cb) {
   // place code for your default task here
   console.log(
-    "please run gulp --tasks to see available tasks for bluffmaster.js"
+    "please run gulp --tasks to see available tasks for blaver.js"
   );
   console.log("you can then try running a command like `gulp readme`");
   cb();

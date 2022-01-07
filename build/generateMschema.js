@@ -1,6 +1,6 @@
-var bluffmaster = require("../");
+var blaver = require("../");
 
-var items = Object.keys(bluffmaster);
+var items = Object.keys(blaver);
 
 items = items.filter(function (i) {
   if (
@@ -26,16 +26,16 @@ schema.methodSchemas = {};
 
 items.forEach(function (item) {
   schema.modules.enum.push(item);
-  for (var q in bluffmaster[item]) {
+  for (var q in blaver[item]) {
     //console.log(item + '.' + q);
 
     // check to see if an existing schema existing on the function
-    var fnLine = bluffmaster[item][q].toString().split("\n").slice(0, 1)[0];
+    var fnLine = blaver[item][q].toString().split("\n").slice(0, 1)[0];
     var prop;
 
-    if (typeof bluffmaster[item][q].schema === "object") {
+    if (typeof blaver[item][q].schema === "object") {
       // if so, we'll want to merge that onto the exported schemas here
-      prop = bluffmaster[item][q].schema;
+      prop = blaver[item][q].schema;
     } else {
       // if not, fall back to the ones we can parse from the method itself
 

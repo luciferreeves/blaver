@@ -1,13 +1,13 @@
 {
-  "name": "bluffmaster",
-  "main": "./build/build/bluffmaster.js",
-  "homepage": "https://github.com/luciferreeves/bluffmaster.js",
+  "name": "blaver",
+  "main": "./build/build/blaver.js",
+  "homepage": "https://github.com/luciferreeves/blaver.js",
   "authors": [
     "Kumar Priyansh <bobbyskhs@gmail.com>"
   ],
   "description": "Generate massive amounts of fake contextual data",
   "keywords": [
-    "bluffmaster",
+    "blaver",
     "faker", 
     "fake",
     "dummy", 

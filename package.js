@@ -17,9 +17,9 @@ Package.onUse(function (api) {
 
   api.addFiles("meteor/npm-require.js", "server");
 
-  api.addFiles("build/build/bluffmaster.js", "client");
+  api.addFiles("build/build/blaver.js", "client");
 
-  api.export("bluffmaster", "server");
+  api.export("blaver", "server");
 });
 
 Package.onTest(function (api) {
@@ -30,5 +30,5 @@ Package.onTest(function (api) {
     "practicalmeteor:chai",
   ]);
 
-  api.addFiles("meteor/tests/bluffmaster-export-test.coffee");
+  api.addFiles("meteor/tests/blaver-export-test.coffee");
 });

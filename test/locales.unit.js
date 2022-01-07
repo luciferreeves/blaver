@@ -1,7 +1,7 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
   var sinon = require('sinon');
-  var bluffmaster = require('../index');
+  var blaver = require('../index');
 }
 
 // TODO: make some tests for getting / setting locales
@@ -10,10 +10,10 @@ if (typeof module !== 'undefined') {
 
 describe("locale", function () {
   describe("setLocale()", function () {
-    it("setLocale() changes bluffmaster.locale", function () {
-      for(var locale in bluffmaster.locales) {
-        bluffmaster.setLocale(locale)
-        assert.strictEqual(bluffmaster.locale, locale);
+    it("setLocale() changes blaver.locale", function () {
+      for(var locale in blaver.locales) {
+        blaver.setLocale(locale)
+        assert.strictEqual(blaver.locale, locale);
       }
     });
   });

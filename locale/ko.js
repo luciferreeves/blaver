@@ -1,5 +1,5 @@
-var BluffMaster = require("../lib");
-var bluffmaster = new BluffMaster({ locale: "ko", localeFallback: "en" });
-bluffmaster.locales["ko"] = require("../lib/locales/ko");
-bluffmaster.locales["en"] = require("../lib/locales/en");
-module["exports"] = bluffmaster;
+var Blaver = require("../lib");
+var blaver = new Blaver({ locale: "ko", localeFallback: "en" });
+blaver.locales["ko"] = require("../lib/locales/ko");
+blaver.locales["en"] = require("../lib/locales/en");
+module["exports"] = blaver;

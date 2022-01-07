@@ -1,113 +1,113 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
   var sinon = require('sinon');
-  var bluffmaster = require('../index');
+  var blaver = require('../index');
 }
 
 describe("address.js", function () {
   describe("city()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.address, 'cityPrefix');
-      sinon.spy(bluffmaster.name, 'firstName');
-      sinon.spy(bluffmaster.name, 'lastName');
-      sinon.spy(bluffmaster.address, 'citySuffix');
+      sinon.spy(blaver.address, 'cityPrefix');
+      sinon.spy(blaver.name, 'firstName');
+      sinon.spy(blaver.name, 'lastName');
+      sinon.spy(blaver.address, 'citySuffix');
     });
 
     afterEach(function () {
-      bluffmaster.datatype.number.restore();
-      bluffmaster.address.cityPrefix.restore();
-      bluffmaster.name.firstName.restore();
-      bluffmaster.name.lastName.restore();
-      bluffmaster.address.citySuffix.restore();
+      blaver.datatype.number.restore();
+      blaver.address.cityPrefix.restore();
+      blaver.name.firstName.restore();
+      blaver.name.lastName.restore();
+      blaver.address.citySuffix.restore();
     });
 
     it("occasionally returns prefix + first name + suffix", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(0);
+      sinon.stub(blaver.datatype, 'number').returns(0);
 
-      var city = bluffmaster.address.city();
+      var city = blaver.address.city();
       assert.ok(city);
 
-      assert.ok(bluffmaster.address.cityPrefix.calledOnce);
-      assert.ok(bluffmaster.name.firstName.calledOnce);
-      assert.ok(bluffmaster.address.citySuffix.calledOnce);
+      assert.ok(blaver.address.cityPrefix.calledOnce);
+      assert.ok(blaver.name.firstName.calledOnce);
+      assert.ok(blaver.address.citySuffix.calledOnce);
     });
 
     it("occasionally returns prefix + first name", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(1);
+      sinon.stub(blaver.datatype, 'number').returns(1);
 
-      var city = bluffmaster.address.city();
+      var city = blaver.address.city();
       assert.ok(city);
 
-      assert.ok(bluffmaster.address.cityPrefix.calledOnce);
-      assert.ok(bluffmaster.name.firstName.calledOnce);
+      assert.ok(blaver.address.cityPrefix.calledOnce);
+      assert.ok(blaver.name.firstName.calledOnce);
     });
 
     it("occasionally returns first name + suffix", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(2);
+      sinon.stub(blaver.datatype, 'number').returns(2);
 
-      var city = bluffmaster.address.city();
+      var city = blaver.address.city();
       assert.ok(city);
 
-      assert.ok(bluffmaster.address.citySuffix.calledOnce);
+      assert.ok(blaver.address.citySuffix.calledOnce);
     });
 
     it("occasionally returns last name + suffix", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(3);
+      sinon.stub(blaver.datatype, 'number').returns(3);
 
-      var city = bluffmaster.address.city();
+      var city = blaver.address.city();
       assert.ok(city);
 
-      assert.ok(!bluffmaster.address.cityPrefix.called);
-      assert.ok(!bluffmaster.name.firstName.called);
-      assert.ok(bluffmaster.name.lastName.calledOnce);
-      assert.ok(bluffmaster.address.citySuffix.calledOnce);
+      assert.ok(!blaver.address.cityPrefix.called);
+      assert.ok(!blaver.name.firstName.called);
+      assert.ok(blaver.name.lastName.calledOnce);
+      assert.ok(blaver.address.citySuffix.calledOnce);
     });
   });
 
 
   describe("streetName()", function () {
     beforeEach(function () {
-      sinon.spy(bluffmaster.name, 'firstName');
-      sinon.spy(bluffmaster.name, 'lastName');
-      sinon.spy(bluffmaster.address, 'streetSuffix');
+      sinon.spy(blaver.name, 'firstName');
+      sinon.spy(blaver.name, 'lastName');
+      sinon.spy(blaver.address, 'streetSuffix');
     });
 
     afterEach(function () {
-      bluffmaster.name.firstName.restore();
-      bluffmaster.name.lastName.restore();
-      bluffmaster.address.streetSuffix.restore();
+      blaver.name.firstName.restore();
+      blaver.name.lastName.restore();
+      blaver.address.streetSuffix.restore();
     });
 
     it("occasionally returns last name + suffix", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(0);
+      sinon.stub(blaver.datatype, 'number').returns(0);
 
-      var street_name = bluffmaster.address.streetName();
+      var street_name = blaver.address.streetName();
       assert.ok(street_name);
-      assert.ok(!bluffmaster.name.firstName.called);
-      assert.ok(bluffmaster.name.lastName.calledOnce);
-      assert.ok(bluffmaster.address.streetSuffix.calledOnce);
+      assert.ok(!blaver.name.firstName.called);
+      assert.ok(blaver.name.lastName.calledOnce);
+      assert.ok(blaver.address.streetSuffix.calledOnce);
 
-      bluffmaster.datatype.number.restore();
+      blaver.datatype.number.restore();
     });
 
     it("occasionally returns first name + suffix", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(1);
+      sinon.stub(blaver.datatype, 'number').returns(1);
 
-      var street_name = bluffmaster.address.streetName();
+      var street_name = blaver.address.streetName();
       assert.ok(street_name);
 
-      assert.ok(bluffmaster.name.firstName.calledOnce);
-      assert.ok(!bluffmaster.name.lastName.called);
-      assert.ok(bluffmaster.address.streetSuffix.calledOnce);
+      assert.ok(blaver.name.firstName.calledOnce);
+      assert.ok(!blaver.name.lastName.called);
+      assert.ok(blaver.address.streetSuffix.calledOnce);
 
-      bluffmaster.datatype.number.restore();
+      blaver.datatype.number.restore();
     });
 
     it("trims trailing whitespace from the name", function() {
-      bluffmaster.address.streetSuffix.restore();
+      blaver.address.streetSuffix.restore();
 
-      sinon.stub(bluffmaster.address, 'streetSuffix').returns("")
-      var street_name = bluffmaster.address.streetName();
+      sinon.stub(blaver.address, 'streetSuffix').returns("")
+      var street_name = blaver.address.streetName();
       assert.ok(!street_name.match(/ $/));
     });
   });
@@ -121,57 +121,57 @@ describe("address.js", function () {
     }
 
     beforeEach(function () {
-      sinon.spy(bluffmaster.address, 'streetName');
-      sinon.spy(bluffmaster.address, 'secondaryAddress');
+      sinon.spy(blaver.address, 'streetName');
+      sinon.spy(blaver.address, 'secondaryAddress');
     });
 
     afterEach(function () {
-      bluffmaster.address.streetName.restore();
-      bluffmaster.address.secondaryAddress.restore();
+      blaver.address.streetName.restore();
+      blaver.address.secondaryAddress.restore();
     });
 
     it("occasionally returns a 5-digit street number", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(0);
-      var address = bluffmaster.address.streetAddress();
+      sinon.stub(blaver.datatype, 'number').returns(0);
+      var address = blaver.address.streetAddress();
       var expected = 5
       var parts = address.split(' ');
 
       assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
-      assert.ok(bluffmaster.address.streetName.called);
+      assert.ok(blaver.address.streetName.called);
 
-      bluffmaster.datatype.number.restore();
+      blaver.datatype.number.restore();
     });
 
     it("occasionally returns a 4-digit street number", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(1);
-      var address = bluffmaster.address.streetAddress();
+      sinon.stub(blaver.datatype, 'number').returns(1);
+      var address = blaver.address.streetAddress();
       var parts = address.split(' ');
       var expected = 4
 
       assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
-      assert.ok(bluffmaster.address.streetName.called);
+      assert.ok(blaver.address.streetName.called);
 
-      bluffmaster.datatype.number.restore();
+      blaver.datatype.number.restore();
     });
 
     it("occasionally returns a 3-digit street number", function () {
-      sinon.stub(bluffmaster.datatype, 'number').returns(2);
-      var address = bluffmaster.address.streetAddress();
+      sinon.stub(blaver.datatype, 'number').returns(2);
+      var address = blaver.address.streetAddress();
       var parts = address.split(' ');
       var expected = 3
 
       assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
-      assert.ok(bluffmaster.address.streetName.called);
-      assert.ok(!bluffmaster.address.secondaryAddress.called);
+      assert.ok(blaver.address.streetName.called);
+      assert.ok(!blaver.address.secondaryAddress.called);
 
-      bluffmaster.datatype.number.restore();
+      blaver.datatype.number.restore();
     });
 
     context("when useFulladdress is true", function () {
       it("adds a secondary address to the result", function () {
-        bluffmaster.address.streetAddress(true);
+        blaver.address.streetAddress(true);
         
-        assert.ok(bluffmaster.address.secondaryAddress.called);
+        assert.ok(blaver.address.secondaryAddress.called);
       });
     });
   });
@@ -179,9 +179,9 @@ describe("address.js", function () {
 
   describe("secondaryAddress()", function () {
     it("randomly chooses an Apt or Suite number", function () {
-      sinon.spy(bluffmaster.random, 'arrayElement');
+      sinon.spy(blaver.random, 'arrayElement');
 
-      var address = bluffmaster.address.secondaryAddress();
+      var address = blaver.address.secondaryAddress();
 
       var expected_array = [
         'Apt. ###',
@@ -189,160 +189,160 @@ describe("address.js", function () {
       ];
 
       assert.ok(address);
-      assert.ok(bluffmaster.random.arrayElement.calledWith(expected_array));
-      bluffmaster.random.arrayElement.restore();
+      assert.ok(blaver.random.arrayElement.calledWith(expected_array));
+      blaver.random.arrayElement.restore();
     });
   });
 
   describe("county()", function () {
     it("returns random county", function () {
-      sinon.spy(bluffmaster.address, 'county');
-      var county = bluffmaster.address.county();
+      sinon.spy(blaver.address, 'county');
+      var county = blaver.address.county();
       assert.ok(county);
-      assert.ok(bluffmaster.address.county.called);
-      bluffmaster.address.county.restore();
+      assert.ok(blaver.address.county.called);
+      blaver.address.county.restore();
     });
   });
 
   describe("country()", function () {
     it("returns random country", function () {
-      sinon.spy(bluffmaster.address, 'country');
-      var country = bluffmaster.address.country();
+      sinon.spy(blaver.address, 'country');
+      var country = blaver.address.country();
       assert.ok(country);
-      assert.ok(bluffmaster.address.country.called);
-      bluffmaster.address.country.restore();
+      assert.ok(blaver.address.country.called);
+      blaver.address.country.restore();
     });
   });
 
   describe("countryCode()", function () {
 
     it("returns random countryCode", function () {
-      sinon.spy(bluffmaster.address, 'countryCode');
-      var countryCode = bluffmaster.address.countryCode();
+      sinon.spy(blaver.address, 'countryCode');
+      var countryCode = blaver.address.countryCode();
       assert.ok(countryCode);
-      assert.ok(bluffmaster.address.countryCode.called);
-      bluffmaster.address.countryCode.restore();
+      assert.ok(blaver.address.countryCode.called);
+      blaver.address.countryCode.restore();
     });
 
     it("returns random alpha-3 countryCode", function () {
-      sinon.spy(bluffmaster.address, 'countryCode');
-      var countryCode = bluffmaster.address.countryCode("alpha-3");
+      sinon.spy(blaver.address, 'countryCode');
+      var countryCode = blaver.address.countryCode("alpha-3");
       assert.ok(countryCode);
-      assert.ok(bluffmaster.address.countryCode.called);
+      assert.ok(blaver.address.countryCode.called);
       assert.strictEqual(countryCode.length, 3, "The countryCode should be had 3 characters");
-      bluffmaster.address.countryCode.restore();
+      blaver.address.countryCode.restore();
     });
         
   });
 
   describe("state()", function () {
     it("returns random state", function () {
-      sinon.spy(bluffmaster.address, 'state');
-      var state = bluffmaster.address.state();
+      sinon.spy(blaver.address, 'state');
+      var state = blaver.address.state();
       assert.ok(state);
-      assert.ok(bluffmaster.address.state.called);
-      bluffmaster.address.state.restore();
+      assert.ok(blaver.address.state.called);
+      blaver.address.state.restore();
     });
   });
 
   describe("zipCode()", function () {
     it("returns random zipCode", function () {
-      sinon.spy(bluffmaster.address, 'zipCode');
-      var zipCode = bluffmaster.address.zipCode();
+      sinon.spy(blaver.address, 'zipCode');
+      var zipCode = blaver.address.zipCode();
       assert.ok(zipCode);
-      assert.ok(bluffmaster.address.zipCode.called);
-      bluffmaster.address.zipCode.restore();
+      assert.ok(blaver.address.zipCode.called);
+      blaver.address.zipCode.restore();
     });
 
     it("returns random zipCode - user specified format", function () {
-      var zipCode = bluffmaster.address.zipCode("?#? #?#");
+      var zipCode = blaver.address.zipCode("?#? #?#");
       assert.ok(zipCode.match(/^[A-Za-z]\d[A-Za-z]\s\d[A-Za-z]\d$/));
       // try another format
-      zipCode = bluffmaster.address.zipCode("###-###");
+      zipCode = blaver.address.zipCode("###-###");
       assert.ok(zipCode.match(/^\d{3}-\d{3}$/));
     });
 
     it("returns zipCode with proper locale format", function () {
       // we'll use the en_CA locale..
-      bluffmaster.locale = "en_CA";
-      var zipCode = bluffmaster.address.zipCode();
+      blaver.locale = "en_CA";
+      var zipCode = blaver.address.zipCode();
       assert.ok(zipCode.match(/^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/));
     });
   });
 
   describe("zipCodeByState()", function () {
     it("returns zipCode valid for specified State", function () {
-      bluffmaster.locale = "en_US";
+      blaver.locale = "en_US";
       var states = ["IL", "GA", "WA"];
 
-      var zipCode1 = bluffmaster.address.zipCodeByState(states[0]);
+      var zipCode1 = blaver.address.zipCodeByState(states[0]);
       assert.ok(zipCode1 >= 60001);
       assert.ok(zipCode1 <= 62999);
-      var zipCode2 = bluffmaster.address.zipCodeByState(states[1]);
+      var zipCode2 = blaver.address.zipCodeByState(states[1]);
       assert.ok(zipCode2 >= 30001);
       assert.ok(zipCode2 <= 31999);
-      var zipCode3 = bluffmaster.address.zipCodeByState(states[2]);
+      var zipCode3 = blaver.address.zipCodeByState(states[2]);
       assert.ok(zipCode3 >= 98001);
       assert.ok(zipCode3 <= 99403);
     });
 
     it("returns undefined if state is invalid", function () {
       var state = "XX";
-      sinon.spy(bluffmaster.address, 'zipCode');
-      bluffmaster.address.zipCodeByState(state);
-      assert.ok(bluffmaster.address.zipCode.called);
-      bluffmaster.address.zipCode.restore();
+      sinon.spy(blaver.address, 'zipCode');
+      blaver.address.zipCodeByState(state);
+      assert.ok(blaver.address.zipCode.called);
+      blaver.address.zipCode.restore();
     });
 
     it("returns undefined if state is valid but localeis invalid", function () {
-      bluffmaster.locale = "zh_CN";
+      blaver.locale = "zh_CN";
       var state = "IL";
-      sinon.spy(bluffmaster.address, 'zipCode');
-      bluffmaster.address.zipCodeByState(state);
-      assert.ok(bluffmaster.address.zipCode.called);
-      bluffmaster.address.zipCode.restore();
+      sinon.spy(blaver.address, 'zipCode');
+      blaver.address.zipCodeByState(state);
+      assert.ok(blaver.address.zipCode.called);
+      blaver.address.zipCode.restore();
     });
   });
 
   describe("latitude()", function () {
     it("returns random latitude", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.datatype, 'number');
-        var latitude = bluffmaster.address.latitude();
+        sinon.spy(blaver.datatype, 'number');
+        var latitude = blaver.address.latitude();
         assert.ok(typeof latitude === 'string');
         var latitude_float = parseFloat(latitude);
         assert.ok(latitude_float >= -90.0);
         assert.ok(latitude_float <= 90.0);
-        assert.ok(bluffmaster.datatype.number.called);
-        bluffmaster.datatype.number.restore();
+        assert.ok(blaver.datatype.number.called);
+        blaver.datatype.number.restore();
       }
     });
 
     it("returns latitude with min and max and default precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.datatype, 'number');
-        var latitude = bluffmaster.address.latitude(-5, 5);
+        sinon.spy(blaver.datatype, 'number');
+        var latitude = blaver.address.latitude(-5, 5);
         assert.ok(typeof latitude === 'string');
         assert.strictEqual(latitude.split('.')[1].length, 4, "The precision of latitude should be had of 4 digits");
         var latitude_float = parseFloat(latitude);
         assert.ok(latitude_float >= -5);
         assert.ok(latitude_float <= 5);
-        assert.ok(bluffmaster.datatype.number.called);
-        bluffmaster.datatype.number.restore();
+        assert.ok(blaver.datatype.number.called);
+        blaver.datatype.number.restore();
       }
     });
 
     it("returns random latitude with custom precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.datatype, 'number');
-        var latitude = bluffmaster.address.latitude(undefined, undefined, 7);
+        sinon.spy(blaver.datatype, 'number');
+        var latitude = blaver.address.latitude(undefined, undefined, 7);
         assert.ok(typeof latitude === 'string');
         assert.strictEqual(latitude.split('.')[1].length, 7, "The precision of latitude should be had of 7 digits");
         var latitude_float = parseFloat(latitude);
         assert.ok(latitude_float >= -180);
         assert.ok(latitude_float <= 180);
-        assert.ok(bluffmaster.datatype.number.called);
-        bluffmaster.datatype.number.restore();
+        assert.ok(blaver.datatype.number.called);
+        blaver.datatype.number.restore();
       }
     });
   });
@@ -350,66 +350,66 @@ describe("address.js", function () {
   describe("longitude()", function () {
     it("returns random longitude", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.datatype, 'number');
-        var longitude = bluffmaster.address.longitude();
+        sinon.spy(blaver.datatype, 'number');
+        var longitude = blaver.address.longitude();
         assert.ok(typeof longitude === 'string');
         var longitude_float = parseFloat(longitude);
         assert.ok(longitude_float >= -180.0);
         assert.ok(longitude_float <= 180.0);
-        assert.ok(bluffmaster.datatype.number.called);
-        bluffmaster.datatype.number.restore();
+        assert.ok(blaver.datatype.number.called);
+        blaver.datatype.number.restore();
       }
     });
 
     it("returns random longitude with min and max and default precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.datatype, 'number');
-        var longitude = bluffmaster.address.longitude(100, -30);
+        sinon.spy(blaver.datatype, 'number');
+        var longitude = blaver.address.longitude(100, -30);
         assert.ok(typeof longitude === 'string');
         assert.strictEqual(longitude.split('.')[1].length, 4, "The precision of longitude should be had of 4 digits");
         var longitude_float = parseFloat(longitude);
         assert.ok(longitude_float >= -30);
         assert.ok(longitude_float <= 100);
-        assert.ok(bluffmaster.datatype.number.called);
-        bluffmaster.datatype.number.restore();
+        assert.ok(blaver.datatype.number.called);
+        blaver.datatype.number.restore();
       }
     });
 
     it("returns random longitude with custom precision", function () {
       for (var i = 0; i < 100; i++) {
-        sinon.spy(bluffmaster.datatype, 'number');
-        var longitude = bluffmaster.address.longitude(undefined, undefined, 7);
+        sinon.spy(blaver.datatype, 'number');
+        var longitude = blaver.address.longitude(undefined, undefined, 7);
         assert.ok(typeof longitude === 'string');
         assert.strictEqual(longitude.split('.')[1].length, 7, "The precision of longitude should be had of 7 digits");
         var longitude_float = parseFloat(longitude);
         assert.ok(longitude_float >= -180);
         assert.ok(longitude_float <= 180);
-        assert.ok(bluffmaster.datatype.number.called);
-        bluffmaster.datatype.number.restore();
+        assert.ok(blaver.datatype.number.called);
+        blaver.datatype.number.restore();
       }
     });
   });
 
   describe("direction()", function () {
     it("returns random direction", function () {
-      sinon.stub(bluffmaster.address, 'direction').returns('North');
-      var direction = bluffmaster.address.direction();
+      sinon.stub(blaver.address, 'direction').returns('North');
+      var direction = blaver.address.direction();
       var expected = 'North';
 
       assert.strictEqual(direction, expected, "The random direction should be equals " + expected);
-      bluffmaster.address.direction.restore();
+      blaver.address.direction.restore();
     })
 
     it("returns abbreviation when useAbbr is false", function () {
-      sinon.stub(bluffmaster.address, 'direction').returns('N');
-      var direction = bluffmaster.address.direction(false);
+      sinon.stub(blaver.address, 'direction').returns('N');
+      var direction = blaver.address.direction(false);
       var expected = 'N';
       assert.strictEqual(direction, expected, "The abbreviation of direction when useAbbr is false should be equals " + expected+ ". Current is " + direction);
-      bluffmaster.address.direction.restore();
+      blaver.address.direction.restore();
     })
 
     it("returns abbreviation when useAbbr is true", function () {
-      var direction = bluffmaster.address.direction(true);
+      var direction = blaver.address.direction(true);
       var expectedType = 'string';
       var lengthDirection = direction.length
       var prefixErrorMessage = "The abbreviation of direction when useAbbr is true should"
@@ -418,36 +418,36 @@ describe("address.js", function () {
     })
 
     it("returns abbreviation when useAbbr is true", function () {
-      sinon.stub(bluffmaster.address, 'direction').returns('N');
-      var direction = bluffmaster.address.direction(true);
+      sinon.stub(blaver.address, 'direction').returns('N');
+      var direction = blaver.address.direction(true);
       var expected = 'N';
       assert.strictEqual(direction, expected, "The abbreviation of direction when useAbbr is true should be equals " + expected + ". Current is " + direction);
-      bluffmaster.address.direction.restore();
+      blaver.address.direction.restore();
     })
 
   })
 
   describe("ordinalDirection()", function () {
     it("returns random ordinal direction", function () {
-      sinon.stub(bluffmaster.address, 'ordinalDirection').returns('West');
-      var ordinalDirection = bluffmaster.address.ordinalDirection();
+      sinon.stub(blaver.address, 'ordinalDirection').returns('West');
+      var ordinalDirection = blaver.address.ordinalDirection();
       var expected = 'West';
 
       assert.strictEqual(ordinalDirection, expected, "The ransom ordinal direction should be equals " + expected + ". Current is " + ordinalDirection);
-      bluffmaster.address.ordinalDirection.restore();
+      blaver.address.ordinalDirection.restore();
     })
 
     it("returns abbreviation when useAbbr is true", function () {
-      sinon.stub(bluffmaster.address, 'ordinalDirection').returns('W');
-      var ordinalDirection = bluffmaster.address.ordinalDirection(true);
+      sinon.stub(blaver.address, 'ordinalDirection').returns('W');
+      var ordinalDirection = blaver.address.ordinalDirection(true);
       var expected = 'W';
 
       assert.strictEqual(ordinalDirection, expected, "The ordinal direction when useAbbr is true should be equals " + expected + ". Current is " + ordinalDirection);
-      bluffmaster.address.ordinalDirection.restore();
+      blaver.address.ordinalDirection.restore();
     })
 
     it("returns abbreviation when useAbbr is true", function () {
-      var ordinalDirection = bluffmaster.address.ordinalDirection(true);
+      var ordinalDirection = blaver.address.ordinalDirection(true);
       var expectedType = 'string';
       var ordinalDirectionLength = ordinalDirection.length;
       var prefixErrorMessage = "The ordinal direction when useAbbr is true should"
@@ -461,25 +461,25 @@ describe("address.js", function () {
 
   describe("cardinalDirection()", function () {
     it("returns random cardinal direction", function () {
-      sinon.stub(bluffmaster.address, 'cardinalDirection').returns('Northwest');
-      var cardinalDirection = bluffmaster.address.cardinalDirection();
+      sinon.stub(blaver.address, 'cardinalDirection').returns('Northwest');
+      var cardinalDirection = blaver.address.cardinalDirection();
       var expected = 'Northwest';
 
       assert.strictEqual(cardinalDirection, expected, "The random cardinal direction should be equals " + expected + ". Current is " + cardinalDirection);
-      bluffmaster.address.cardinalDirection.restore();
+      blaver.address.cardinalDirection.restore();
     })
 
     it("returns abbreviation when useAbbr is true", function () {
-      sinon.stub(bluffmaster.address, 'cardinalDirection').returns('NW');
-      var cardinalDirection = bluffmaster.address.cardinalDirection(true);
+      sinon.stub(blaver.address, 'cardinalDirection').returns('NW');
+      var cardinalDirection = blaver.address.cardinalDirection(true);
       var expected = 'NW';
 
       assert.strictEqual(cardinalDirection, expected, "The cardinal direction when useAbbr is true should be equals " + expected + ". Current is " + cardinalDirection);
-      bluffmaster.address.cardinalDirection.restore();
+      blaver.address.cardinalDirection.restore();
     })
 
     it("returns abbreviation when useAbbr is true", function () {
-      var cardinalDirection = bluffmaster.address.cardinalDirection(true);
+      var cardinalDirection = blaver.address.cardinalDirection(true);
       var expectedType = 'string';
       var cardinalDirectionLength = cardinalDirection.length;
       var prefixErrorMessage = "The cardinal direction when useAbbr is true should"
@@ -510,12 +510,12 @@ describe("address.js", function () {
         return isMetric ? distance : kilometersToMiles(distance);
       }
       for (var i = 0; i < 10000; i++) {
-        var latFloat1 = parseFloat(bluffmaster.address.latitude());
-        var lonFloat1 = parseFloat(bluffmaster.address.longitude());
+        var latFloat1 = parseFloat(blaver.address.latitude());
+        var lonFloat1 = parseFloat(blaver.address.longitude());
         var radius = (Math.random() * 99) + 1; // range of [1, 100)
         var isMetric = (Math.round(Math.random()) == 1);
 
-        var coordinate = bluffmaster.address.nearbyGPSCoordinate([latFloat1, lonFloat1], radius, isMetric);
+        var coordinate = blaver.address.nearbyGPSCoordinate([latFloat1, lonFloat1], radius, isMetric);
         assert.ok(coordinate.length === 2);
         assert.ok(typeof coordinate[0] === 'string');
         assert.ok(typeof coordinate[1] === 'string');
@@ -537,7 +537,7 @@ describe("address.js", function () {
       }
 
       // test once with undefined radius
-      var coordinate = bluffmaster.address.nearbyGPSCoordinate([latFloat1, lonFloat1], undefined, isMetric);
+      var coordinate = blaver.address.nearbyGPSCoordinate([latFloat1, lonFloat1], undefined, isMetric);
       assert.ok(coordinate.length === 2);
       assert.ok(typeof coordinate[0] === 'string');
       assert.ok(typeof coordinate[1] === 'string');
@@ -547,11 +547,11 @@ describe("address.js", function () {
 
   describe("timeZone()", function () {
     it("returns random timeZone", function () {
-      sinon.spy(bluffmaster.address, 'timeZone');
-      var timeZone = bluffmaster.address.timeZone();
+      sinon.spy(blaver.address, 'timeZone');
+      var timeZone = blaver.address.timeZone();
       assert.ok(timeZone);
-      assert.ok(bluffmaster.address.timeZone.called);
-      bluffmaster.address.timeZone.restore();
+      assert.ok(blaver.address.timeZone.called);
+      blaver.address.timeZone.restore();
     });
   });
 

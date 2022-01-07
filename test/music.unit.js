@@ -1,17 +1,17 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
   var sinon = require('sinon');
-  var bluffmaster = require('../index');
+  var blaver = require('../index');
 }
 
 describe("music.js", function () {
   describe("genre()", function () {
     it("returns a genre", function () {
-      sinon.stub(bluffmaster.music, 'genre').returns('Rock');
-      var genre = bluffmaster.music.genre();
+      sinon.stub(blaver.music, 'genre').returns('Rock');
+      var genre = blaver.music.genre();
 
       assert.strictEqual(genre, 'Rock');
-      bluffmaster.music.genre.restore();
+      blaver.music.genre.restore();
     });
   });
 });

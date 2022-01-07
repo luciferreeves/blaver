@@ -1,22 +1,22 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
-  var bluffmaster = require('../index');
+  var blaver = require('../index');
 }
   
 function getAnIbanByCountry(countryCode) {
-  var iban = bluffmaster.finance.iban();
+  var iban = blaver.finance.iban();
   var maxTry = 100000;
   var countTry = maxTry;
   while (countTry && iban.substring(0, 2) != countryCode) {
-    bluffmaster.seed(100000- countTry);
-    iban = bluffmaster.finance.iban();
+    blaver.seed(100000- countTry);
+    iban = blaver.finance.iban();
     countTry--;
   }
   
   if (countTry === 0) {
     console.log('Not found with 10000 seed, vraiment pas de bol');
   } else if (countTry < maxTry) {
-    console.log('you can optimize this helper by add bluffmaster.seed(' + (100000 - 1 - countTry) + ') before the call of getAnIbanByCountry()');
+    console.log('you can optimize this helper by add blaver.seed(' + (100000 - 1 - countTry) + ') before the call of getAnIbanByCountry()');
   }
   // console.log(iban);
   
@@ -40,7 +40,7 @@ describe('finance_iban.js', function () {
   
     it("IBAN for Georgia is correct", function () {
   
-      bluffmaster.seed(17);
+      blaver.seed(17);
       var iban = getAnIbanByCountry('GE');
       var ibanFormated = iban.match(/.{1,4}/g).join(" ");
       var bban = iban.substring(4) + iban.substring(0, 4);
@@ -74,7 +74,7 @@ describe('finance_iban.js', function () {
   
     it("IBAN for Pakistan is correct", function () {
   
-      bluffmaster.seed(28);
+      blaver.seed(28);
       var iban = getAnIbanByCountry('PK');
       var ibanFormated = iban.match(/.{1,4}/g).join(" ");
       var bban = iban.substring(4) + iban.substring(0, 4);
@@ -114,7 +114,7 @@ describe('finance_iban.js', function () {
   
     it("IBAN for Turkish is correct", function () {
   
-      bluffmaster.seed(37);
+      blaver.seed(37);
   
       var iban = getAnIbanByCountry('TR');
       var ibanFormated = iban.match(/.{1,4}/g).join(" ");
@@ -149,7 +149,7 @@ describe('finance_iban.js', function () {
   
     it("IBAN for Azerbaijan is correct", function () {
   
-      bluffmaster.seed(21);
+      blaver.seed(21);
       var iban = getAnIbanByCountry('AZ');
       var ibanFormated = iban.match(/.{1,4}/g).join(" ");
       var bban = iban.substring(4) + iban.substring(0, 4);

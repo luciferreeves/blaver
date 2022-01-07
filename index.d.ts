@@ -1,5 +1,5 @@
-// Type definitions for bluffmaster 5.5
-// Project: http://marak.com/bluffmaster.js/
+// Type definitions for blaver 5.5
+// Project: http://marak.com/blaver.js/
 // Definitions by: Ben Swartz <https://github.com/bensw>
 //                 Bas Pennings <https://github.com/basp>
 //                 Yuki Kokubun <https://github.com/Kuniwak>
@@ -12,10 +12,10 @@
 //                 Jérémie Parker <https://github.com/p-j>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare const bluffmasterStatic: BluffMaster.BluffMasterStatic;
+declare const blaverStatic: Blaver.BlaverStatic;
 
-declare namespace BluffMaster {
-  interface BluffMasterStatic {
+declare namespace Blaver {
+  interface BlaverStatic {
     locale: string;
     setLocale(locale: string): void;
 
@@ -281,17 +281,17 @@ declare namespace BluffMaster {
     };
 
     random: {
-      /** @deprecated bluffmaster.random.number is now located in bluffmaster.datatype.number */
+      /** @deprecated blaver.random.number is now located in blaver.datatype.number */
       number(max?: number): number;
-      /** @deprecated bluffmaster.random.number is now located in bluffmaster.datatype.number */
+      /** @deprecated blaver.random.number is now located in blaver.datatype.number */
       number(options?: {
         min?: number | undefined;
         max?: number | undefined;
         precision?: number | undefined;
       }): number;
-      /** @deprecated bluffmaster.random.float is now located in bluffmaster.datatype.float */
+      /** @deprecated blaver.random.float is now located in blaver.datatype.float */
       float(max?: number): number;
-      /** @deprecated bluffmaster.random.float is now located in bluffmaster.datatype.float */
+      /** @deprecated blaver.random.float is now located in blaver.datatype.float */
       float(options?: {
         min?: number | undefined;
         max?: number | undefined;
@@ -305,9 +305,9 @@ declare namespace BluffMaster {
       arrayElements<T>(array: ReadonlyArray<T>, count?: number): ReadonlyArray<T>;
       objectElement(object?: { [key: string]: any }, field?: 'key'): string;
       objectElement<T>(object?: { [key: string]: T }, field?: any): T;
-      /** @deprecated bluffmaster.random.uuid is now located in bluffmaster.datatype.uuid */
+      /** @deprecated blaver.random.uuid is now located in blaver.datatype.uuid */
       uuid(): string;
-      /** @deprecated bluffmaster.random.boolean is now located in bluffmaster.datatype.boolean */
+      /** @deprecated blaver.random.boolean is now located in blaver.datatype.boolean */
       boolean(): boolean;
       word(type?: string): string;
       words(count?: number): string;
@@ -315,7 +315,7 @@ declare namespace BluffMaster {
       locale(): string;
       alpha(options?: { count?: number | undefined; upcase?: boolean | undefined }): string;
       alphaNumeric(count?: number): string;
-      /** @deprecated bluffmaster.random.hexaDecimal is now located in bluffmaster.datatype.hexaDecimal */
+      /** @deprecated blaver.random.hexaDecimal is now located in blaver.datatype.hexaDecimal */
       hexaDecimal(count?: number): string;
     };
 
@@ -443,182 +443,182 @@ declare namespace BluffMaster {
   }
 }
 
-declare module '@withshepherd/bluffmaster' {
-  export = bluffmasterStatic;
+declare module '@withshepherd/blaver' {
+  export = blaverStatic;
 }
 
-declare module '@withshepherd/bluffmaster/locale/az' {
-  export = bluffmasterStatic;
+declare module '@withshepherd/blaver/locale/az' {
+  export = blaverStatic;
 }
 
-declare module '@withshepherd/bluffmaster/locale/ar' {
-  export = bluffmasterStatic;
+declare module '@withshepherd/blaver/locale/ar' {
+  export = blaverStatic;
 }
 
-declare module '@withshepherd/bluffmaster/locale/cz' {
-  export = bluffmasterStatic;
+declare module '@withshepherd/blaver/locale/cz' {
+  export = blaverStatic;
 }
 
-declare module '@withshepherd/bluffmaster/locale/de' {
-  export = bluffmasterStatic;
+declare module '@withshepherd/blaver/locale/de' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/de_AT' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/de_AT' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/de_CH' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/de_CH' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_AU' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_AU' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_AU_ocker' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_AU_ocker' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_BORK' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_BORK' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_CA' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_CA' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_GB' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_GB' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_IE' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_IE' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_IND' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_IND' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_US' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_US' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/en_ZA' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/en_ZA' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/es' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/es' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/es_MX' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/es_MX' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/fa' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/fa' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/fi' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/fi' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/fr' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/fr' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/fr_CA' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/fr_CA' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/fr_CH' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/fr_CH' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/ge' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/ge' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/id_ID' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/id_ID' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/it' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/it' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/ja' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/ja' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/ko' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/ko' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/nb_NO' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/nb_NO' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/nep' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/nep' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/nl' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/nl' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/nl_BE' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/nl_BE' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/pl' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/pl' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/pt_BR' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/pt_BR' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/pt_PT' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/pt_PT' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/ro' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/ro' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/ru' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/ru' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/sk' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/sk' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/sv' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/sv' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/tr' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/tr' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/uk' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/uk' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/vi' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/vi' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/zh_CN' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/zh_CN' {
+  export = blaverStatic;
 }
 
-declare module 'bluffmaster/locale/zh_TW' {
-  export = bluffmasterStatic;
+declare module 'blaver/locale/zh_TW' {
+  export = blaverStatic;
 }

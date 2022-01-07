@@ -2,7 +2,7 @@ if (typeof module !== 'undefined') {
   var assert = require('assert');
   var sinon = require('sinon');
   var _ = require('lodash');
-  var bluffmaster = require('../index');
+  var blaver = require('../index');
   var mersenne = new (require('../lib/mersenne'));
 }
 
@@ -11,35 +11,35 @@ describe("random.js", function () {
   describe("number", function() {
     it("random.number() uses datatype module and prints deprecation warning", function() {
       sinon.spy(console, 'log');
-      sinon.spy(bluffmaster.datatype, 'number');
-      bluffmaster.random.number();
-      assert.ok(bluffmaster.datatype.number.called);
-      assert.ok(console.log.calledWith('Deprecation Warning: bluffmaster.random.number is now located in bluffmaster.datatype.number'));
-      bluffmaster.datatype.number.restore();
+      sinon.spy(blaver.datatype, 'number');
+      blaver.random.number();
+      assert.ok(blaver.datatype.number.called);
+      assert.ok(console.log.calledWith('Deprecation Warning: blaver.random.number is now located in blaver.datatype.number'));
+      blaver.datatype.number.restore();
       console.log.restore();
     });
 
     it('should return deterministic results when seeded with integer', function() {
-      bluffmaster.seed(100);
-      var name = bluffmaster.name.findName();
+      blaver.seed(100);
+      var name = blaver.name.findName();
       assert.strictEqual(name, 'Eva Jenkins');
     });
 
     it('should return deterministic results when seeded with 0', function() {
-      bluffmaster.seed(0);
-      var name = bluffmaster.name.findName();
+      blaver.seed(0);
+      var name = blaver.name.findName();
       assert.strictEqual(name, 'Lola Sporer');
     });
 
     it('should return deterministic results when seeded with array - one element', function() {
-      bluffmaster.seed([10]);
-      var name = bluffmaster.name.findName();
+      blaver.seed([10]);
+      var name = blaver.name.findName();
       assert.strictEqual(name, 'Duane Kshlerin');
     });
 
     it('should return deterministic results when seeded with array - multiple elements', function() {
-      bluffmaster.seed([10, 100, 1000]);
-      var name = bluffmaster.name.findName();
+      blaver.seed([10, 100, 1000]);
+      var name = blaver.name.findName();
       assert.strictEqual(name, 'Alma Shanahan');
     });
   });
@@ -47,11 +47,11 @@ describe("random.js", function () {
   describe("float", function() {
     it("random.float() uses datatype module and prints deprecation warning", function() {
       sinon.spy(console, 'log');
-      sinon.spy(bluffmaster.datatype, 'float');
-      bluffmaster.random.float();
-      assert.ok(bluffmaster.datatype.float.called);
-      assert.ok(console.log.calledWith('Deprecation Warning: bluffmaster.random.float is now located in bluffmaster.datatype.float'));
-      bluffmaster.datatype.float.restore();
+      sinon.spy(blaver.datatype, 'float');
+      blaver.random.float();
+      assert.ok(blaver.datatype.float.called);
+      assert.ok(console.log.calledWith('Deprecation Warning: blaver.random.float is now located in blaver.datatype.float'));
+      blaver.datatype.float.restore();
       console.log.restore();
     });
   });
@@ -59,19 +59,19 @@ describe("random.js", function () {
   describe('arrayElement', function() {
     it('returns a random element in the array', function() {
       var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      assert.ok(testArray.indexOf(bluffmaster.random.arrayElement(testArray)) > -1);
+      assert.ok(testArray.indexOf(blaver.random.arrayElement(testArray)) > -1);
     });
 
     it('returns a random element in the array when there is only 1', function() {
       var testArray = ['hello'];
-      assert.ok(testArray.indexOf(bluffmaster.random.arrayElement(testArray)) > -1);
+      assert.ok(testArray.indexOf(blaver.random.arrayElement(testArray)) > -1);
     });
   });
 
   describe('arrayElements', function() {
     it('returns a subset with random elements in the array', function() {
       var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      var subset = bluffmaster.random.arrayElements(testArray);
+      var subset = blaver.random.arrayElements(testArray);
 
       // Check length
       assert.ok(subset.length >= 1 && subset.length <= testArray.length);
@@ -90,7 +90,7 @@ describe("random.js", function () {
 
     it('returns a subset of fixed length with random elements in the array', function() {
       var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      var subset = bluffmaster.random.arrayElements(testArray, 3);
+      var subset = blaver.random.arrayElements(testArray, 3);
 
       // Check length
       assert.ok(subset.length === 3);
@@ -111,11 +111,11 @@ describe("random.js", function () {
   describe('UUID', function() {
     it("random.uuid() uses datatype module and prints deprecation warning", function() {
       sinon.spy(console, 'log');
-      sinon.spy(bluffmaster.datatype, 'uuid');
-      bluffmaster.random.uuid();
-      assert.ok(bluffmaster.datatype.uuid.called);
-      assert.ok(console.log.calledWith('Deprecation Warning: bluffmaster.random.uuid is now located in bluffmaster.datatype.uuid'));
-      bluffmaster.datatype.uuid.restore();
+      sinon.spy(blaver.datatype, 'uuid');
+      blaver.random.uuid();
+      assert.ok(blaver.datatype.uuid.called);
+      assert.ok(console.log.calledWith('Deprecation Warning: blaver.random.uuid is now located in blaver.datatype.uuid'));
+      blaver.datatype.uuid.restore();
       console.log.restore();
     });
   });
@@ -123,17 +123,17 @@ describe("random.js", function () {
   describe('boolean', function() {
     it("random.boolean() uses datatype module and prints deprecation warning", function() {
       sinon.spy(console, 'log');
-      sinon.spy(bluffmaster.datatype, 'boolean');
-      bluffmaster.random.boolean();
-      assert.ok(bluffmaster.datatype.boolean.called);
-      assert.ok(console.log.calledWith('Deprecation Warning: bluffmaster.random.boolean is now located in bluffmaster.datatype.boolean'));
-      bluffmaster.datatype.boolean.restore();
+      sinon.spy(blaver.datatype, 'boolean');
+      blaver.random.boolean();
+      assert.ok(blaver.datatype.boolean.called);
+      assert.ok(console.log.calledWith('Deprecation Warning: blaver.random.boolean is now located in blaver.datatype.boolean'));
+      blaver.datatype.boolean.restore();
       console.log.restore();
     });
   });
 
   describe('semver', function() {
-    var semver = bluffmaster.system.semver();
+    var semver = blaver.system.semver();
 
     it('should generate a string', function() {
       assert.ok(typeof semver === 'string');
@@ -145,7 +145,7 @@ describe("random.js", function () {
   });
 
   describe('alpha', function() {
-    var alpha = bluffmaster.random.alpha;
+    var alpha = blaver.random.alpha;
 
     it('should return single letter when no count provided', function() {
       assert.ok(alpha().length === 1);
@@ -176,7 +176,7 @@ describe("random.js", function () {
   });
 
   describe('alphaNumeric', function() {
-    var alphaNumeric = bluffmaster.random.alphaNumeric;
+    var alphaNumeric = blaver.random.alphaNumeric;
 
     it('should generate single character when no additional argument was provided', function() {
       assert.ok(alphaNumeric().length === 1);
@@ -201,11 +201,11 @@ describe("random.js", function () {
   describe('hexaDecimal', function() {
     it("random.hexaDecimal() uses datatype module and prints deprecation warning", function() {
       sinon.spy(console, 'log');
-      sinon.spy(bluffmaster.datatype, 'hexaDecimal');
-      bluffmaster.random.hexaDecimal();
-      assert.ok(bluffmaster.datatype.hexaDecimal.called);
-      assert.ok(console.log.calledWith('Deprecation Warning: bluffmaster.random.hexaDecimal is now located in bluffmaster.datatype.hexaDecimal'));
-      bluffmaster.datatype.hexaDecimal.restore();
+      sinon.spy(blaver.datatype, 'hexaDecimal');
+      blaver.random.hexaDecimal();
+      assert.ok(blaver.datatype.hexaDecimal.called);
+      assert.ok(console.log.calledWith('Deprecation Warning: blaver.random.hexaDecimal is now located in blaver.datatype.hexaDecimal'));
+      blaver.datatype.hexaDecimal.restore();
       console.log.restore();
     });
   });

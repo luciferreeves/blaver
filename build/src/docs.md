@@ -1,20 +1,20 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/luciferreeves/bluffmaster/master/logos/logo-96.png">
+  <img src="https://raw.githubusercontent.com/luciferreeves/blaver/master/logos/logo-96.png">
 </p>
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/bluffmaster/Build) ![npm](https://img.shields.io/npm/v/bluffmaster) ![NPM](https://img.shields.io/npm/l/bluffmaster) ![GitHub issues](https://img.shields.io/github/issues-raw/luciferreeves/bluffmaster) ![npm](https://img.shields.io/npm/dw/bluffmaster) ![GitHub deployments](https://img.shields.io/github/deployments/luciferreeves/bluffmaster/github-pages?label=JSDoc%20Deployment) [![Coverage Status](https://coveralls.io/repos/github/luciferreeves/bluffmaster/badge.svg?branch=master)](https://coveralls.io/github/luciferreeves/bluffmaster?branch=master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/blaver/Build) ![npm](https://img.shields.io/npm/v/blaver) ![NPM](https://img.shields.io/npm/l/blaver) ![GitHub issues](https://img.shields.io/github/issues-raw/luciferreeves/blaver) ![GitHub deployments](https://img.shields.io/github/deployments/luciferreeves/blaver/github-pages?label=JSDoc%20Deployment) [![Coverage Status](https://coveralls.io/repos/github/luciferreeves/blaver/badge.svg?branch=master)](https://coveralls.io/github/luciferreeves/blaver?branch=master)
 
-# BluffMaster - generate massive amounts of fake data in the browser and node.js
+# Blaver - generate massive amounts of fake data in the browser and node.js
 
-BluffMaster is a JavaScript library built on top of the [Faker.JS](https://github.com/marak/Faker.js) library. It generates massive amounts of fake data in the browser and node.js. 
+Blaver is a JavaScript library built on top of the [Faker.JS](https://github.com/marak/Faker.js) library. It generates massive amounts of fake data in the browser and node.js. 
 
-Fake data is useful when building and testing our application. BluffMaster can generate fake data for various areas, including address, commerce, company, date, finance, image, random, or name.
+Fake data is useful when building and testing our application. Blaver can generate fake data for various areas, including address, commerce, company, date, finance, image, random, or name.
 
 ## What happened to the original faker.js?
 
 This project was originally created and hosted at https://github.com/marak/Faker.js/ - however around 4th Jan, 2022 - the author decided to delete the repository along with the code, for unknown reasons.
 
-BluffMaster is a fork of the original Faker.js library. The original library was created by [Marak Squires](https://github.com/marak/) in 2011. BluffMaster aims to maintain the original library's functionality and add new features. 
+Blaver is a fork of the original Faker.js library. The original library was created by [Marak Squires](https://github.com/marak/) in 2011. Blaver aims to maintain the original library's functionality and add new features. 
 
 You can also access unofficial Faker.js documentation at [https://fakerjsdocs.netlify.com/](https://fakerjsdocs.netlify.com/)
 
@@ -35,44 +35,44 @@ You can also access unofficial Faker.js documentation at [https://fakerjsdocs.ne
 ### Browser
 
 ```html
-<script src = "bluffmaster.js" type = "text/javascript"></script>
+<script src = "blaver.js" type = "text/javascript"></script>
 <script>
-  var randomName = bluffmaster.name.findName(); // Caitlyn Kerluke
-  var randomEmail = bluffmaster.internet.email(); // Rusty@arne.info
-  var randomCard = bluffmaster.helpers.createCard(); // random contact card containing many properties
+  var randomName = blaver.name.findName(); // Caitlyn Kerluke
+  var randomEmail = blaver.internet.email(); // Rusty@arne.info
+  var randomCard = blaver.helpers.createCard(); // random contact card containing many properties
 </script>
 ```
 
 ### Node.js
 
 ```js
-var bluffmaster = require('bluffmaster');
+var blaver = require('blaver');
 
-var randomName = bluffmaster.name.findName(); // Rowan Nikolaus
-var randomEmail = bluffmaster.internet.email(); // Kassandra.Haley@erich.biz
-var randomCard = bluffmaster.helpers.createCard(); // random contact card containing many properties
+var randomName = blaver.name.findName(); // Rowan Nikolaus
+var randomEmail = blaver.internet.email(); // Kassandra.Haley@erich.biz
+var randomCard = blaver.helpers.createCard(); // random contact card containing many properties
 ```
 
 ## API
 
 ### JSDoc API Browser
 
-You can browse all API methods by going to the [JSDoc API Browser](http://thatcomputerscientist.com/bluffmaster/).
+You can browse all API methods by going to the [JSDoc API Browser](http://thatcomputerscientist.com/blaver/).
 
 ### API Methods
 
 {{{API}}}
 
-### BluffMaster.fake()
+### Blaver.fake()
 
-BluffMaster contains a super useful generator method `BluffMaster.fake` for combining faker API methods using a mustache string format.
+Blaver contains a super useful generator method `Blaver.fake` for combining faker API methods using a mustache string format.
 
 **Example:**
 
 {{=<% %>=}}
 
 ``` js
-console.log(bluffmaster.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
+console.log(blaver.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"));
 // outputs: "Marks, Dean Sr."
 ```
 
@@ -82,7 +82,7 @@ This will interpolate the format string with the value of methods `name.lastName
 
 ## Localization
 
-BluffMaster has support for multiple localities – ported directly from the orginal faker.js library (version `v2.0.0`).
+Blaver has support for multiple localities – ported directly from the orginal faker.js library (version `v2.0.0`).
 
 The default language locale is set to English.
 
@@ -90,22 +90,22 @@ Setting a new locale is simple:
 
 ```js
 // sets locale to de
-bluffmaster.locale = "de";
+blaver.locale = "de";
 ```
 
 {{LOCALES}}
 
 ### Individual Localization Packages
 
-BluffMaster supports incremental loading of locales.
+Blaver supports incremental loading of locales.
 
-By default, requiring `bluffmaster` will include *all* locale data.
+By default, requiring `blaver` will include *all* locale data.
 
 In a production environment, you may only want to include the locale data for a specific set of locales.
 
 ```js
 // loads only de locale
-var bluffmaster = require('bluffmaster/locale/de');
+var blaver = require('blaver/locale/de');
 ```
 
 ## Setting a randomness seed
@@ -113,14 +113,14 @@ var bluffmaster = require('bluffmaster/locale/de');
 If you want consistent results, you can set your own seed:
 
 ```js
-bluffmaster.seed(123);
+blaver.seed(123);
 
-var firstRandom = bluffmaster.random.number();
+var firstRandom = blaver.random.number();
 
 // Setting the seed again resets the sequence.
-bluffmaster.seed(123);
+blaver.seed(123);
 
-var secondRandom = bluffmaster.random.number();
+var secondRandom = blaver.random.number();
 
 console.log(firstRandom === secondRandom);
 ```
@@ -134,9 +134,9 @@ make test
 
 You can view a code coverage report generated in coverage/lcov-report/index.html.
 
-## Building BluffMaster
+## Building Blaver
 
-BluffMaster uses [gulp](http://gulpjs.com/) to automate its build process. Each build operation is a separate task which can be run independently.
+Blaver uses [gulp](http://gulpjs.com/) to automate its build process. Each build operation is a separate task which can be run independently.
 
 ### Browser Bundle
 
@@ -154,7 +154,7 @@ npm run jsdoc
 
 ### Building Readme
 
-The `Readme.md` file for `bluffmaster` is automatically generated and should not be modified directly. All updates to `Readme.md` should be performed in `./build/src/docs.md` and then the build script should be run.
+The `Readme.md` file for `blaver` is automatically generated and should not be modified directly. All updates to `Readme.md` should be performed in `./build/src/docs.md` and then the build script should be run.
 
 ```shell
 npm run readme
@@ -164,11 +164,11 @@ npm run readme
 
 ### Kumar Priyansh
 
-BluffMaster - Copyright (c) 2022 - Present
+Blaver - Copyright (c) 2022 - Present
 
-https://github.com/luciferreeves/bluffmaster
+https://github.com/luciferreeves/blaver
 
-https://npmjs.com/package/bluffmaster
+https://npmjs.com/package/blaver
 
 ### Marak Squires
 
