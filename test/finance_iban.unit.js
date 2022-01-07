@@ -4,9 +4,9 @@ if (typeof module !== 'undefined') {
 }
   
 function getAnIbanByCountry(countryCode) {
-  var iban = blaver.finance.iban();
-  var maxTry = 100000;
-  var countTry = maxTry;
+  const iban = blaver.finance.iban();
+  const maxTry = 100000;
+  const countTry = maxTry;
   while (countTry && iban.substring(0, 2) != countryCode) {
     blaver.seed(100000- countTry);
     iban = blaver.finance.iban();
@@ -36,14 +36,14 @@ describe('finance_iban.js', function () {
   
     // example IBAN GE29 NB00 0000 0101 9049 17
   
-    var ibanLib = require('../lib/iban');
+    const ibanLib = require('../lib/iban');
   
     it("IBAN for Georgia is correct", function () {
   
       blaver.seed(17);
-      var iban = getAnIbanByCountry('GE');
-      var ibanFormated = iban.match(/.{1,4}/g).join(" ");
-      var bban = iban.substring(4) + iban.substring(0, 4);
+      const iban = getAnIbanByCountry('GE');
+      const ibanFormated = iban.match(/.{1,4}/g).join(" ");
+      const bban = iban.substring(4) + iban.substring(0, 4);
   
       assert.equal(22, iban.length,  'GE IBAN would be 22 chars length, given is ' + iban.length);
   
@@ -70,14 +70,14 @@ describe('finance_iban.js', function () {
     // Account Code 16 digits
     // Total Length 24 chars
   
-    var ibanLib = require('../lib/iban');
+    const ibanLib = require('../lib/iban');
   
     it("IBAN for Pakistan is correct", function () {
   
       blaver.seed(28);
-      var iban = getAnIbanByCountry('PK');
-      var ibanFormated = iban.match(/.{1,4}/g).join(" ");
-      var bban = iban.substring(4) + iban.substring(0, 4);
+      const iban = getAnIbanByCountry('PK');
+      const ibanFormated = iban.match(/.{1,4}/g).join(" ");
+      const bban = iban.substring(4) + iban.substring(0, 4);
   
       assert.equal(24, iban.length, 'PK IBAN would be 24 chars length, given is ' + iban.length);
   
@@ -110,15 +110,15 @@ describe('finance_iban.js', function () {
     //   Chiffre d'indicatif national	0
     //   Numéro de compte bancaire	0519786457841326
   
-    var ibanLib = require('../lib/iban');
+    const ibanLib = require('../lib/iban');
   
     it("IBAN for Turkish is correct", function () {
   
       blaver.seed(37);
   
-      var iban = getAnIbanByCountry('TR');
-      var ibanFormated = iban.match(/.{1,4}/g).join(" ");
-      var bban = iban.substring(4) + iban.substring(0, 4);
+      const iban = getAnIbanByCountry('TR');
+      const ibanFormated = iban.match(/.{1,4}/g).join(" ");
+      const bban = iban.substring(4) + iban.substring(0, 4);
   
       assert.equal(26, iban.length,  'PK IBAN would be 26 chars length, given is ' + iban.length);
   
@@ -145,14 +145,14 @@ describe('finance_iban.js', function () {
   
     // example IBAN AZ21 NABZ 0000 0000 1370 1000 1944
   
-    var ibanLib = require('../lib/iban');
+    const ibanLib = require('../lib/iban');
   
     it("IBAN for Azerbaijan is correct", function () {
   
       blaver.seed(21);
-      var iban = getAnIbanByCountry('AZ');
-      var ibanFormated = iban.match(/.{1,4}/g).join(" ");
-      var bban = iban.substring(4) + iban.substring(0, 4);
+      const iban = getAnIbanByCountry('AZ');
+      const ibanFormated = iban.match(/.{1,4}/g).join(" ");
+      const bban = iban.substring(4) + iban.substring(0, 4);
   
       assert.equal(28, iban.length,  'AZ IBAN would be 28 chars length, given is ' + iban.length);
   

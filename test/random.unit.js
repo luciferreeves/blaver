@@ -1,7 +1,6 @@
 if (typeof module !== 'undefined') {
   var assert = require('assert');
   var sinon = require('sinon');
-  var _ = require('lodash');
   var blaver = require('../index');
   var mersenne = new (require('../lib/mersenne'));
 }
@@ -21,25 +20,25 @@ describe("random.js", function () {
 
     it('should return deterministic results when seeded with integer', function() {
       blaver.seed(100);
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
       assert.strictEqual(name, 'Eva Jenkins');
     });
 
     it('should return deterministic results when seeded with 0', function() {
       blaver.seed(0);
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
       assert.strictEqual(name, 'Lola Sporer');
     });
 
     it('should return deterministic results when seeded with array - one element', function() {
       blaver.seed([10]);
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
       assert.strictEqual(name, 'Duane Kshlerin');
     });
 
     it('should return deterministic results when seeded with array - multiple elements', function() {
       blaver.seed([10, 100, 1000]);
-      var name = blaver.name.findName();
+      const name = blaver.name.findName();
       assert.strictEqual(name, 'Alma Shanahan');
     });
   });
@@ -58,20 +57,20 @@ describe("random.js", function () {
 
   describe('arrayElement', function() {
     it('returns a random element in the array', function() {
-      var testArray = ['hello', 'to', 'you', 'my', 'friend'];
+      const testArray = ['hello', 'to', 'you', 'my', 'friend'];
       assert.ok(testArray.indexOf(blaver.random.arrayElement(testArray)) > -1);
     });
 
     it('returns a random element in the array when there is only 1', function() {
-      var testArray = ['hello'];
+      const testArray = ['hello'];
       assert.ok(testArray.indexOf(blaver.random.arrayElement(testArray)) > -1);
     });
   });
 
   describe('arrayElements', function() {
     it('returns a subset with random elements in the array', function() {
-      var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      var subset = blaver.random.arrayElements(testArray);
+      const testArray = ['hello', 'to', 'you', 'my', 'friend'];
+      const subset = blaver.random.arrayElements(testArray);
 
       // Check length
       assert.ok(subset.length >= 1 && subset.length <= testArray.length);
@@ -89,8 +88,8 @@ describe("random.js", function () {
     });
 
     it('returns a subset of fixed length with random elements in the array', function() {
-      var testArray = ['hello', 'to', 'you', 'my', 'friend'];
-      var subset = blaver.random.arrayElements(testArray, 3);
+      const testArray = ['hello', 'to', 'you', 'my', 'friend'];
+      const subset = blaver.random.arrayElements(testArray, 3);
 
       // Check length
       assert.ok(subset.length === 3);
@@ -133,7 +132,7 @@ describe("random.js", function () {
   });
 
   describe('semver', function() {
-    var semver = blaver.system.semver();
+    const semver = blaver.system.semver();
 
     it('should generate a string', function() {
       assert.ok(typeof semver === 'string');
@@ -145,7 +144,7 @@ describe("random.js", function () {
   });
 
   describe('alpha', function() {
-    var alpha = blaver.random.alpha;
+    const alpha = blaver.random.alpha;
 
     it('should return single letter when no count provided', function() {
       assert.ok(alpha().length === 1);
@@ -164,19 +163,19 @@ describe("random.js", function () {
     });
 
     it('should be able to ban some characters', function() {
-      var alphaText = alpha(5,{bannedChars:['a', 'p']});
+      const alphaText = alpha(5,{bannedChars:['a', 'p']});
       assert.ok(alphaText.length === 5);
       assert.ok(alphaText.match(/[b-oq-z]/));
     });
     it('should be able handle mistake in banned characters array', function() {
-      var alphaText = alpha(5,{bannedChars:['a', 'a', 'p']});
+      const alphaText = alpha(5,{bannedChars:['a', 'a', 'p']});
       assert.ok(alphaText.length === 5);
       assert.ok(alphaText.match(/[b-oq-z]/));
     });
   });
 
   describe('alphaNumeric', function() {
-    var alphaNumeric = blaver.random.alphaNumeric;
+    const alphaNumeric = blaver.random.alphaNumeric;
 
     it('should generate single character when no additional argument was provided', function() {
       assert.ok(alphaNumeric().length === 1);
@@ -187,12 +186,12 @@ describe("random.js", function () {
     });
 
     it('should be able to ban some characters', function() {
-      var alphaText = alphaNumeric(5,{bannedChars:['a','p']});
+      const alphaText = alphaNumeric(5,{bannedChars:['a','p']});
       assert.ok(alphaText.length === 5);
       assert.ok(alphaText.match(/[b-oq-z]/));
     });
     it('should be able handle mistake in banned characters array', function() {
-      var alphaText = alphaNumeric(5,{bannedChars:['a','p','a']});
+      const alphaText = alphaNumeric(5,{bannedChars:['a','p','a']});
       assert.ok(alphaText.length === 5);
       assert.ok(alphaText.match(/[b-oq-z]/));
     });
@@ -212,8 +211,7 @@ describe("random.js", function () {
 
   describe("mersenne twister", function() {
     it("returns a random number without given min / max arguments", function() {
-      var max = 10;
-      var randomNumber = mersenne.rand();
+      const randomNumber = mersenne.rand();
       assert.ok(typeof randomNumber === 'number');
     });
 

@@ -1,19 +1,19 @@
-var fs = require("fs");
+const fs = require("fs");
 
-var methods = {
+const methods = {
   walk: function (dir, validation_function, cb) {
     if (arguments.length === 2) {
       cb = validation_function;
       validation_function = null;
     }
 
-    var results = [];
+    const results = [];
     fs.readdir(dir, function (err, list) {
       if (err) {
         return cb(err);
       }
 
-      var pending = list.length;
+      const pending = list.length;
 
       if (!pending) {
         return cb(null, results);

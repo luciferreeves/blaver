@@ -1,14 +1,14 @@
 if (typeof module !== 'undefined') {
-  var assert = require('assert'),
-    sinon = require('sinon'),
-    blaver = require('../index');
+  var assert = require('assert');
+  var sinon = require('sinon');
+  var blaver = require('../index');
 }
 
 describe("commerce.js", function() {
 
   describe("color()", function() {
     it("returns random value from commerce.color array", function() {
-      var color = blaver.commerce.color();
+      const color = blaver.commerce.color();
       assert.ok(blaver.definitions.commerce.color.indexOf(color) !== -1);
     });
   });
@@ -16,7 +16,7 @@ describe("commerce.js", function() {
   describe("department(max, fixedValue)", function() {
 
     it("should use the default amounts when not passing arguments", function() {
-      var department = blaver.commerce.department();
+      const department = blaver.commerce.department();
       assert.ok(department.split(" ").length === 1);
     });
 
@@ -25,7 +25,7 @@ describe("commerce.js", function() {
     it("should return only one value if we specify a maximum of one", function() {
         sinon.spy(blaver.random, 'arrayElement');
 
-        var department = blaver.commerce.department(1);
+        const department = blaver.commerce.department(1);
 
         assert.strictEqual(department.split(" ").length, 1);
         assert.ok(blaver.random.arrayElement.calledOnce);
@@ -36,7 +36,7 @@ describe("commerce.js", function() {
     it("should return the maximum value if we specify the fixed value", function() {
         sinon.spy(blaver.random, 'arrayElement');
 
-        var department = blaver.commerce.department(5, true);
+        const department = blaver.commerce.department(5, true);
 
         console.log(department);
 
@@ -57,7 +57,7 @@ describe("commerce.js", function() {
       sinon.spy(blaver.commerce, 'productAdjective');
       sinon.spy(blaver.commerce, 'productMaterial');
       sinon.spy(blaver.commerce, 'product');
-      var name = blaver.commerce.productName();
+      const name = blaver.commerce.productName();
 
       assert.ok(name.split(' ').length >= 3);
       assert.ok(blaver.random.arrayElement.calledThrice);
@@ -74,7 +74,7 @@ describe("commerce.js", function() {
 
   describe("price(min, max, dec, symbol)", function() {
     it("should use the default amounts when not passing arguments", function() {
-      var price = blaver.commerce.price();
+      const price = blaver.commerce.price();
 
       assert.ok(price);
       assert.strictEqual((price > 0), true, "the amount should be greater than 0");
@@ -82,30 +82,30 @@ describe("commerce.js", function() {
     });
 
     it("should use the default decimal location when not passing arguments", function() {
-      var price = blaver.commerce.price();
+      const price = blaver.commerce.price();
 
-      var decimal = ".";
-      var expected = price.length - 3;
-      var actual = price.indexOf(decimal);
+      const decimal = ".";
+      const expected = price.length - 3;
+      const actual = price.indexOf(decimal);
 
       assert.strictEqual(actual, expected, "The expected location of the decimal is " + expected + " but it was " + actual + " amount " + price);
     });
 
     it("should not include a currency symbol by default", function () {
 
-      var amount = blaver.commerce.price();
+      const amount = blaver.commerce.price();
 
-      var regexp = new RegExp(/[0-9.]/);
+      const regexp = new RegExp(/[0-9.]/);
 
-      var expected = true;
-      var actual = regexp.test(amount);
+      const expected = true;
+      const actual = regexp.test(amount);
 
       assert.strictEqual(actual, expected, 'The expected match should not include a currency symbol');
     });
 
     it("it should handle negative amounts, but return 0", function () {
 
-      var amount = blaver.commerce.price(-200, -1);
+      const amount = blaver.commerce.price(-200, -1);
 
       assert.ok(amount);
       assert.strictEqual((amount == 0.00), true, "the amount should equal 0");
@@ -113,7 +113,7 @@ describe("commerce.js", function() {
 
     it("it should handle argument dec", function () {
 
-      var price = blaver.commerce.price(100, 100, 1);
+      const price = blaver.commerce.price(100, 100, 1);
 
       assert.ok(price);
       assert.strictEqual(price , '100.0', "the price should be equal 100.0");
@@ -121,7 +121,7 @@ describe("commerce.js", function() {
 
     it("it should handle argument dec = 0", function () {
 
-      var price = blaver.commerce.price(100, 100, 0);
+      const price = blaver.commerce.price(100, 100, 0);
 
       assert.ok(price);
       assert.strictEqual(price , '100', "the price should be equal 100");
@@ -132,7 +132,7 @@ describe("commerce.js", function() {
   describe("productDescription()", function() {
     it("returns a random product description", function() {
       sinon.spy(blaver.commerce, 'productDescription');
-      var description = blaver.commerce.productDescription();
+      const description = blaver.commerce.productDescription();
 
       assert.ok(typeof description === 'string');
       assert.ok(blaver.commerce.productDescription.calledOnce);
