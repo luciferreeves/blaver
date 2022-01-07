@@ -64,7 +64,6 @@ describe("address.js", function () {
     });
   });
 
-
   describe("streetName()", function () {
     beforeEach(function () {
       sinon.spy(blaver.name, 'firstName');
@@ -111,8 +110,6 @@ describe("address.js", function () {
       assert.ok(!street_name.match(/ $/));
     });
   });
-
-
 
   describe("streetAddress()", function () {
 
@@ -175,7 +172,6 @@ describe("address.js", function () {
       });
     });
   });
-
 
   describe("secondaryAddress()", function () {
     it("randomly chooses an Apt or Suite number", function () {
