@@ -1,6 +1,6 @@
-var fs = require("fs");
+const fs = require("fs");
 
-var blaver = require("../../index");
+const blaver = require("../../index");
 
 // generate dataSet as example
 fs.writeFile(
@@ -11,15 +11,11 @@ fs.writeFile(
   }
 );
 // generate bigDataSet as example
-var bigSet = [];
-
-for (var i = 20; i >= 0; i--) {
-  bigSet.push(blaver.helpers.userCard());
-}
+const bigSet = Array.from({length: 20}, () => blaver.helpers.userCard());
 
 fs.writeFile(
   __dirname + "/bigDataSet.json",
-  JSON.stringify(bigSet),
+  JSON.stringify(bigSet, null, 2),
   function () {
     console.log("bigDataSet generated successfully!");
   }
