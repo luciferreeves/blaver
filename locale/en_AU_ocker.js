@@ -1,5 +1,5 @@
-var Blaver = require("../lib");
-var blaver = new Blaver({
+const Blaver = require("../lib");
+const blaver = new Blaver({
   locale: "en_AU_ocker",
   localeFallback: "en",
 });

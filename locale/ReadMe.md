@@ -7,6 +7,6 @@ These file exist in order to allow users to require the `blaver` library using a
 Example:
 
 ``` js
-var blaver = require('../locale/en');
+const blaver = require('../locale/en');
 console.log(blaver.name.findName());
 ```
