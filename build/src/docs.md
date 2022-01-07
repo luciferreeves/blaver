@@ -47,7 +47,6 @@ npm i blaver
 ### Browser
 
 ```html
-<script src = "blaver.js" type = "text/javascript"></script>
 <script>
   var randomName = blaver.name.findName(); // Caitlyn Kerluke
   var randomEmail = blaver.internet.email(); // Rusty@arne.info
