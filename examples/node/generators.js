@@ -1,13 +1,13 @@
-var bluffmaster = require("../../index");
+var blaver = require("../../index");
 
-bluffmaster.locale = "en";
+blaver.locale = "en";
 
 console.log(
-  bluffmaster.fake("{{random.uuid}}, {{name.firstName}} {{name.suffix}}")
+  blaver.fake("{{random.uuid}}, {{name.firstName}} {{name.suffix}}")
 );
 
 return;
 
-console.log(bluffmaster.fake("{{finance.currencyName}} - {{finance.amount}}"));
+console.log(blaver.fake("{{finance.currencyName}} - {{finance.amount}}"));
 
-console.log(bluffmaster.fake("{{name.firstName}} {{name.lastName}}"));
+console.log(blaver.fake("{{name.firstName}} {{name.lastName}}"));

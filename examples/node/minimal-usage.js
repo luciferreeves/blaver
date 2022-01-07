@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-var bluffmaster = require("../../index");
-bluffmaster.locale = "fi";
+var blaver = require("../../index");
+blaver.locale = "fi";
 
-//console.log(bluffmaster.lorem.sentences())
+//console.log(blaver.lorem.sentences())
 
-console.log(bluffmaster.name.findName());
+console.log(blaver.name.findName());
 return;
-//console.log(bluffmaster.address)
-console.log(bluffmaster.internet.email());
-console.log(bluffmaster.date.recent());
-console.log(bluffmaster.helpers.contextualCard());
+//console.log(blaver.address)
+console.log(blaver.internet.email());
+console.log(blaver.date.recent());
+console.log(blaver.helpers.contextualCard());
 
-bluffmaster.locale = "uk";
+blaver.locale = "uk";
 
-console.log(bluffmaster.helpers.contextualCard());
+console.log(blaver.helpers.contextualCard());

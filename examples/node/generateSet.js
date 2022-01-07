@@ -1,11 +1,11 @@
 var fs = require("fs");
 
-var bluffmaster = require("../../index");
+var blaver = require("../../index");
 
 // generate dataSet as example
 fs.writeFile(
   __dirname + "/dataSet.json",
-  JSON.stringify(bluffmaster.helpers.userCard()),
+  JSON.stringify(blaver.helpers.userCard()),
   function () {
     console.log("dataSet generated successfully!");
   }
@@ -14,7 +14,7 @@ fs.writeFile(
 var bigSet = [];
 
 for (var i = 20; i >= 0; i--) {
-  bigSet.push(bluffmaster.helpers.userCard());
+  bigSet.push(blaver.helpers.userCard());
 }
 
 fs.writeFile(

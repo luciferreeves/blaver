@@ -1,7 +1,7 @@
-var bluffmaster = require("../locale/en");
+var blaver = require("../locale/en");
 
-console.log(bluffmaster.name.findName());
+console.log(blaver.name.findName());
 
-var bluffmaster = require("../locale/uk");
+var blaver = require("../locale/uk");
 
-console.log(bluffmaster.name.findName());
+console.log(blaver.name.findName());
