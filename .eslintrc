@@ -46,6 +46,7 @@
     "comma-dangle": 2,
     "key-spacing": 2,
     "eol-last": 2,
+    "newline-before-return": 2,
     "indent": [
       2,
       2,
