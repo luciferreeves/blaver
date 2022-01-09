@@ -13,9 +13,9 @@
     "readme": "./node_modules/.bin/gulp readme",
     "lint": "node_modules/.bin/eslint lib --fix",
     "test": "node_modules/.bin/mocha test/*.*.js",
-    "test:watch": "node_modules/.bin/mocha --watch test/*.*.js",
+    "test:watch": "node_modules/.bin/mocha --watch",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov",
-    "coverage:watch": "nyc npm run test:watch && nyc report --reporter=text-lcov"
+    "coverage:watch": "nyc node_modules/.bin/mocha --watch && nyc report --reporter=text-lcov"
   },
   "nyc": {
     "all": false,
