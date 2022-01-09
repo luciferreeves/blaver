@@ -1,48 +1,45 @@
-const fs = require("fs");
+var fs = require("fs");
 
-const methods = {
+var methods = {
   walk: function (dir, validation_function, cb) {
-    let localCb = cb;
-    let local_validation_function = cb;
     if (arguments.length === 2) {
-      localCb = validation_function;
-      local_validation_function = null;
+      cb = validation_function;
+      validation_function = null;
     }
 
-    const results = [];
+    var results = [];
     fs.readdir(dir, function (err, list) {
       if (err) {
-        return localCb(err);
+        return cb(err);
       }
 
-      let pending = list.length;
+      var pending = list.length;
 
       if (!pending) {
-        return localCb(null, results);
+        return cb(null, results);
       }
 
       list.forEach(function (file) {
-        let localFile = file;
-        localFile = dir + "/" + file;
-        fs.stat(localFile, function (err, stat) {
+        file = dir + "/" + file;
+        fs.stat(file, function (err, stat) {
           if (stat && stat.isDirectory()) {
-            methods.walk(localFile, local_validation_function, function (err, res) {
-              results.push(res);
+            methods.walk(file, validation_function, function (err, res) {
+              results = results.concat(res);
               if (!--pending) {
-                localCb(null, results);
+                cb(null, results);
               }
             });
           } else {
-            if (typeof local_validation_function === "function") {
-              if (local_validation_function(localFile)) {
-                results.push(localFile);
+            if (typeof validation_function === "function") {
+              if (validation_function(file)) {
+                results.push(file);
               }
             } else {
-              results.push(localFile);
+              results.push(file);
             }
 
             if (!--pending) {
-              localCb(null, results);
+              cb(null, results);
             }
           }
         });

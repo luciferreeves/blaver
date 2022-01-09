@@ -81,17 +81,17 @@ exports.generate = function generate(faker) {
 
   function randomBrowserAndOS() {
     var browser = rnd({
-        chrome:    .45132810566,
+        chrome: .45132810566,
         iexplorer: .27477061836,
-        firefox:   .19384170608,
-        safari:    .06186781118,
-        opera:     .01574236955
+        firefox: .19384170608,
+        safari: .06186781118,
+        opera: .01574236955
       }),
       os = {
-        chrome:  {win: .89,  mac: .09 , lin: .02},
+        chrome: {win: .89,  mac: .09 , lin: .02},
         firefox: {win: .83,  mac: .16,  lin: .01},
-        opera:   {win: .91,  mac: .03 , lin: .06},
-        safari:  {win: .04 , mac: .96  },
+        opera: {win: .91,  mac: .03 , lin: .06},
+        safari: {win: .04 , mac: .96  },
         iexplorer: ['win']
       };
 
@@ -100,10 +100,11 @@ exports.generate = function generate(faker) {
 
   function randomProc(arch) {
     var procs = {
-      lin:['i686', 'x86_64'],
-      mac: {'Intel' : .48, 'PPC': .01, 'U; Intel':.48, 'U; PPC' :.01},
-      win:['', 'WOW64', 'Win64; x64']
+      lin: ['i686', 'x86_64'],
+      mac: {'Intel': .48, 'PPC': .01, 'U; Intel': .48, 'U; PPC': .01},
+      win: ['', 'WOW64', 'Win64; x64']
     };
+    
     return rnd(procs[arch]);
   }
 
@@ -114,6 +115,7 @@ exports.generate = function generate(faker) {
     for (var x = 0; x < dots; x++) {
       return_val += '.' + rnd(0, 9);
     }
+    
     return return_val;
   }
 
@@ -204,5 +206,6 @@ exports.generate = function generate(faker) {
   };
 
   var random = randomBrowserAndOS();
+  
   return browser[random[0]](random[1]);
 };
