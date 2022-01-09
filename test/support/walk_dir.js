@@ -2,50 +2,53 @@ const fs = require("fs");
 
 const methods = {
   walk: function (dir, validation_function, cb) {
+    let localCb = cb;
+    let local_validation_function = cb;
     if (arguments.length === 2) {
-      cb = validation_function;
-      validation_function = null;
+      localCb = validation_function;
+      local_validation_function = null;
     }
 
     const results = [];
     fs.readdir(dir, function (err, list) {
       if (err) {
-        return cb(err);
+        return localCb(err);
       }
 
-      const pending = list.length;
+      let pending = list.length;
 
       if (!pending) {
-        return cb(null, results);
+        return localCb(null, results);
       }
 
       list.forEach(function (file) {
-        file = dir + "/" + file;
-        fs.stat(file, function (err, stat) {
+        let localFile = file;
+        localFile = dir + "/" + file;
+        fs.stat(localFile, function (err, stat) {
           if (stat && stat.isDirectory()) {
-            methods.walk(file, validation_function, function (err, res) {
-              results = results.concat(res);
+            methods.walk(localFile, local_validation_function, function (err, res) {
+              results.push(res);
               if (!--pending) {
-                cb(null, results);
+                localCb(null, results);
               }
             });
           } else {
-            if (typeof validation_function === "function") {
-              if (validation_function(file)) {
-                results.push(file);
+            if (typeof local_validation_function === "function") {
+              if (local_validation_function(localFile)) {
+                results.push(localFile);
               }
             } else {
-              results.push(file);
+              results.push(localFile);
             }
 
             if (!--pending) {
-              cb(null, results);
+              localCb(null, results);
             }
           }
         });
       });
     });
-  },
+  }
 };
 
 module.exports = methods;

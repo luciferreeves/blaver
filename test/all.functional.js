@@ -6,7 +6,6 @@ if (typeof module !== 'undefined') {
 const functionalHelpers = require('./support/function-helpers.js');
 
 const modules = functionalHelpers.modulesList();
-console.log('LOG ~ file: all.functional.js ~ line 35 ~ modules', modules);
 
 describe("functional tests", function () {
   for(const locale in blaver.locales) {
