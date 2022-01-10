@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/luciferreeves/blaver/master/logos/logo-96.png">
 </p>
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/blaver/Build) ![npm](https://img.shields.io/npm/v/blaver) ![NPM](https://img.shields.io/npm/l/blaver) ![GitHub issues](https://img.shields.io/github/issues-raw/luciferreeves/blaver) ![GitHub deployments](https://img.shields.io/github/deployments/luciferreeves/blaver/github-pages?label=JSDoc%20Deployment) [![Coverage Status](https://coveralls.io/repos/github/luciferreeves/blaver/badge.svg?branch=master)](https://coveralls.io/github/luciferreeves/blaver?branch=master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luciferreeves/blaver/Build) ![npm](https://img.shields.io/npm/v/blaver) ![NPM](https://img.shields.io/npm/l/blaver) ![GitHub issues](https://img.shields.io/github/issues-raw/luciferreeves/blaver) ![GitHub deployments](https://img.shields.io/github/deployments/luciferreeves/blaver/github-pages?label=JSDoc%20Deployment) [![Coverage Status](https://coveralls.io/repos/github/luciferreeves/blaver/badge.svg?branch=master)](https://coveralls.io/github/luciferreeves/blaver?branch=master) ![npm](https://img.shields.io/npm/dw/blaver)
 
 # Blaver - generate massive amounts of fake data in the browser and node.js
 
