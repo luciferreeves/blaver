@@ -1,6 +1,7 @@
 name: "\U0001F41E Bug report"
 description: Report an issue
-labels: [bug] # This will automatically assign the 'pending triage' label
+labels: [bug]
+title: "[Bug]: "
 body:
   - type: textarea
     id: bug-description
