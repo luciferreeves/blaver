@@ -40,6 +40,25 @@
     ],
     "report-dir": "./reports/coverage"
   },
+  "keywords":[
+    "blaver",
+    "blaver.js",
+    "blaver.dev",
+    "blaver-js",
+    "faker",
+    "faker.js",
+    "faker-js",
+    "faker-js-blaver",
+    "marak",
+    "priyansh",
+    "reeves",
+    "luciferreeves",
+    "fake data generator",
+    "fake data",
+    "fake content generator",
+    "fake contextual data generator",
+    "fake contextual data"
+  ],
   "devDependencies": {
     "browserify": "^16.5.2",
     "coveralls": "^3.1.1",
