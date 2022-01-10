@@ -11,10 +11,10 @@ describe('finance.js', function () {
 
     it('should supply a default length if no length is passed', function () {
 
-      var account = blaver.finance.account();
+      const account = blaver.finance.account();
 
-      var expected = 8;
-      var actual = account.length;
+      const expected = 8;
+      const actual = account.length;
 
       assert.strictEqual(actual, expected, 'The expected default account length is ' + expected + ' but it was ' + actual);
 
@@ -22,11 +22,11 @@ describe('finance.js', function () {
 
     it('should supply a length if a length is passed', function () {
 
-      var expected = 9;
+      const expected = 9;
 
-      var account = blaver.finance.account(expected);
+      const account = blaver.finance.account(expected);
 
-      var actual = account.length;
+      const actual = account.length;
 
       assert.strictEqual(actual, expected, 'The expected default account length is ' + expected + ' but it was ' + actual);
 
@@ -34,11 +34,11 @@ describe('finance.js', function () {
 
     it('should supply a default length if a zero is passed', function () {
 
-      var expected = 8;
+      const expected = 8;
 
-      var account = blaver.finance.account(0);
+      const account = blaver.finance.account(0);
 
-      var actual = account.length;
+      const actual = account.length;
 
       assert.strictEqual(actual, expected, 'The expected default account length is ' + expected + ' but it was ' + actual);
 
@@ -50,7 +50,7 @@ describe('finance.js', function () {
 
     it("should return an account name", function () {
 
-      var actual = blaver.finance.accountName();
+      const actual = blaver.finance.accountName();
 
       assert.ok(actual);
 
@@ -62,7 +62,7 @@ describe('finance.js', function () {
 
     it("should return a routing number", function () {
 
-      var actual = blaver.finance.routingNumber();
+      const actual = blaver.finance.routingNumber();
 
       assert.ok(actual);
 
@@ -73,11 +73,11 @@ describe('finance.js', function () {
   describe('mask( length, parens, ellipsis )', function () {
     it("should set a default length", function () {
 
-      var expected = 4; //default account mask length
+      const expected = 4; //default account mask length
 
-      var mask = blaver.finance.mask(null, false, false);
+      const mask = blaver.finance.mask(null, false, false);
 
-      var actual = mask.length;
+      const actual = mask.length;
 
       assert.strictEqual(actual, expected, 'The expected default mask length is ' + expected + ' but it was ' + actual);
 
@@ -85,13 +85,13 @@ describe('finance.js', function () {
 
     it("should set a specified length", function () {
 
-      var expected = blaver.datatype.number(20);
+      let expected = blaver.datatype.number(20);
 
       expected = (expected == 0 || !expected || typeof expected == 'undefined') ? 4 : expected;
 
-      var mask = blaver.finance.mask(expected, false, false);
+      const mask = blaver.finance.mask(expected, false, false);
 
-      var actual = mask.length; //picks 4 if the random number generator picks 0
+      const actual = mask.length; //picks 4 if the random number generator picks 0
 
       assert.strictEqual(actual, expected, 'The expected default mask length is ' + expected + ' but it was ' + actual);
 
@@ -99,11 +99,11 @@ describe('finance.js', function () {
 
     it("should set a default length of 4 for a zero value", function () {
 
-      var expected = 4;
+      const expected = 4;
 
       blaver.finance.mask(0, false, false);
 
-      var actual = 4; //picks 4 if the random number generator picks 0
+      const actual = 4; //picks 4 if the random number generator picks 0
 
       assert.strictEqual(actual, expected, 'The expected default mask length is ' + expected + ' but it was ' + actual);
 
@@ -112,12 +112,12 @@ describe('finance.js', function () {
 
     it("should by default include parentheses around a partial account number", function () {
 
-      var expected = true;
+      const expected = true;
 
-      var mask = blaver.finance.mask(null, null, false);
+      const mask = blaver.finance.mask(null, null, false);
 
-      var regexp = new RegExp(/(\(\d{4}?\))/);
-      var actual = regexp.test(mask);
+      const regexp = new RegExp(/(\(\d{4}?\))/);
+      const actual = regexp.test(mask);
 
       assert.strictEqual(actual, expected, 'The expected match for parentheses is ' + expected + ' but it was ' + actual);
 
@@ -125,24 +125,24 @@ describe('finance.js', function () {
 
     it("should by default include an ellipsis", function () {
 
-      var expected = true;
+      const expected = true;
 
-      var mask = blaver.finance.mask(null, false, null);
+      const mask = blaver.finance.mask(null, false, null);
 
-      var regexp = new RegExp(/(\.\.\.\d{4})/);
-      var actual = regexp.test(mask);
+      const regexp = new RegExp(/(\.\.\.\d{4})/);
+      const actual = regexp.test(mask);
 
       assert.strictEqual(actual, expected, 'The expected match for parentheses is ' + expected + ' but it was ' + actual);
 
     });
 
-    it("should work when random variables are passed into the arguments", function () {
+    it("should work when random constiables are passed into the arguments", function () {
 
-      var length = blaver.datatype.number(20);
-      var ellipsis = (length % 2 === 0) ? true : false;
-      var parens = !ellipsis;
+      const length = blaver.datatype.number(20);
+      const ellipsis = (length % 2 === 0) ? true : false;
+      const parens = !ellipsis;
 
-      var mask = blaver.finance.mask(length, ellipsis, parens);
+      const mask = blaver.finance.mask(length, ellipsis, parens);
       assert.ok(mask);
 
     });
@@ -153,7 +153,7 @@ describe('finance.js', function () {
   describe('amount(min, max, dec, symbol)', function () {
 
     it("should use the default amounts when not passing arguments", function () {
-      var amount = blaver.finance.amount();
+      const amount = blaver.finance.amount();
 
       assert.ok(amount);
       assert.strictEqual((amount > 0), true, "the amount should be greater than 0");
@@ -163,11 +163,8 @@ describe('finance.js', function () {
 
     it("should use the default decimal location when not passing arguments", function () {
 
-      var amount = blaver.finance.amount();
-
-      var decimal = '.';
-      var expected = amount.length - 3;
-      var amount = blaver.finance.amount(100, 100, 1);
+      let amount = blaver.finance.amount();
+      amount = blaver.finance.amount(100, 100, 1);
 
       assert.ok(amount);
       assert.strictEqual(amount , '100.0', "the amount should be equal 100.0");
@@ -176,12 +173,12 @@ describe('finance.js', function () {
     //TODO: add support for more currency and decimal options
     it("should not include a currency symbol by default", function () {
 
-      var amount = blaver.finance.amount();
+      const amount = blaver.finance.amount();
 
-      var regexp = new RegExp(/[0-9.]/);
+      const regexp = new RegExp(/[0-9.]/);
 
-      var expected = true;
-      var actual = regexp.test(amount);
+      const expected = true;
+      const actual = regexp.test(amount);
 
       assert.strictEqual(actual, expected, 'The expected match should not include a currency symbol');
     });
@@ -189,7 +186,7 @@ describe('finance.js', function () {
 
     it("it should handle negative amounts", function () {
 
-      var amount = blaver.finance.amount(-200, -1);
+      const amount = blaver.finance.amount(-200, -1);
 
       assert.ok(amount);
       assert.strictEqual((amount < 0), true, "the amount should be greater than 0");
@@ -199,7 +196,7 @@ describe('finance.js', function () {
 
     it("it should handle argument dec", function () {
 
-      var amount = blaver.finance.amount(100, 100, 1);
+      const amount = blaver.finance.amount(100, 100, 1);
 
       assert.ok(amount);
       assert.strictEqual(amount , "100.0", "the amount should be equal 100.0");
@@ -207,7 +204,7 @@ describe('finance.js', function () {
 
     it("it should handle argument dec = 0", function () {
 
-      var amount = blaver.finance.amount(100, 100, 0);
+      const amount = blaver.finance.amount(100, 100, 0);
 
       assert.ok(amount);
       assert.strictEqual(amount , '100', "the amount should be equal 100");
@@ -215,9 +212,9 @@ describe('finance.js', function () {
 
     it("it should return a string", function() {
 
-      var amount = blaver.finance.amount(100, 100, 0);
+      const amount = blaver.finance.amount(100, 100, 0);
 
-      var typeOfAmount = typeof amount;
+      const typeOfAmount = typeof amount;
 
       assert.ok(amount);
       assert.strictEqual(typeOfAmount , "string", "the amount type should be number");
@@ -248,7 +245,7 @@ describe('finance.js', function () {
   describe('transactionType()', function () {
 
     it("should return a random transaction type", function () {
-      var transactionType = blaver.finance.transactionType();
+      const transactionType = blaver.finance.transactionType();
 
       assert.ok(transactionType);
     });
@@ -256,7 +253,7 @@ describe('finance.js', function () {
 
   describe("currencyCode()", function () {
     it("returns a random currency code with a format", function () {
-      var currencyCode = blaver.finance.currencyCode();
+      const currencyCode = blaver.finance.currencyCode();
 
       assert.ok(currencyCode.match(/^[A-Z]{3}$/));
     });
@@ -264,7 +261,7 @@ describe('finance.js', function () {
 
   describe("bitcoinAddress()", function(){
     it("returns a random bitcoin address", function(){
-      var bitcoinAddress = blaver.finance.bitcoinAddress();
+      const bitcoinAddress = blaver.finance.bitcoinAddress();
       /**
            *  Note: Although the total length of a Bitcoin address can be 25-33 characters, regex quantifiers only check the preceding token
            *  Therefore we take one from the total length of the address not including the first character ([13])
@@ -276,7 +273,7 @@ describe('finance.js', function () {
 
   describe("litecoinAddress()", function(){
     it("returns a random litecoin address", function(){
-      var litecoinAddress = blaver.finance.litecoinAddress();
+      const litecoinAddress = blaver.finance.litecoinAddress();
 
       assert.ok(litecoinAddress.match(/^[LM3][1-9a-km-zA-HJ-NP-Z]{25,32}$/));
     });
@@ -284,16 +281,16 @@ describe('finance.js', function () {
 
   describe("ethereumAddress()", function(){
     it("returns a random ethereum address", function(){
-      var ethereumAddress = blaver.finance.ethereumAddress();
+      const ethereumAddress = blaver.finance.ethereumAddress();
       assert.ok(ethereumAddress.match(/^(0x)[0-9a-f]{40}$/));
     });
   });
 
   describe("creditCardNumber()", function(){
-    var luhnFormula = require("./support/luhnCheck.js");
+    const luhnFormula = require("./support/luhnCheck.js");
 
     it("returns a random credit card number", function(){
-      var number = blaver.finance.creditCardNumber();
+      let number = blaver.finance.creditCardNumber();
       number = number.replace(/\D/g,""); // remove formating
       console.log("version:", process.version, number, number.length);
       assert.ok(number.length >= 13 && number.length <= 20);
@@ -313,38 +310,38 @@ describe('finance.js', function () {
     });
     it("returns a correct credit card number when issuer provided", function(){
       //TODO: implement checks for each format with regexp
-      var visa = blaver.finance.creditCardNumber("visa");
+      const visa = blaver.finance.creditCardNumber("visa");
       assert.ok(visa.match(/^4(([0-9]){12}|([0-9]){3}(\-([0-9]){4}){3})$/));
       assert.ok(luhnFormula(visa));
 
 
-      var mastercard = blaver.finance.creditCardNumber("mastercard");
+      const mastercard = blaver.finance.creditCardNumber("mastercard");
       assert.ok(mastercard.match(/^(5[1-5]\d{2}|6771)(\-\d{4}){3}$/));
       assert.ok(luhnFormula(mastercard));
 
-      var discover = blaver.finance.creditCardNumber("discover");
+      const discover = blaver.finance.creditCardNumber("discover");
 
       assert.ok(luhnFormula(discover));
 
-      var american_express = blaver.finance.creditCardNumber("american_express");
+      const american_express = blaver.finance.creditCardNumber("american_express");
       assert.ok(luhnFormula(american_express));
-      var diners_club = blaver.finance.creditCardNumber("diners_club");
+      const diners_club = blaver.finance.creditCardNumber("diners_club");
       assert.ok(luhnFormula(diners_club));
-      var jcb = blaver.finance.creditCardNumber("jcb");
+      const jcb = blaver.finance.creditCardNumber("jcb");
       assert.ok(luhnFormula(jcb));
-      var switchC = blaver.finance.creditCardNumber("mastercard");
+      const switchC = blaver.finance.creditCardNumber("mastercard");
       assert.ok(luhnFormula(switchC));
-      var solo = blaver.finance.creditCardNumber("solo");
+      const solo = blaver.finance.creditCardNumber("solo");
       assert.ok(luhnFormula(solo));
-      var maestro = blaver.finance.creditCardNumber("maestro");
+      const maestro = blaver.finance.creditCardNumber("maestro");
       assert.ok(luhnFormula(maestro));
-      var laser = blaver.finance.creditCardNumber("laser");
+      const laser = blaver.finance.creditCardNumber("laser");
       assert.ok(luhnFormula(laser));
-      var instapayment = blaver.finance.creditCardNumber("instapayment");
+      const instapayment = blaver.finance.creditCardNumber("instapayment");
       assert.ok(luhnFormula(instapayment));
     });
     it("returns custom formated strings",function(){
-      var number = blaver.finance.creditCardNumber("###-###-##L");
+      let number = blaver.finance.creditCardNumber("###-###-##L");
       assert.ok(number.match(/^\d{3}\-\d{3}\-\d{3}$/));
       assert.ok(luhnFormula(number));
       number =blaver.finance.creditCardNumber("234[5-9]#{999}L");
@@ -355,7 +352,7 @@ describe('finance.js', function () {
 
   describe("creditCardCVV()", function(){
     it("returns a random credit card CVV", function(){
-      var cvv = blaver.finance.creditCardCVV();
+      const cvv = blaver.finance.creditCardCVV();
       assert.ok(cvv.length === 3);
       assert.ok(cvv.match(/^[0-9]{3}$/));
     });
@@ -363,17 +360,17 @@ describe('finance.js', function () {
 
 
   describe("iban()", function () {
-    var ibanLib = require('../lib/iban');
+    const ibanLib = require('../lib/iban');
     it("returns a random yet formally correct IBAN number", function () {
-      var iban = blaver.finance.iban();
-      var bban = iban.substring(4) + iban.substring(0, 4);
+      const iban = blaver.finance.iban();
+      const bban = iban.substring(4) + iban.substring(0, 4);
 
       assert.strictEqual(ibanLib.mod97(ibanLib.toDigitString(bban)), 1, "the result should be equal to 1");
     });
     it("returns a specific and formally correct IBAN number", function () {
-      var iban = blaver.finance.iban(false, "DE");
-      var bban = iban.substring(4) + iban.substring(0, 4);
-      var countryCode = iban.substring(0, 2);
+      const iban = blaver.finance.iban(false, "DE");
+      const bban = iban.substring(4) + iban.substring(0, 4);
+      const countryCode = iban.substring(0, 2);
 
       assert.equal(countryCode, "DE");
       assert.equal(ibanLib.mod97(ibanLib.toDigitString(bban)), 1, "the result should be equal to 1");
@@ -384,10 +381,10 @@ describe('finance.js', function () {
   });
 
   describe("bic()", function () {
-    var ibanLib = require('../lib/iban');
+    const ibanLib = require('../lib/iban');
     it("returns a random yet formally correct BIC number", function () {
-      var bic = blaver.finance.bic();
-      var expr = new RegExp("^[A-Z]{4}(" + ibanLib.iso3166.join("|") + ")[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$", "i");
+      const bic = blaver.finance.bic();
+      const expr = new RegExp("^[A-Z]{4}(" + ibanLib.iso3166.join("|") + ")[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$", "i");
 
       assert.ok(bic.match(expr));
     });
@@ -403,7 +400,7 @@ describe('finance.js', function () {
     });
 
     it("returns a random transaction description", function() {
-      var transactionDescription = blaver.finance.transactionDescription();
+      const transactionDescription = blaver.finance.transactionDescription();
 
       assert.ok(transactionDescription);
       assert.ok(blaver.helpers.createTransaction.calledOnce);

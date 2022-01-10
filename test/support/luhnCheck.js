@@ -1,10 +1,10 @@
 module.exports = function (number) {
   number = number.replace(/\D/g, "");
-  var split = number.split("");
+  let split = number.split("");
   split = split.map(function (num) {
     return parseInt(num);
   });
-  var check = split.pop();
+  const check = split.pop();
   split.reverse();
   split = split.map(function (num, index) {
     if (index % 2 === 0) {
@@ -15,7 +15,7 @@ module.exports = function (number) {
     }
     return num;
   });
-  var sum = split.reduce(function (prev, curr) {
+  const sum = split.reduce(function (prev, curr) {
     return prev + curr;
   });
   return sum % 10 === check;

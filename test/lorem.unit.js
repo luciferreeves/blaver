@@ -9,14 +9,14 @@ describe("lorem.js", function () {
 
     context("when no 'length' param passed in", function () {
       it("returns a word with a random length", function () {
-        var str = blaver.lorem.word();
+        const str = blaver.lorem.word();
         assert.ok(typeof str === 'string');
       });
     });
 
     context("when 'length' param passed in", function () {
       it("returns a word with the requested length", function () {
-        var str = blaver.lorem.word(5);
+        const str = blaver.lorem.word(5);
         assert.ok(typeof str === 'string');
         assert.strictEqual(str.length, 5);
       });
@@ -34,8 +34,8 @@ describe("lorem.js", function () {
 
     context("when no 'num' param passed in", function () {
       it("returns three words", function () {
-        var str = blaver.lorem.words();
-        var words = str.split(' ');
+        const str = blaver.lorem.words();
+        const words = str.split(' ');
         assert.ok(Array.isArray(words));
         assert.strictEqual(true, words.length >= 3);
         // assert.ok(blaver.helpers.shuffle.called);
@@ -44,8 +44,8 @@ describe("lorem.js", function () {
 
     context("when 'num' param passed in", function () {
       it("returns requested number of words", function () {
-        var str = blaver.lorem.words(7);
-        var words = str.split(' ');
+        const str = blaver.lorem.words(7);
+        const words = str.split(' ');
         assert.ok(Array.isArray(words));
         assert.strictEqual(words.length, 7);
       });
@@ -61,21 +61,21 @@ describe("lorem.js", function () {
       blaver.helpers.shuffle.restore();
     });
 
-    var validateSlug = function (wordCount, str) {
+    const validateSlug = function (wordCount, str) {
       assert.strictEqual(1, str.match(/^[a-z][a-z-]*[a-z]$/).length);
       assert.strictEqual(wordCount - 1, str.match(/-/g).length);
     };
 
     context("when no 'wordCount' param passed in", function () {
       it("returns a slug with three words", function () {
-        var str = blaver.lorem.slug();
+        const str = blaver.lorem.slug();
         validateSlug(3, str);
       });
     });
 
     context("when 'wordCount' param passed in", function () {
       it("returns a slug with requested number of words", function () {
-        var str = blaver.lorem.slug(7);
+        const str = blaver.lorem.slug(7);
         validateSlug(7, str);
       });
     });
@@ -88,9 +88,9 @@ describe("lorem.js", function () {
             it("returns a string of at least three words", function () {
                 sinon.spy(blaver.lorem, 'words');
                 sinon.stub(blaver.random, 'number').returns(2);
-                var sentence = blaver.lorem.sentence();
+                const sentence = blaver.lorem.sentence();
                 assert.ok(typeof sentence === 'string');
-                var parts = sentence.split(' ');
+                const parts = sentence.split(' ');
                 assert.strictEqual(parts.length, 5); // default 3 plus stubbed 2.
                 assert.ok(blaver.lorem.words.calledWith(5));
 
@@ -103,10 +103,10 @@ describe("lorem.js", function () {
             it("returns a string of at least the requested number of words", function () {
                 sinon.spy(blaver.lorem, 'words');
                 sinon.stub(blaver.random, 'number').withArgs(7).returns(2);
-                var sentence = blaver.lorem.sentence(10);
+                const sentence = blaver.lorem.sentence(10);
 
                 assert.ok(typeof sentence === 'string');
-                var parts = sentence.split(' ');
+                const parts = sentence.split(' ');
                 assert.strictEqual(parts.length, 12); // requested 10 plus stubbed 2.
                 assert.ok(blaver.lorem.words.calledWith(12));
 
@@ -120,10 +120,10 @@ describe("lorem.js", function () {
                 sinon.spy(blaver.lorem, 'words');
                 sinon.stub(blaver.random, 'number').withArgs(4).returns(4);
 
-                var sentence = blaver.lorem.sentence(10, 4);
+                const sentence = blaver.lorem.sentence(10, 4);
 
                 assert.ok(typeof sentence === 'string');
-                var parts = sentence.split(' ');
+                const parts = sentence.split(' ');
                 assert.strictEqual(parts.length, 14); // requested 10 plus stubbed 4.
                 assert.ok(blaver.random.number.calledWith(4)); // random.number should be called with the 'range' we passed. 
                 assert.ok(blaver.lorem.words.calledWith(14));
@@ -141,10 +141,10 @@ describe("lorem.js", function () {
         context("when no 'sentenceCount' param passed in", function () {
             it("returns newline-separated string of three sentences", function () {
                 sinon.spy(blaver.lorem, 'sentence');
-                var sentences = blaver.lorem.sentences();
+                const sentences = blaver.lorem.sentences();
 
                 assert.ok(typeof sentences === 'string');
-                var parts = sentences.split('\n');
+                const parts = sentences.split('\n');
                 assert.strictEqual(parts.length, 3);
                 assert.ok(blaver.lorem.sentence.calledThrice);
 
@@ -155,10 +155,10 @@ describe("lorem.js", function () {
         context("when 'sentenceCount' param passed in", function () {
             it("returns newline-separated string of requested number of sentences", function () {
                 sinon.spy(blaver.lorem, 'sentence');
-                var sentences = blaver.lorem.sentences(5);
+                const sentences = blaver.lorem.sentences(5);
 
                 assert.ok(typeof sentences === 'string');
-                var parts = sentences.split('\n');
+                const parts = sentences.split('\n');
                 assert.strictEqual(parts.length, 5);
 
                 blaver.lorem.sentence.restore();
@@ -172,10 +172,10 @@ describe("lorem.js", function () {
             it("returns a string of at least three sentences", function () {
                 sinon.spy(blaver.lorem, 'sentences');
                 sinon.stub(blaver.random, 'number').returns(2);
-                var paragraph = blaver.lorem.paragraph();
+                const paragraph = blaver.lorem.paragraph();
 
                 assert.ok(typeof paragraph === 'string');
-                var parts = paragraph.split('\n');
+                const parts = paragraph.split('\n');
                 assert.strictEqual(parts.length, 5); // default 3 plus stubbed 2.
                 assert.ok(blaver.lorem.sentences.calledWith(5));
 
@@ -188,10 +188,10 @@ describe("lorem.js", function () {
             it("returns a string of at least the requested number of sentences", function () {
                 sinon.spy(blaver.lorem, 'sentences');
                 sinon.stub(blaver.random, 'number').returns(2);
-                var paragraph = blaver.lorem.paragraph(10);
+                const paragraph = blaver.lorem.paragraph(10);
 
                 assert.ok(typeof paragraph === 'string');
-                var parts = paragraph.split('\n');
+                const parts = paragraph.split('\n');
                 assert.strictEqual(parts.length, 12); // requested 10 plus stubbed 2.
                 assert.ok(blaver.lorem.sentences.calledWith(12));
 
@@ -208,10 +208,10 @@ describe("lorem.js", function () {
         context("when no 'paragraphCount' param passed in", function () {
             it("returns newline-separated string of three paragraphs", function () {
                 sinon.spy(blaver.lorem, 'paragraph');
-                var paragraphs = blaver.lorem.paragraphs();
+                const paragraphs = blaver.lorem.paragraphs();
 
                 assert.ok(typeof paragraphs === 'string');
-                var parts = paragraphs.split('\n \r');
+                const parts = paragraphs.split('\n \r');
                 assert.strictEqual(parts.length, 3);
                 assert.ok(blaver.lorem.paragraph.calledThrice);
 
@@ -222,10 +222,10 @@ describe("lorem.js", function () {
         context("when 'paragraphCount' param passed in", function () {
             it("returns newline-separated string of requested number of paragraphs", function () {
                 sinon.spy(blaver.lorem, 'paragraph');
-                var paragraphs = blaver.lorem.paragraphs(5);
+                const paragraphs = blaver.lorem.paragraphs(5);
 
                 assert.ok(typeof paragraphs === 'string');
-                var parts = paragraphs.split('\n \r');
+                const parts = paragraphs.split('\n \r');
                 assert.strictEqual(parts.length, 5);
 
                 blaver.lorem.paragraph.restore();

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 process.env.NODE_ENV = 'test';
 
-var fs = require('fs');
-var Mocha = require('mocha');
-var optimist = require('optimist');
-var walk_dir = require('./support/walk_dir');
+const fs = require('fs');
+const Mocha = require('mocha');
+const optimist = require('optimist');
+const walk_dir = require('./support/walk_dir');
 
-var argv = optimist
+const argv = optimist
   .usage("Usage: $0 -t [types] --reporter [reporter] --timeout [timeout]")
   .default({types: 'unit,functional', reporter: 'spec', timeout: 6000})
   .describe('types', 'The types of tests to run, separated by commas. E.g., unit,functional,acceptance')
@@ -19,11 +19,11 @@ var argv = optimist
   .alias('help', 'h')
   .argv;
 
-var mocha = new Mocha({timeout: argv.timeout, reporter: argv.reporter, ui: 'bdd'});
+const mocha = new Mocha({timeout: argv.timeout, reporter: argv.reporter, ui: 'bdd'});
 
-var valid_test_types = ['unit', 'functional', 'acceptance', 'integration'];
-var requested_types = argv.types.split(',');
-var types_to_use = [];
+const valid_test_types = ['unit', 'functional', 'acceptance', 'integration'];
+const requested_types = argv.types.split(',');
+const types_to_use = [];
 
 valid_test_types.forEach(function (valid_test_type) {
   if (requested_types.indexOf(valid_test_type) !== -1) {
@@ -36,10 +36,10 @@ if (argv.help || types_to_use.length === 0) {
   process.exit();
 }
 
-var is_valid_file = function (file) {
-  for (var i = 0; i < types_to_use.length; i++) {
-    var test_type = types_to_use[i];
-    var ext = test_type + ".js";
+const is_valid_file = function (file) {
+  for (let i = 0; i < types_to_use.length; i++) {
+    const test_type = types_to_use[i];
+    const ext = test_type + ".js";
 
     if (file.indexOf(ext) !== -1) {
       return true;
