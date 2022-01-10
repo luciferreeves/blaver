@@ -9,14 +9,14 @@ describe("helpers.js", function () {
   describe("replaceSymbolWithNumber()", function () {
     context("when no symbol passed in", function () {
       it("uses '#' by default", function () {
-        var num = blaver.helpers.replaceSymbolWithNumber('#AB');
+        const num = blaver.helpers.replaceSymbolWithNumber('#AB');
         assert.ok(num.match(/\dAB/));
       });
     });
 
     context("when symbol passed in", function () {
       it("replaces that symbol with integers", function () {
-        var num = blaver.helpers.replaceSymbolWithNumber('#AB', 'A');
+        const num = blaver.helpers.replaceSymbolWithNumber('#AB', 'A');
         assert.ok(num.match(/#\dB/));
       });
     });
@@ -25,7 +25,7 @@ describe("helpers.js", function () {
   describe("replaceSymbols()", function () {
     context("when '*' passed", function () {
       it("replaces it with alphanumeric", function(){
-        var num = blaver.helpers.replaceSymbols('*AB');
+        const num = blaver.helpers.replaceSymbols('*AB');
         assert.ok(num.match(/\wAB/));
       });
     });
@@ -34,75 +34,75 @@ describe("helpers.js", function () {
   describe("shuffle()", function () {
     it("the output is the same length as the input", function () {
       sinon.spy(blaver.datatype, 'number');
-      var shuffled = blaver.helpers.shuffle(["a", "b"]);
+      const shuffled = blaver.helpers.shuffle(["a", "b"]);
       assert.ok(shuffled.length === 2);
       assert.ok(blaver.datatype.number.calledWith(1));
       blaver.datatype.number.restore();
     });
 
     it("empty array returns empty array", function () {
-      var shuffled = blaver.helpers.shuffle([]);
+      const shuffled = blaver.helpers.shuffle([]);
       assert.ok(shuffled.length === 0);
     });
 
     it("mutates the input array in place", function () {
-      var input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
-      var shuffled = blaver.helpers.shuffle(input);
+      const input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+      const shuffled = blaver.helpers.shuffle(input);
       assert.deepStrictEqual(shuffled, input);
     });
 
     it("all items shuffled as expected when seeded", function () {
-      var input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+      const input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
       blaver.seed(100);
-      var shuffled = blaver.helpers.shuffle(input);
+      const shuffled = blaver.helpers.shuffle(input);
       assert.deepStrictEqual(shuffled, ["b", "e", "a", "d", "j", "i", "h", "c", "g", "f"]);
     });
   });
 
   describe("uniqueArray()", function () {
     it("custom array returns unique array", function () {
-      var input = ["a", "a", "a", "a,", "a", "a", "a", "a", "b"];
-      var length = 2;
-      var unique = blaver.helpers.uniqueArray(input, length);
+      const input = ["a", "a", "a", "a,", "a", "a", "a", "a", "b"];
+      const length = 2;
+      const unique = blaver.helpers.uniqueArray(input, length);
       assert.strictEqual(unique.length, length);
       assert.strictEqual(new Set(unique).size, length);
     });
 
     it("definition array returns unique array", function () {
-      var length = blaver.datatype.number({ min: 1, max: 6 });
-      var unique = blaver.helpers.uniqueArray(blaver.definitions.hacker.noun, length);
+      const length = blaver.datatype.number({ min: 1, max: 6 });
+      const unique = blaver.helpers.uniqueArray(blaver.definitions.hacker.noun, length);
       assert.strictEqual(unique.length, length);
       assert.strictEqual(new Set(unique).size, length);
     });
 
     it("function returns unique array", function () {
-      var length = blaver.datatype.number({ min: 1, max: 6 });
-      var unique = blaver.helpers.uniqueArray(blaver.lorem.word, length);
+      const length = blaver.datatype.number({ min: 1, max: 6 });
+      const unique = blaver.helpers.uniqueArray(blaver.lorem.word, length);
       assert.strictEqual(unique.length, length);
       assert.strictEqual(new Set(unique).size, length);
     });
 
     it("empty array returns empty array", function () {
-      var input = [];
-      var length = blaver.datatype.number({ min: 1, max: 6 });
-      var unique = blaver.helpers.uniqueArray(input, length);
+      const input = [];
+      const length = blaver.datatype.number({ min: 1, max: 6 });
+      const unique = blaver.helpers.uniqueArray(input, length);
       assert.strictEqual(unique.length, input.length);
       assert.strictEqual(new Set(unique).size, input.length);
     });
 
     it("length longer than source returns max length", function () {
-      var input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
-      var length = input.length + 1;
-      var unique = blaver.helpers.uniqueArray(input, length);
+      const input = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+      const length = input.length + 1;
+      const unique = blaver.helpers.uniqueArray(input, length);
       assert.strictEqual(unique.length, input.length);
       assert.strictEqual(new Set(unique).size, input.length);
     });
 
     it("works as expected when seeded", function () {
-      var input = ["a", "a", "a", "a", "a", "f", "g", "h", "i", "j"];
-      var length = 5;
+      const input = ["a", "a", "a", "a", "a", "f", "g", "h", "i", "j"];
+      const length = 5;
       blaver.seed(100);
-      var unique = blaver.helpers.uniqueArray(input, length);
+      const unique = blaver.helpers.uniqueArray(input, length);
       assert.deepStrictEqual(unique, ["g", "a", "i", "f", "j"]);
     });
   });
@@ -142,21 +142,21 @@ describe("helpers.js", function () {
 
   describe("createCard()", function () {
     it("returns an object", function () {
-      var card = blaver.helpers.createCard();
+      const card = blaver.helpers.createCard();
       assert.ok(typeof card === 'object');
     });
   });
 
   describe("contextualCard()", function () {
     it("returns an object", function () {
-      var card = blaver.helpers.contextualCard();
+      const card = blaver.helpers.contextualCard();
       assert.ok(typeof card === 'object');
     });
   });
 
   describe("userCard()", function () {
     it("returns an object", function () {
-      var card = blaver.helpers.userCard();
+      const card = blaver.helpers.userCard();
       assert.ok(typeof card === 'object');
     });
   });
@@ -164,27 +164,27 @@ describe("helpers.js", function () {
   // Make sure we keep this function for backward-compatibility.
   describe("randomize()", function () {
     it("returns a random element from an array", function () {
-      var arr = ['a', 'b', 'c'];
-      var elem = blaver.helpers.randomize(arr);
+      const arr = ['a', 'b', 'c'];
+      const elem = blaver.helpers.randomize(arr);
       assert.ok(elem);
       assert.ok(arr.indexOf(elem) !== -1);
     });
   });
 
   describe("replaceCreditCardSymbols()", function () {
-    var luhnCheck = require("./support/luhnCheck.js");
+    const luhnCheck = require("./support/luhnCheck.js");
     it("returns a credit card number given a schema", function () {
-      var number = blaver.helpers.replaceCreditCardSymbols("6453-####-####-####-###L");
+      const number = blaver.helpers.replaceCreditCardSymbols("6453-####-####-####-###L");
       assert.ok(number.match(/^6453\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}$/));
       assert.ok(luhnCheck(number));
     });
     it("supports different symbols", function () {
-      var number = blaver.helpers.replaceCreditCardSymbols("6453-****-****-****-***L","*");
+      const number = blaver.helpers.replaceCreditCardSymbols("6453-****-****-****-***L","*");
       assert.ok(number.match(/^6453\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}$/));
       assert.ok(luhnCheck(number));
     });
     it("handles regexp style input", function () {
-      var number = blaver.helpers.replaceCreditCardSymbols("6453-*{4}-*{4}-*{4}-*{3}L","*");
+      let number = blaver.helpers.replaceCreditCardSymbols("6453-*{4}-*{4}-*{4}-*{3}L","*");
       assert.ok(number.match(/^6453\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}\-([0-9]){4}$/));
       assert.ok(luhnCheck(number));
       number = blaver.helpers.replaceCreditCardSymbols("645[5-9]-#{4,6}-#{1,2}-#{4,6}-#{3}L");
@@ -198,12 +198,12 @@ describe("helpers.js", function () {
       assert.ok(blaver.helpers.regexpStyleStringParse() === "");
     });
     it("deals with range repeat", function () {
-      var string = blaver.helpers.regexpStyleStringParse("#{5,10}");
+      const string = blaver.helpers.regexpStyleStringParse("#{5,10}");
       assert.ok(string.length <= 10 && string.length >= 5);
       assert.ok(string.match(/^\#{5,10}$/));
     });
     it("flips the range when min > max", function () {
-      var string = blaver.helpers.regexpStyleStringParse("#{10,5}");
+      const string = blaver.helpers.regexpStyleStringParse("#{10,5}");
       assert.ok(string.length <= 10 && string.length >= 5);
       assert.ok(string.match(/^\#{5,10}$/));
     });
@@ -213,18 +213,18 @@ describe("helpers.js", function () {
       assert.ok(blaver.helpers.regexpStyleStringParse("%{5}") === blaver.helpers.repeatString("%",5));
     });
     it("creates a numerical range", function () {
-      var string = blaver.helpers.regexpStyleStringParse("Hello[0-9]");
+      const string = blaver.helpers.regexpStyleStringParse("Hello[0-9]");
       assert.ok(string.match(/^Hello[0-9]$/));
     });
     it("deals with multiple tokens in one string", function () {
-      var string = blaver.helpers.regexpStyleStringParse("Test#{5}%{2,5}Testing**[1-5]**{10}END");
+      const string = blaver.helpers.regexpStyleStringParse("Test#{5}%{2,5}Testing**[1-5]**{10}END");
       assert.ok(string.match(/^Test\#{5}%{2,5}Testing\*\*[1-5]\*\*{10}END$/));
     });
   });
 
   describe("createTransaction()", function() {
     it("should create a random transaction", function() {
-      var transaction = blaver.helpers.createTransaction();
+      const transaction = blaver.helpers.createTransaction();
       assert.ok(transaction);
       assert.ok(transaction.amount);
       assert.ok(transaction.date);

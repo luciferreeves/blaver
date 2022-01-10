@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 Npm.depends({
-  faker: "3.0.1",
+  faker: "3.0.1"
 });
 
 Package.describe({
@@ -9,7 +9,7 @@ Package.describe({
   name: "practicalmeteor:faker",
   version: "3.0.1_1",
   git: "https://github.com/practicalmeteor/meteor-faker.git",
-  documentation: "Readme.md",
+  documentation: "Readme.md"
 });
 
 Package.onUse(function (api) {
@@ -27,7 +27,7 @@ Package.onTest(function (api) {
     "practicalmeteor:faker",
     "coffeescript",
     "tinytest",
-    "practicalmeteor:chai",
+    "practicalmeteor:chai"
   ]);
 
   api.addFiles("meteor/tests/blaver-export-test.coffee");

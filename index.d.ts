@@ -119,6 +119,7 @@ declare namespace Blaver {
       hexaDecimal(count?: number): string;
       json(): string;
       array(length?: number): Array<string | number>;
+      bigInt(value?: number): number;
     };
 
     date: {

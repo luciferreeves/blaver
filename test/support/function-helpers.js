@@ -1,16 +1,14 @@
 if (typeof module !== 'undefined') {
-  var assert = require('assert');
-  var sinon = require('sinon');
   var blaver = require('../../index');
 }
 
-var functionHelpers = {};
+const functionHelpers = {};
 
 module.exports = functionHelpers;
 
 
-var IGNORED_MODULES = ['locales', 'locale', 'localeFallback', 'definitions', 'fake', 'helpers', 'mersenne'];
-var IGNORED_METHODS = {
+const IGNORED_MODULES = ['locales', 'locale', 'localeFallback', 'definitions', 'fake', 'helpers', 'mersenne'];
+const IGNORED_METHODS = {
   system: ['directoryPath', 'filePath'] // these are TODOs
 };
 
@@ -39,7 +37,7 @@ function both(pred1, pred2) {
 // Basic smoke tests to make sure each method is at least implemented and returns a value.
 
 functionHelpers.modulesList = function modulesList () {
-  var modules = Object.keys(blaver)
+  const modules = Object.keys(blaver)
     .filter(isTestableModule)
     .reduce(function(result, mod) {
       result[mod] = Object.keys(blaver[mod]).filter(both(isMethodOf(mod), isTestableMethod(mod)));

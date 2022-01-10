@@ -11,7 +11,7 @@
     "browser": "./node_modules/.bin/gulp browser",
     "jsdoc": "./node_modules/.bin/gulp jsdoc",
     "readme": "./node_modules/.bin/gulp readme",
-    "lint": "node_modules/.bin/eslint ./lib/animal.js",
+    "lint": "node_modules/.bin/eslint lib --fix",
     "test": "node_modules/.bin/mocha test/*.*.js",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov"
   },

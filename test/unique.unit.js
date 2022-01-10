@@ -8,27 +8,27 @@ describe("unique.js", function () {
   describe("unique()", function () {
 
     it("is able to call a function with no arguments and return a result", function () {
-      var result = blaver.unique(blaver.internet.email);
+      const result = blaver.unique(blaver.internet.email);
       assert.strictEqual(typeof result, 'string');
     });
 
     it("is able to call a function with arguments and return a result", function () {
-      var result = blaver.unique(blaver.internet.email, ['a', 'b', 'c']); // third argument is provider, or domain for email
+      const result = blaver.unique(blaver.internet.email, ['a', 'b', 'c']); // third argument is provider, or domain for email
       assert.ok(result.match(/\@c/));
     });
 
     it("is able to call same function with arguments and return a result", function () {
-      var result = blaver.unique(blaver.internet.email, ['a', 'b', 'c']); // third argument is provider, or domain for email
+      const result = blaver.unique(blaver.internet.email, ['a', 'b', 'c']); // third argument is provider, or domain for email
       assert.ok(result.match(/\@c/));
     });
 
     it("is able to exclude results as array", function () {
-      var result = blaver.unique(blaver.internet.protocol, [], { exclude: ['https'] });
+      const result = blaver.unique(blaver.internet.protocol, [], { exclude: ['https'] });
       assert.strictEqual(result, 'http');
     });
 
     it("is able to limit unique call by maxTime in ms", function () {
-      var result;
+      let result;
       try {
         result = blaver.unique(blaver.internet.protocol, [], { maxTime: 1, maxRetries: 9999, exclude: ['https', 'http'] });
       } catch (err) {
@@ -37,7 +37,7 @@ describe("unique.js", function () {
     });
 
     it("is able to limit unique call by maxRetries", function () {
-      var result;
+      let result;
       try {
         result = blaver.unique(blaver.internet.protocol, [], { maxTime: 5000, maxRetries: 5, exclude: ['https', 'http'] });
       } catch (err) {
@@ -46,7 +46,7 @@ describe("unique.js", function () {
     });
 
     it("is able to call last function with arguments and return a result", function () {
-      var result = blaver.unique(blaver.internet.email, ['a', 'b', 'c']); // third argument is provider, or domain for email
+      const result = blaver.unique(blaver.internet.email, ['a', 'b', 'c']); // third argument is provider, or domain for email
       assert.ok(result.match(/\@c/));
     });
 

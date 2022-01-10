@@ -36,27 +36,27 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var sinon = function () {
+const sinon = function () {
   "use strict";
 
-  var buster = (function (setTimeout, B) {
-    var isNode = typeof require == "function" && typeof module == "object";
-    var div = typeof document != "undefined" && document.createElement("div");
-    var F = function () {};
+  const buster = (function (setTimeout, B) {
+    const isNode = typeof require == "function" && typeof module == "object";
+    const div = typeof document != "undefined" && document.createElement("div");
+    const F = function () {};
 
-    var buster = {
+    const buster = {
       bind: function bind(obj, methOrProp) {
-        var method =
+        const method =
           typeof methOrProp == "string" ? obj[methOrProp] : methOrProp;
-        var args = Array.prototype.slice.call(arguments, 2);
+        const args = Array.prototype.slice.call(arguments, 2);
         return function () {
-          var allArgs = args.concat(Array.prototype.slice.call(arguments));
+          const allArgs = args.concat(Array.prototype.slice.call(arguments));
           return method.apply(obj, allArgs);
         };
       },
 
       partial: function partial(fn) {
-        var args = [].slice.call(arguments, 1);
+        const args = [].slice.call(arguments, 1);
         return function () {
           return fn.apply(this, args.concat([].slice.call(arguments)));
         };
@@ -71,7 +71,7 @@ var sinon = function () {
         if (!target) {
           return;
         }
-        for (var i = 1, l = arguments.length, prop; i < l; ++i) {
+        for (let i = 1, l = arguments.length, prop; i < l; ++i) {
           for (prop in arguments[i]) {
             target[prop] = arguments[i][prop];
           }
@@ -90,7 +90,7 @@ var sinon = function () {
         if (!func) {return "";}
         if (func.displayName) {return func.displayName;}
         if (func.name) {return func.name;}
-        var matches = func.toString().match(/function\s+([^\(]+)/m);
+        const matches = func.toString().match(/function\s+([^\(]+)/m);
         return (matches && matches[1]) || "";
       },
 
@@ -114,9 +114,9 @@ var sinon = function () {
       },
 
       flatten: function flatten(arr) {
-        var result = [],
+        const result = [],
           arr = arr || [];
-        for (var i = 0, l = arr.length; i < l; ++i) {
+        for (let i = 0, l = arr.length; i < l; ++i) {
           result = result.concat(
             buster.isArray(arr[i]) ? flatten(arr[i]) : arr[i]
           );
@@ -125,14 +125,14 @@ var sinon = function () {
       },
 
       each: function each(arr, callback) {
-        for (var i = 0, l = arr.length; i < l; ++i) {
+        for (let i = 0, l = arr.length; i < l; ++i) {
           callback(arr[i]);
         }
       },
 
       map: function map(arr, callback) {
-        var results = [];
-        for (var i = 0, l = arr.length; i < l; ++i) {
+        const results = [];
+        for (let i = 0, l = arr.length; i < l; ++i) {
           results.push(callback(arr[i]));
         }
         return results;
@@ -148,7 +148,7 @@ var sinon = function () {
         if (fns.length == 0) {
           return cb(null, []);
         }
-        var remaining = fns.length,
+        const remaining = fns.length,
           results = [];
         function makeDone(num) {
           return function done(err, result) {
@@ -161,7 +161,7 @@ var sinon = function () {
             }
           };
         }
-        for (var i = 0, l = fns.length; i < l; ++i) {
+        for (let i = 0, l = fns.length; i < l; ++i) {
           fns[i](makeDone(i));
         }
       },
@@ -172,11 +172,11 @@ var sinon = function () {
             callback(err, res);
           }
         }
-        var remaining = fns.slice();
-        var results = [];
+        const remaining = fns.slice();
+        const results = [];
         function callNext() {
           if (remaining.length == 0) {return cb(null, results);}
-          var promise = remaining.shift()(next);
+          const promise = remaining.shift()(next);
           if (promise && typeof promise.then == "function") {
             promise.then(buster.partial(next, null), next);
           }
@@ -201,13 +201,13 @@ var sinon = function () {
       typeof require === "function" &&
       typeof module === "object"
     ) {
-      var crypto = require("crypto");
-      var path = require("path");
+      const crypto = require("crypto");
+      const path = require("path");
 
       buster.tmpFile = function (fileName) {
-        var hashed = crypto.createHash("sha1");
+        const hashed = crypto.createHash("sha1");
         hashed.update(fileName);
-        var tmpfileName = hashed.digest("hex");
+        const tmpfileName = hashed.digest("hex");
 
         if (process.platform == "win32") {
           return path.join(process.env["TEMP"], tmpfileName);
@@ -228,12 +228,12 @@ var sinon = function () {
           throw new TypeError();
         }
         arr = Object(arr);
-        var len = arr.length >>> 0;
+        const len = arr.length >>> 0;
         if (typeof fun !== "function") {
           throw new TypeError();
         }
 
-        for (var i = 0; i < len; i++) {
+        for (let i = 0; i < len; i++) {
           if (arr.hasOwnProperty(i) && fun.call(thisp, arr[i], i, arr)) {
             return true;
           }
@@ -254,16 +254,16 @@ var sinon = function () {
           throw new TypeError();
         }
 
-        var t = Object(this);
-        var len = t.length >>> 0;
+        const t = Object(this);
+        const len = t.length >>> 0;
         if (typeof fn != "function") {
           throw new TypeError();
         }
 
-        var res = [];
-        for (var i = 0; i < len; i++) {
+        const res = [];
+        for (let i = 0; i < len; i++) {
           if (i in t) {
-            var val = t[i]; // in case fun mutates this
+            const val = t[i]; // in case fun mutates this
             if (fn.call(thisp, val, i, t)) {
               res.push(val);
             }
@@ -287,7 +287,7 @@ var sinon = function () {
     return buster.extend(B || {}, buster);
   })(setTimeout, buster);
   if (typeof buster === "undefined") {
-    var buster = {};
+    const buster = {};
   }
 
   if (typeof module === "object" && typeof require === "function") {
@@ -299,9 +299,9 @@ var sinon = function () {
   buster.format.quoteStrings = true;
 
   buster.format.ascii = (function () {
-    var hasOwn = Object.prototype.hasOwnProperty;
+    const hasOwn = Object.prototype.hasOwnProperty;
 
-    var specialObjects = [];
+    const specialObjects = [];
     if (typeof global != "undefined") {
       specialObjects.push({ obj: global, value: "[object global]" });
     }
@@ -313,10 +313,10 @@ var sinon = function () {
     }
 
     function keys(object) {
-      var k = (Object.keys && Object.keys(object)) || [];
+      const k = (Object.keys && Object.keys(object)) || [];
 
       if (k.length == 0) {
-        for (var prop in object) {
+        for (let prop in object) {
           if (hasOwn.call(object, prop)) {
             k.push(prop);
           }
@@ -331,7 +331,7 @@ var sinon = function () {
         return false;
       }
 
-      for (var i = 0, l = objects.length; i < l; ++i) {
+      for (let i = 0, l = objects.length; i < l; ++i) {
         if (objects[i] === object) {
           return true;
         }
@@ -342,7 +342,7 @@ var sinon = function () {
 
     function ascii(object, processed, indent) {
       if (typeof object == "string") {
-        var quote = typeof this.quoteStrings != "boolean" || this.quoteStrings;
+        const quote = typeof this.quoteStrings != "boolean" || this.quoteStrings;
         return processed || quote ? '"' + object + '"' : object;
       }
 
@@ -375,7 +375,7 @@ var sinon = function () {
         return object.toString();
       }
 
-      for (var i = 0, l = specialObjects.length; i < l; i++) {
+      for (let i = 0, l = specialObjects.length; i < l; i++) {
         if (object === specialObjects[i].obj) {
           return specialObjects[i].value;
         }
@@ -391,9 +391,9 @@ var sinon = function () {
     ascii.array = function (array, processed) {
       processed = processed || [];
       processed.push(array);
-      var pieces = [];
+      const pieces = [];
 
-      for (var i = 0, l = array.length; i < l; ++i) {
+      for (let i = 0, l = array.length; i < l; ++i) {
         pieces.push(ascii.call(this, array[i], processed));
       }
 
@@ -404,15 +404,15 @@ var sinon = function () {
       processed = processed || [];
       processed.push(object);
       indent = indent || 0;
-      var pieces = [],
+      const pieces = [],
         properties = keys(object),
         prop,
         str,
         obj;
-      var is = "";
-      var length = 3;
+      const is = "";
+      const length = 3;
 
-      for (var i = 0, l = indent; i < l; ++i) {
+      for (let i = 0, l = indent; i < l; ++i) {
         is += " ";
       }
 
@@ -431,8 +431,8 @@ var sinon = function () {
         pieces.push(str);
       }
 
-      var cons = ascii.constructorName.call(this, object);
-      var prefix = cons ? "[" + cons + "] " : "";
+      const cons = ascii.constructorName.call(this, object);
+      const prefix = cons ? "[" + cons + "] " : "";
 
       return length + indent > 80
         ? prefix + "{\n  " + is + pieces.join(",\n  " + is) + "\n" + is + "}"
@@ -440,13 +440,13 @@ var sinon = function () {
     };
 
     ascii.element = function (element) {
-      var tagName = element.tagName.toLowerCase();
-      var attrs = element.attributes,
+      const tagName = element.tagName.toLowerCase();
+      const attrs = element.attributes,
         attribute,
         pairs = [],
         attrName;
 
-      for (var i = 0, l = attrs.length; i < l; ++i) {
+      for (let i = 0, l = attrs.length; i < l; ++i) {
         attribute = attrs.item(i);
         attrName = attribute.nodeName.toLowerCase().replace("html:", "");
 
@@ -459,25 +459,25 @@ var sinon = function () {
         }
       }
 
-      var formatted = "<" + tagName + (pairs.length > 0 ? " " : "");
-      var content = element.innerHTML;
+      const formatted = "<" + tagName + (pairs.length > 0 ? " " : "");
+      const content = element.innerHTML;
 
       if (content.length > 20) {
         content = content.substr(0, 20) + "[...]";
       }
 
-      var res =
+      const res =
         formatted + pairs.join(" ") + ">" + content + "</" + tagName + ">";
 
       return res.replace(/ contentEditable="inherit"/, "");
     };
 
     ascii.constructorName = function (object) {
-      var name = buster.functionName(object && object.constructor);
-      var excludes =
+      const name = buster.functionName(object && object.constructor);
+      const excludes =
         this.excludeConstructors || buster.format.excludeConstructors || [];
 
-      for (var i = 0, l = excludes.length; i < l; ++i) {
+      for (let i = 0, l = excludes.length; i < l; ++i) {
         if (typeof excludes[i] == "string" && excludes[i] == name) {
           return "";
         } else if (excludes[i].test && excludes[i].test(name)) {
@@ -494,7 +494,7 @@ var sinon = function () {
   if (typeof module != "undefined") {
     module.exports = buster.format;
   }
-  /*jslint eqeqeq: false, onevar: false, forin: true, nomen: false, regexp: false, plusplus: false*/
+  /*jslint eqeqeq: false, oneconst: false, forin: true, nomen: false, regexp: false, plusplus: false*/
   /*global module, require, __dirname, document*/
   /**
    * Sinon core utilities. For internal use only.
@@ -505,12 +505,12 @@ var sinon = function () {
    * Copyright (c) 2010-2011 Christian Johansen
    */
 
-  var sinon = (function (buster) {
-    var div = typeof document != "undefined" && document.createElement("div");
-    var hasOwn = Object.prototype.hasOwnProperty;
+  const sinon = (function (buster) {
+    const div = typeof document != "undefined" && document.createElement("div");
+    const hasOwn = Object.prototype.hasOwnProperty;
 
     function isDOMNode(obj) {
-      var success = false;
+      const success = false;
 
       try {
         obj.appendChild(div);
@@ -540,14 +540,14 @@ var sinon = function () {
     }
 
     function mirrorProperties(target, source) {
-      for (var prop in source) {
+      for (let prop in source) {
         if (!hasOwn.call(target, prop)) {
           target[prop] = source[prop];
         }
       }
     }
 
-    var sinon = {
+    const sinon = {
       wrapMethod: function wrapMethod(object, property, method) {
         if (!object) {
           throw new TypeError("Should wrap property of object");
@@ -557,7 +557,7 @@ var sinon = function () {
           throw new TypeError("Method wrapper should be function");
         }
 
-        var wrappedMethod = object[property];
+        const wrappedMethod = object[property];
 
         if (!isFunction(wrappedMethod)) {
           throw new TypeError(
@@ -576,14 +576,14 @@ var sinon = function () {
         }
 
         if (wrappedMethod.calledBefore) {
-          var verb = !!wrappedMethod.returns ? "stubbed" : "spied on";
+          const verb = !!wrappedMethod.returns ? "stubbed" : "spied on";
           throw new TypeError(
             "Attempted to wrap " + property + " which is already " + verb
           );
         }
 
         // IE 8 does not support hasOwnProperty on the window object.
-        var owned = hasOwn.call(object, property);
+        const owned = hasOwn.call(object, property);
         object[property] = method;
         method.displayName = property;
 
@@ -606,8 +606,8 @@ var sinon = function () {
       },
 
       extend: function extend(target) {
-        for (var i = 1, l = arguments.length; i < l; i += 1) {
-          for (var prop in arguments[i]) {
+        for (let i = 1, l = arguments.length; i < l; i += 1) {
+          for (let prop in arguments[i]) {
             if (arguments[i].hasOwnProperty(prop)) {
               target[prop] = arguments[i][prop];
             }
@@ -626,7 +626,7 @@ var sinon = function () {
       },
 
       create: function create(proto) {
-        var F = function () {};
+        const F = function () {};
         F.prototype = proto;
         return new F();
       },
@@ -651,7 +651,7 @@ var sinon = function () {
           return false;
         }
 
-        var aString = Object.prototype.toString.call(a);
+        const aString = Object.prototype.toString.call(a);
         if (aString != Object.prototype.toString.call(b)) {
           return false;
         }
@@ -661,7 +661,7 @@ var sinon = function () {
             return false;
           }
 
-          for (var i = 0, l = a.length; i < l; i += 1) {
+          for (let i = 0, l = a.length; i < l; i += 1) {
             if (!deepEqual(a[i], b[i])) {
               return false;
             }
@@ -670,7 +670,7 @@ var sinon = function () {
           return true;
         }
 
-        var prop,
+        const prop,
           aLength = 0,
           bLength = 0;
 
@@ -694,14 +694,14 @@ var sinon = function () {
       },
 
       functionName: function functionName(func) {
-        var name = func.displayName || func.name;
+        const name = func.displayName || func.name;
 
         // Use function decomposition as a last resort to get function
         // name. Does not rely on function decomposition to work - if it
         // doesn't debugging will be slightly less informative
         // (i.e. toString will say 'spy' rather than 'myFunc').
         if (!name) {
-          var matches = func.toString().match(/function ([^\s\(]+)/);
+          const matches = func.toString().match(/function ([^\s\(]+)/);
           name = matches && matches[1];
         }
 
@@ -710,7 +710,7 @@ var sinon = function () {
 
       functionToString: function toString() {
         if (this.getCall && this.callCount) {
-          var thisValue,
+          const thisValue,
             prop,
             i = this.callCount;
 
@@ -729,11 +729,11 @@ var sinon = function () {
       },
 
       getConfig: function (custom) {
-        var config = {};
+        const config = {};
         custom = custom || {};
-        var defaults = sinon.defaultConfig;
+        const defaults = sinon.defaultConfig;
 
-        for (var prop in defaults) {
+        for (let prop in defaults) {
           if (defaults.hasOwnProperty(prop)) {
             config[prop] = custom.hasOwnProperty(prop)
               ? custom[prop]
@@ -766,7 +766,7 @@ var sinon = function () {
       },
 
       calledInOrder: function (spies) {
-        for (var i = 1, l = spies.length; i < l; i++) {
+        for (let i = 1, l = spies.length; i < l; i++) {
           if (!spies[i - 1].calledBefore(spies[i])) {
             return false;
           }
@@ -778,10 +778,10 @@ var sinon = function () {
       orderByFirstCall: function (spies) {
         return spies.sort(function (a, b) {
           // uuid, won't ever be equal
-          var aCall = a.getCall(0);
-          var bCall = b.getCall(0);
-          var aId = (aCall && aCall.callId) || -1;
-          var bId = (bCall && bCall.callId) || -1;
+          const aCall = a.getCall(0);
+          const bCall = b.getCall(0);
+          const aId = (aCall && aCall.callId) || -1;
+          const bId = (bCall && bCall.callId) || -1;
 
           return aId < bId ? -1 : 1;
         });
@@ -790,7 +790,7 @@ var sinon = function () {
       log: function () {},
 
       logError: function (label, err) {
-        var msg = label + " threw exception: ";
+        const msg = label + " threw exception: ";
         sinon.log(msg + "[" + err.name + "] " + err.message);
         if (err.stack) {
           sinon.log(err.stack);
@@ -808,12 +808,12 @@ var sinon = function () {
         } else if (value === undefined) {
           return "undefined";
         }
-        var string = Object.prototype.toString.call(value);
+        const string = Object.prototype.toString.call(value);
         return string.substring(8, string.length - 1).toLowerCase();
       },
     };
 
-    var isNode = typeof module == "object" && typeof require == "function";
+    const isNode = typeof module == "object" && typeof require == "function";
 
     if (isNode) {
       try {
@@ -833,14 +833,14 @@ var sinon = function () {
     }
 
     if (buster) {
-      var formatter = sinon.create(buster.format);
+      const formatter = sinon.create(buster.format);
       formatter.quoteStrings = false;
       sinon.format = function () {
         return formatter.ascii.apply(formatter, arguments);
       };
     } else if (isNode) {
       try {
-        var util = require("util");
+        const util = require("util");
         sinon.format = function (value) {
           return typeof value == "object" &&
             value.toString === Object.prototype.toString
@@ -857,7 +857,7 @@ var sinon = function () {
   })(typeof buster == "object" && buster);
 
   /* @depend ../sinon.js */
-  /*jslint eqeqeq: false, onevar: false, plusplus: false*/
+  /*jslint eqeqeq: false, oneconst: false, plusplus: false*/
   /*global module, require, sinon*/
   /**
    * Match functions
@@ -869,7 +869,7 @@ var sinon = function () {
    */
 
   (function (sinon) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
 
     if (!sinon && commonJSModule) {
@@ -881,7 +881,7 @@ var sinon = function () {
     }
 
     function assertType(value, type, name) {
-      var actual = sinon.typeOf(value);
+      const actual = sinon.typeOf(value);
       if (actual !== type) {
         throw new TypeError(
           "Expected type of " + name + " to be " + type + ", but was " + actual
@@ -889,7 +889,7 @@ var sinon = function () {
       }
     }
 
-    var matcher = {
+    const matcher = {
       toString: function () {
         return this.message;
       },
@@ -903,10 +903,10 @@ var sinon = function () {
       if (actual === null || actual === undefined) {
         return false;
       }
-      for (var key in expectation) {
+      for (let key in expectation) {
         if (expectation.hasOwnProperty(key)) {
-          var exp = expectation[key];
-          var act = actual[key];
+          const exp = expectation[key];
+          const act = actual[key];
           if (match.isMatcher(exp)) {
             if (!exp.test(act)) {
               return false;
@@ -927,8 +927,8 @@ var sinon = function () {
       if (!isMatcher(m2)) {
         throw new TypeError("Matcher expected");
       }
-      var m1 = this;
-      var or = sinon.create(matcher);
+      const m1 = this;
+      const or = sinon.create(matcher);
       or.test = function (actual) {
         return m1.test(actual) || m2.test(actual);
       };
@@ -940,8 +940,8 @@ var sinon = function () {
       if (!isMatcher(m2)) {
         throw new TypeError("Matcher expected");
       }
-      var m1 = this;
-      var and = sinon.create(matcher);
+      const m1 = this;
+      const and = sinon.create(matcher);
       and.test = function (actual) {
         return m1.test(actual) && m2.test(actual);
       };
@@ -949,9 +949,9 @@ var sinon = function () {
       return and;
     };
 
-    var match = function (expectation, message) {
-      var m = sinon.create(matcher);
-      var type = sinon.typeOf(expectation);
+    const match = function (expectation, message) {
+      const m = sinon.create(matcher);
+      const type = sinon.typeOf(expectation);
       switch (type) {
         case "object":
           if (typeof expectation.test === "function") {
@@ -961,8 +961,8 @@ var sinon = function () {
             m.message = "match(" + sinon.functionName(expectation.test) + ")";
             return m;
           }
-          var str = [];
-          for (var key in expectation) {
+          const str = [];
+          for (let key in expectation) {
             if (expectation.hasOwnProperty(key)) {
               str.push(key + ": " + expectation[key]);
             }
@@ -1054,8 +1054,8 @@ var sinon = function () {
     function createPropertyMatcher(propertyTest, messagePrefix) {
       return function (property, value) {
         assertType(property, "string", "property");
-        var onlyProperty = arguments.length === 1;
-        var message = messagePrefix + '("' + property + '"';
+        const onlyProperty = arguments.length === 1;
+        const message = messagePrefix + '("' + property + '"';
         if (!onlyProperty) {
           message += ", " + value;
         }
@@ -1104,7 +1104,7 @@ var sinon = function () {
    * @depend ../sinon.js
    * @depend match.js
    */
-  /*jslint eqeqeq: false, onevar: false, plusplus: false*/
+  /*jslint eqeqeq: false, oneconst: false, plusplus: false*/
   /*global module, require, sinon*/
   /**
    * Spy functions
@@ -1116,12 +1116,12 @@ var sinon = function () {
    */
 
   (function (sinon) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
-    var spyCall;
-    var callId = 0;
-    var push = [].push;
-    var slice = Array.prototype.slice;
+    const spyCall;
+    const callId = 0;
+    const push = [].push;
+    const slice = Array.prototype.slice;
 
     if (!sinon && commonJSModule) {
       sinon = require("../sinon");
@@ -1140,7 +1140,7 @@ var sinon = function () {
         return spy.create(function () {});
       }
 
-      var method = object[property];
+      const method = object[property];
       return sinon.wrapMethod(object, property, spy.create(method));
     }
 
@@ -1156,10 +1156,10 @@ var sinon = function () {
               return false;
             }
 
-            var currentCall;
-            var matches = 0;
+            const currentCall;
+            const matches = 0;
 
-            for (var i = 0, l = this.callCount; i < l; i += 1) {
+            for (let i = 0, l = this.callCount; i < l; i += 1) {
               currentCall = this.getCall(i);
 
               if (currentCall[actual || method].apply(currentCall, arguments)) {
@@ -1180,9 +1180,9 @@ var sinon = function () {
             return;
           }
 
-          var alen = args.length;
+          const alen = args.length;
 
-          for (var i = 0, l = fakes.length; i < l; i++) {
+          for (let i = 0, l = fakes.length; i < l; i++) {
             if (fakes[i].matches(args, strict)) {
               return fakes[i];
             }
@@ -1205,14 +1205,14 @@ var sinon = function () {
           this.lastCall = this.getCall(this.callCount - 1);
         }
 
-        var vars = "a,b,c,d,e,f,g,h,i,j,k,l";
+        const consts = "a,b,c,d,e,f,g,h,i,j,k,l";
         function createProxy(func) {
           // Retain the function length:
-          var p;
+          const p;
           if (func.length) {
             eval(
               "p = (function proxy(" +
-                vars.substring(0, func.length * 2 - 1) +
+                consts.substring(0, func.length * 2 - 1) +
                 ") { return p.invoke(func, this, slice.call(arguments)); });"
             );
           } else {
@@ -1223,10 +1223,10 @@ var sinon = function () {
           return p;
         }
 
-        var uuid = 0;
+        const uuid = 0;
 
         // Public API
-        var spyApi = {
+        const spyApi = {
           reset: function () {
             this.called = false;
             this.notCalled = true;
@@ -1244,14 +1244,14 @@ var sinon = function () {
             this.exceptions = [];
             this.callIds = [];
             if (this.fakes) {
-              for (var i = 0; i < this.fakes.length; i++) {
+              for (let i = 0; i < this.fakes.length; i++) {
                 this.fakes[i].reset();
               }
             }
           },
 
           create: function create(func) {
-            var name;
+            const name;
 
             if (typeof func != "function") {
               func = function () {};
@@ -1259,7 +1259,7 @@ var sinon = function () {
               name = sinon.functionName(func);
             }
 
-            var proxy = createProxy(func);
+            const proxy = createProxy(func);
 
             sinon.extend(proxy, spy);
             delete proxy.create;
@@ -1276,8 +1276,8 @@ var sinon = function () {
           },
 
           invoke: function invoke(func, thisValue, args) {
-            var matching = matchingFake(this.fakes, args);
-            var exception, returnValue;
+            const matching = matchingFake(this.fakes, args);
+            const exception, returnValue;
 
             incrementCallCount.call(this);
             push.call(this.thisValues, thisValue);
@@ -1344,10 +1344,10 @@ var sinon = function () {
           },
 
           withArgs: function () {
-            var args = slice.call(arguments);
+            const args = slice.call(arguments);
 
             if (this.fakes) {
-              var match = matchingFake(this.fakes, args, true);
+              const match = matchingFake(this.fakes, args, true);
 
               if (match) {
                 return match;
@@ -1356,8 +1356,8 @@ var sinon = function () {
               this.fakes = [];
             }
 
-            var original = this;
-            var fake = this._create();
+            const original = this;
+            const fake = this._create();
             fake.matchingAguments = args;
             push.call(this.fakes, fake);
 
@@ -1365,7 +1365,7 @@ var sinon = function () {
               return original.withArgs.apply(original, arguments);
             };
 
-            for (var i = 0; i < this.args.length; i++) {
+            for (let i = 0; i < this.args.length; i++) {
               if (fake.matches(this.args[i])) {
                 incrementCallCount.call(fake);
                 push.call(fake.thisValues, this.thisValues[i]);
@@ -1381,7 +1381,7 @@ var sinon = function () {
           },
 
           matches: function (args, strict) {
-            var margs = this.matchingAguments;
+            const margs = this.matchingAguments;
 
             if (
               margs.length <= args.length &&
@@ -1392,9 +1392,9 @@ var sinon = function () {
           },
 
           printf: function (format) {
-            var spy = this;
-            var args = slice.call(arguments, 1);
-            var formatter;
+            const spy = this;
+            const args = slice.call(arguments, 1);
+            const formatter;
 
             return (format || "").replace(/%(.)/g, function (match, specifyer) {
               formatter = spyApi.formatters[specifyer];
@@ -1490,9 +1490,9 @@ var sinon = function () {
           },
 
           C: function (spy) {
-            var calls = [];
+            const calls = [];
 
-            for (var i = 0, l = spy.callCount; i < l; ++i) {
+            for (let i = 0, l = spy.callCount; i < l; ++i) {
               push.call(calls, "    " + spy.getCall(i).toString());
             }
 
@@ -1500,9 +1500,9 @@ var sinon = function () {
           },
 
           t: function (spy) {
-            var objects = [];
+            const objects = [];
 
-            for (var i = 0, l = spy.callCount; i < l; ++i) {
+            for (let i = 0, l = spy.callCount; i < l; ++i) {
               push.call(objects, sinon.format(spy.thisValues[i]));
             }
 
@@ -1510,9 +1510,9 @@ var sinon = function () {
           },
 
           "*": function (spy, args) {
-            var formatted = [];
+            const formatted = [];
 
-            for (var i = 0, l = args.length; i < l; ++i) {
+            for (let i = 0, l = args.length; i < l; ++i) {
               push.call(formatted, sinon.format(args[i]));
             }
 
@@ -1526,14 +1526,14 @@ var sinon = function () {
 
     spyCall = (function () {
       function throwYieldError(proxy, text, args) {
-        var msg = sinon.functionName(proxy) + text;
+        const msg = sinon.functionName(proxy) + text;
         if (args.length) {
           msg += " Received [" + slice.call(args).join(", ") + "]";
         }
         throw new Error(msg);
       }
 
-      var callApi = {
+      const callApi = {
         create: function create(
           spy,
           thisValue,
@@ -1542,7 +1542,7 @@ var sinon = function () {
           exception,
           id
         ) {
-          var proxyCall = sinon.create(spyCall);
+          const proxyCall = sinon.create(spyCall);
           delete proxyCall.create;
           proxyCall.proxy = spy;
           proxyCall.thisValue = thisValue;
@@ -1562,7 +1562,7 @@ var sinon = function () {
         },
 
         calledWith: function calledWith() {
-          for (var i = 0, l = arguments.length; i < l; i += 1) {
+          for (let i = 0, l = arguments.length; i < l; i += 1) {
             if (!sinon.deepEqual(arguments[i], this.args[i])) {
               return false;
             }
@@ -1572,9 +1572,9 @@ var sinon = function () {
         },
 
         calledWithMatch: function calledWithMatch() {
-          for (var i = 0, l = arguments.length; i < l; i += 1) {
-            var actual = this.args[i];
-            var expectation = arguments[i];
+          for (let i = 0, l = arguments.length; i < l; i += 1) {
+            const actual = this.args[i];
+            const expectation = arguments[i];
             if (!sinon.match || !sinon.match(expectation).test(actual)) {
               return false;
             }
@@ -1630,13 +1630,13 @@ var sinon = function () {
         },
 
         callArgWith: function (pos) {
-          var args = slice.call(arguments, 1);
+          const args = slice.call(arguments, 1);
           this.args[pos].apply(null, args);
         },
 
         yield: function () {
-          var args = this.args;
-          for (var i = 0, l = args.length; i < l; ++i) {
+          const args = this.args;
+          for (let i = 0, l = args.length; i < l; ++i) {
             if (typeof args[i] === "function") {
               args[i].apply(null, slice.call(arguments));
               return;
@@ -1650,8 +1650,8 @@ var sinon = function () {
         },
 
         yieldTo: function (prop) {
-          var args = this.args;
-          for (var i = 0, l = args.length; i < l; ++i) {
+          const args = this.args;
+          for (let i = 0, l = args.length; i < l; ++i) {
             if (args[i] && typeof args[i][prop] === "function") {
               args[i][prop].apply(null, slice.call(arguments, 1));
               return;
@@ -1665,10 +1665,10 @@ var sinon = function () {
         },
 
         toString: function () {
-          var callStr = this.proxy.toString() + "(";
-          var args = [];
+          const callStr = this.proxy.toString() + "(";
+          const args = [];
 
-          for (var i = 0, l = this.args.length; i < l; ++i) {
+          for (let i = 0, l = this.args.length; i < l; ++i) {
             push.call(args, sinon.format(this.args[i]));
           }
 
@@ -1709,7 +1709,7 @@ var sinon = function () {
    * @depend ../sinon.js
    * @depend spy.js
    */
-  /*jslint eqeqeq: false, onevar: false*/
+  /*jslint eqeqeq: false, oneconst: false*/
   /*global module, require, sinon*/
   /**
    * Stub functions
@@ -1721,7 +1721,7 @@ var sinon = function () {
    */
 
   (function (sinon) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
 
     if (!sinon && commonJSModule) {
@@ -1737,7 +1737,7 @@ var sinon = function () {
         throw new TypeError("Custom stub should be function");
       }
 
-      var wrapper;
+      const wrapper;
 
       if (func) {
         wrapper = sinon.spy && sinon.spy.create ? sinon.spy.create(func) : func;
@@ -1750,7 +1750,7 @@ var sinon = function () {
       }
 
       if (!property && !!object && typeof object == "object") {
-        for (var prop in object) {
+        for (let prop in object) {
           if (typeof object[prop] === "function") {
             stub(object, prop);
           }
@@ -1763,8 +1763,8 @@ var sinon = function () {
     }
 
     function getChangingValue(stub, property) {
-      var index = stub.callCount - 1;
-      var prop =
+      const index = stub.callCount - 1;
+      const prop =
         index in stub[property]
           ? stub[property][index]
           : stub[property + "Last"];
@@ -1774,12 +1774,12 @@ var sinon = function () {
     }
 
     function getCallback(stub, args) {
-      var callArgAt = getChangingValue(stub, "callArgAts");
+      const callArgAt = getChangingValue(stub, "callArgAts");
 
       if (callArgAt < 0) {
-        var callArgProp = getChangingValue(stub, "callArgProps");
+        const callArgProp = getChangingValue(stub, "callArgProps");
 
-        for (var i = 0, l = args.length; i < l; ++i) {
+        for (let i = 0, l = args.length; i < l; ++i) {
           if (!callArgProp && typeof args[i] == "function") {
             return args[i];
           }
@@ -1799,11 +1799,11 @@ var sinon = function () {
       return args[callArgAt];
     }
 
-    var join = Array.prototype.join;
+    const join = Array.prototype.join;
 
     function getCallbackError(stub, func, args) {
       if (stub.callArgAtsLast < 0) {
-        var msg;
+        const msg;
 
         if (stub.callArgPropsLast) {
           msg =
@@ -1832,7 +1832,7 @@ var sinon = function () {
       );
     }
 
-    var nextTick = (function () {
+    const nextTick = (function () {
       if (
         typeof process === "object" &&
         typeof process.nextTick === "function"
@@ -1851,16 +1851,16 @@ var sinon = function () {
 
     function callCallback(stub, args) {
       if (stub.callArgAts.length > 0) {
-        var func = getCallback(stub, args);
+        const func = getCallback(stub, args);
 
         if (typeof func != "function") {
           throw new TypeError(getCallbackError(stub, func, args));
         }
 
-        var index = stub.callCount - 1;
+        const index = stub.callCount - 1;
 
-        var callbackArguments = getChangingValue(stub, "callbackArguments");
-        var callbackContext = getChangingValue(stub, "callbackContexts");
+        const callbackArguments = getChangingValue(stub, "callbackArguments");
+        const callbackContext = getChangingValue(stub, "callbackContexts");
 
         if (stub.callbackAsync) {
           nextTick(function () {
@@ -1872,12 +1872,12 @@ var sinon = function () {
       }
     }
 
-    var uuid = 0;
+    const uuid = 0;
 
     sinon.extend(
       stub,
       (function () {
-        var slice = Array.prototype.slice,
+        const slice = Array.prototype.slice,
           proto;
 
         function throwsException(error, message) {
@@ -1895,7 +1895,7 @@ var sinon = function () {
 
         proto = {
           create: function create() {
-            var functionStub = function () {
+            const functionStub = function () {
               callCallback(functionStub, arguments);
 
               if (functionStub.exception) {
@@ -1909,7 +1909,7 @@ var sinon = function () {
             };
 
             functionStub.id = "stub#" + uuid++;
-            var orig = functionStub;
+            const orig = functionStub;
             functionStub = sinon.spy.create(functionStub);
             functionStub.func = orig;
 
@@ -2055,7 +2055,7 @@ var sinon = function () {
         };
 
         // create asynchronous versions of callsArg* and yields* methods
-        for (var method in proto) {
+        for (let method in proto) {
           // need to avoid creating anotherasync versions of the newly added async methods
           if (
             proto.hasOwnProperty(method) &&
@@ -2086,7 +2086,7 @@ var sinon = function () {
    * @depend ../sinon.js
    * @depend stub.js
    */
-  /*jslint eqeqeq: false, onevar: false, nomen: false*/
+  /*jslint eqeqeq: false, oneconst: false, nomen: false*/
   /*global module, require, sinon*/
   /**
    * Mock functions.
@@ -2098,9 +2098,9 @@ var sinon = function () {
    */
 
   (function (sinon) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
-    var push = [].push;
+    const push = [].push;
 
     if (!sinon && commonJSModule) {
       sinon = require("../sinon");
@@ -2128,7 +2128,7 @@ var sinon = function () {
             return;
           }
 
-          for (var i = 0, l = collection.length; i < l; i += 1) {
+          for (let i = 0, l = collection.length; i < l; i += 1) {
             callback(collection[i]);
           }
         }
@@ -2139,7 +2139,7 @@ var sinon = function () {
               throw new TypeError("object is null");
             }
 
-            var mockObject = sinon.extend({}, mock);
+            const mockObject = sinon.extend({}, mock);
             mockObject.object = object;
             delete mockObject.create;
 
@@ -2158,7 +2158,7 @@ var sinon = function () {
 
             if (!this.expectations[method]) {
               this.expectations[method] = [];
-              var mockObject = this;
+              const mockObject = this;
 
               sinon.wrapMethod(this.object, method, function () {
                 return mockObject.invokeMethod(method, this, arguments);
@@ -2167,14 +2167,14 @@ var sinon = function () {
               push.call(this.proxies, method);
             }
 
-            var expectation = sinon.expectation.create(method);
+            const expectation = sinon.expectation.create(method);
             push.call(this.expectations[method], expectation);
 
             return expectation;
           },
 
           restore: function restore() {
-            var object = this.object;
+            const object = this.object;
 
             each(this.proxies, function (proxy) {
               if (typeof object[proxy].restore == "function") {
@@ -2184,8 +2184,8 @@ var sinon = function () {
           },
 
           verify: function verify() {
-            var expectations = this.expectations || {};
-            var messages = [],
+            const expectations = this.expectations || {};
+            const messages = [],
               met = [];
 
             each(this.proxies, function (proxy) {
@@ -2210,8 +2210,8 @@ var sinon = function () {
           },
 
           invokeMethod: function invokeMethod(method, thisValue, args) {
-            var expectations = this.expectations && this.expectations[method];
-            var length = (expectations && expectations.length) || 0,
+            const expectations = this.expectations && this.expectations[method];
+            const length = (expectations && expectations.length) || 0,
               i;
 
             for (i = 0; i < length; i += 1) {
@@ -2223,7 +2223,7 @@ var sinon = function () {
               }
             }
 
-            var messages = [],
+            const messages = [],
               available,
               exhausted = 0;
 
@@ -2254,11 +2254,11 @@ var sinon = function () {
       })()
     );
 
-    var times = sinon.timesInWords;
+    const times = sinon.timesInWords;
 
     sinon.expectation = (function () {
-      var slice = Array.prototype.slice;
-      var _invoke = sinon.spy.invoke;
+      const slice = Array.prototype.slice;
+      const _invoke = sinon.spy.invoke;
 
       function callCountInWords(callCount) {
         if (callCount == 0) {
@@ -2269,11 +2269,11 @@ var sinon = function () {
       }
 
       function expectedCallCountInWords(expectation) {
-        var min = expectation.minCalls;
-        var max = expectation.maxCalls;
+        const min = expectation.minCalls;
+        const max = expectation.maxCalls;
 
         if (typeof min == "number" && typeof max == "number") {
-          var str = times(min);
+          const str = times(min);
 
           if (min != max) {
             str = "at least " + str + " and at most " + times(max);
@@ -2290,7 +2290,7 @@ var sinon = function () {
       }
 
       function receivedMinCalls(expectation) {
-        var hasMinLimit = typeof expectation.minCalls == "number";
+        const hasMinLimit = typeof expectation.minCalls == "number";
         return !hasMinLimit || expectation.callCount >= expectation.minCalls;
       }
 
@@ -2307,7 +2307,7 @@ var sinon = function () {
         maxCalls: 1,
 
         create: function create(methodName) {
-          var expectation = sinon.extend(
+          const expectation = sinon.extend(
             sinon.stub.create(),
             sinon.expectation
           );
@@ -2435,7 +2435,7 @@ var sinon = function () {
             );
           }
 
-          for (var i = 0, l = this.expectedArguments.length; i < l; i += 1) {
+          for (let i = 0, l = this.expectedArguments.length; i < l; i += 1) {
             if (!sinon.deepEqual(this.expectedArguments[i], args[i])) {
               sinon.expectation.fail(
                 this.method +
@@ -2474,7 +2474,7 @@ var sinon = function () {
             return false;
           }
 
-          for (var i = 0, l = this.expectedArguments.length; i < l; i += 1) {
+          for (let i = 0, l = this.expectedArguments.length; i < l; i += 1) {
             if (!sinon.deepEqual(this.expectedArguments[i], args[i])) {
               return false;
             }
@@ -2500,18 +2500,18 @@ var sinon = function () {
         },
 
         toString: function () {
-          var args = (this.expectedArguments || []).slice();
+          const args = (this.expectedArguments || []).slice();
 
           if (!this.expectsExactArgCount) {
             push.call(args, "[...]");
           }
 
-          var callStr = sinon.spyCall.toString.call({
+          const callStr = sinon.spyCall.toString.call({
             proxy: this.method,
             args: args,
           });
 
-          var message =
+          const message =
             callStr.replace(", [...", "[, ...") +
             " " +
             expectedCallCountInWords(this);
@@ -2543,7 +2543,7 @@ var sinon = function () {
           sinon.assert.pass(message);
         },
         fail: function (message) {
-          var exception = new Error(message);
+          const exception = new Error(message);
           exception.name = "ExpectationError";
 
           throw exception;
@@ -2563,7 +2563,7 @@ var sinon = function () {
    * @depend stub.js
    * @depend mock.js
    */
-  /*jslint eqeqeq: false, onevar: false, forin: true*/
+  /*jslint eqeqeq: false, oneconst: false, forin: true*/
   /*global module, require, sinon*/
   /**
    * Collections of stubs, spies and mocks.
@@ -2575,10 +2575,10 @@ var sinon = function () {
    */
 
   (function (sinon) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
-    var push = [].push;
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    const push = [].push;
+    const hasOwnProperty = Object.prototype.hasOwnProperty;
 
     if (!sinon && commonJSModule) {
       sinon = require("../sinon");
@@ -2597,9 +2597,9 @@ var sinon = function () {
     }
 
     function each(fakeCollection, method) {
-      var fakes = getFakes(fakeCollection);
+      const fakes = getFakes(fakeCollection);
 
-      for (var i = 0, l = fakes.length; i < l; i += 1) {
+      for (let i = 0, l = fakes.length; i < l; i += 1) {
         if (typeof fakes[i][method] == "function") {
           fakes[i][method]();
         }
@@ -2607,14 +2607,14 @@ var sinon = function () {
     }
 
     function compact(fakeCollection) {
-      var fakes = getFakes(fakeCollection);
-      var i = 0;
+      const fakes = getFakes(fakeCollection);
+      const i = 0;
       while (i < fakes.length) {
         fakes.splice(i, 1);
       }
     }
 
-    var collection = {
+    const collection = {
       verify: function resolve() {
         each(this, "verify");
       },
@@ -2625,7 +2625,7 @@ var sinon = function () {
       },
 
       verifyAndRestore: function verifyAndRestore() {
-        var exception;
+        const exception;
 
         try {
           this.verify();
@@ -2651,7 +2651,7 @@ var sinon = function () {
 
       stub: function stub(object, property, value) {
         if (property) {
-          var original = object[property];
+          const original = object[property];
 
           if (typeof original != "function") {
             if (!hasOwnProperty.call(object, property)) {
@@ -2670,9 +2670,9 @@ var sinon = function () {
           }
         }
         if (!property && !!object && typeof object == "object") {
-          var stubbedObj = sinon.stub.apply(sinon, arguments);
+          const stubbedObj = sinon.stub.apply(sinon, arguments);
 
-          for (var prop in stubbedObj) {
+          for (let prop in stubbedObj) {
             if (typeof stubbedObj[prop] === "function") {
               this.add(stubbedObj[prop]);
             }
@@ -2689,7 +2689,7 @@ var sinon = function () {
       },
 
       inject: function inject(obj) {
-        var col = this;
+        const col = this;
 
         obj.spy = function () {
           return col.spy.apply(col, arguments);
@@ -2714,7 +2714,7 @@ var sinon = function () {
     }
   })((typeof sinon == "object" && sinon) || null);
 
-  /*jslint eqeqeq: false, plusplus: false, evil: true, onevar: false, browser: true, forin: false*/
+  /*jslint eqeqeq: false, plusplus: false, evil: true, oneconst: false, browser: true, forin: false*/
   /*global module, require, window*/
   /**
    * Fake timer API
@@ -2735,19 +2735,19 @@ var sinon = function () {
    */
 
   if (typeof sinon == "undefined") {
-    var sinon = {};
+    const sinon = {};
   }
 
   (function (global) {
-    var id = 1;
+    const id = 1;
 
     function addTimer(args, recurring) {
       if (args.length === 0) {
         throw new Error("Function requires at least 1 parameter");
       }
 
-      var toId = id++;
-      var delay = args[1] || 0;
+      const toId = id++;
+      const delay = args[1] || 0;
 
       if (!this.timeouts) {
         this.timeouts = {};
@@ -2772,10 +2772,10 @@ var sinon = function () {
         return 0;
       }
 
-      var strings = str.split(":");
-      var l = strings.length,
+      const strings = str.split(":");
+      const l = strings.length,
         i = l;
-      var ms = 0,
+      const ms = 0,
         parsed;
 
       if (l > 3 || !/^(\d\d:){0,2}\d\d?$/.test(str)) {
@@ -2796,12 +2796,12 @@ var sinon = function () {
     }
 
     function createObject(object) {
-      var newObject;
+      const newObject;
 
       if (Object.create) {
         newObject = Object.create(object);
       } else {
-        var F = function () {};
+        const F = function () {};
         F.prototype = object;
         newObject = new F();
       }
@@ -2814,7 +2814,7 @@ var sinon = function () {
       now: 0,
 
       create: function create(now) {
-        var clock = createObject(this);
+        const clock = createObject(this);
 
         if (typeof now == "number") {
           clock.now = now;
@@ -2851,12 +2851,12 @@ var sinon = function () {
 
       tick: function tick(ms) {
         ms = typeof ms == "number" ? ms : parseTime(ms);
-        var tickFrom = this.now,
+        const tickFrom = this.now,
           tickTo = this.now + ms,
           previous = this.now;
-        var timer = this.firstTimerInRange(tickFrom, tickTo);
+        const timer = this.firstTimerInRange(tickFrom, tickTo);
 
-        var firstException;
+        const firstException;
         while (timer && tickFrom <= tickTo) {
           if (this.timeouts[timer.id]) {
             tickFrom = this.now = timer.callAt;
@@ -2879,9 +2879,9 @@ var sinon = function () {
       },
 
       firstTimerInRange: function (from, to) {
-        var timer, smallest, originalTimer;
+        const timer, smallest, originalTimer;
 
-        for (var id in this.timeouts) {
+        for (let id in this.timeouts) {
           if (this.timeouts.hasOwnProperty(id)) {
             if (
               this.timeouts[id].callAt < from ||
@@ -2922,7 +2922,7 @@ var sinon = function () {
             eval(timer.func);
           }
         } catch (e) {
-          var exception = e;
+          const exception = e;
         }
 
         if (!this.timeouts[timer.id]) {
@@ -2942,7 +2942,7 @@ var sinon = function () {
       },
 
       Date: (function () {
-        var NativeDate = Date;
+        const NativeDate = Date;
 
         function ClockDate(year, month, date, hour, minute, second, ms) {
           // Defensive and verbose to avoid potential harm in passing
@@ -3007,7 +3007,7 @@ var sinon = function () {
       return target;
     }
 
-    var methods = [
+    const methods = [
       "Date",
       "setTimeout",
       "setInterval",
@@ -3016,9 +3016,9 @@ var sinon = function () {
     ];
 
     function restore() {
-      var method;
+      const method;
 
-      for (var i = 0, l = this.methods.length; i < l; i++) {
+      for (let i = 0, l = this.methods.length; i < l; i++) {
         method = this.methods[i];
         if (global[method].hadOwnProperty) {
           global[method] = this["_" + method];
@@ -3039,14 +3039,14 @@ var sinon = function () {
       clock["_" + method] = global[method];
 
       if (method == "Date") {
-        var date = mirrorDateProperties(clock[method], global[method]);
+        const date = mirrorDateProperties(clock[method], global[method]);
         global[method] = date;
       } else {
         global[method] = function () {
           return clock[method].apply(clock, arguments);
         };
 
-        for (var prop in clock[method]) {
+        for (let prop in clock[method]) {
           if (clock[method].hasOwnProperty(prop)) {
             global[method][prop] = clock[method][prop];
           }
@@ -3057,7 +3057,7 @@ var sinon = function () {
     }
 
     sinon.useFakeTimers = function useFakeTimers(now) {
-      var clock = sinon.clock.create(now);
+      const clock = sinon.clock.create(now);
       clock.restore = restore;
       clock.methods = Array.prototype.slice.call(
         arguments,
@@ -3068,7 +3068,7 @@ var sinon = function () {
         clock.methods = methods;
       }
 
-      for (var i = 0, l = clock.methods.length; i < l; i++) {
+      for (let i = 0, l = clock.methods.length; i < l; i++) {
         stubGlobal(clock.methods[i], clock);
       }
 
@@ -3090,7 +3090,7 @@ var sinon = function () {
     module.exports = sinon;
   }
 
-  /*jslint eqeqeq: false, onevar: false*/
+  /*jslint eqeqeq: false, oneconst: false*/
   /*global sinon, module, require, ActiveXObject, XMLHttpRequest, DOMParser*/
   /**
    * Minimal Event interface implementation
@@ -3110,7 +3110,7 @@ var sinon = function () {
   }
 
   (function () {
-    var push = [].push;
+    const push = [].push;
 
     sinon.Event = function Event(type, bubbles, cancelable) {
       this.initEvent(type, bubbles, cancelable);
@@ -3142,10 +3142,10 @@ var sinon = function () {
         listener,
         useCapture
       ) {
-        var listeners =
+        const listeners =
           (this.eventListeners && this.eventListeners[event]) || [];
 
-        for (var i = 0, l = listeners.length; i < l; ++i) {
+        for (let i = 0, l = listeners.length; i < l; ++i) {
           if (listeners[i] == listener) {
             return listeners.splice(i, 1);
           }
@@ -3153,11 +3153,11 @@ var sinon = function () {
       },
 
       dispatchEvent: function dispatchEvent(event) {
-        var type = event.type;
-        var listeners =
+        const type = event.type;
+        const listeners =
           (this.eventListeners && this.eventListeners[type]) || [];
 
-        for (var i = 0; i < listeners.length; i++) {
+        for (let i = 0; i < listeners.length; i++) {
           if (typeof listeners[i] == "function") {
             listeners[i].call(this, event);
           } else {
@@ -3174,7 +3174,7 @@ var sinon = function () {
    * @depend ../../sinon.js
    * @depend event.js
    */
-  /*jslint eqeqeq: false, onevar: false*/
+  /*jslint eqeqeq: false, oneconst: false*/
   /*global sinon, module, require, ActiveXObject, XMLHttpRequest, DOMParser*/
   /**
    * Fake XMLHttpRequest object
@@ -3192,7 +3192,7 @@ var sinon = function () {
 
   // wrapper for global
   (function (global) {
-    var xhr = sinon.xhr;
+    const xhr = sinon.xhr;
     xhr.GlobalXMLHttpRequest = global.XMLHttpRequest;
     xhr.GlobalActiveXObject = global.ActiveXObject;
     xhr.supportsActiveX = typeof xhr.GlobalActiveXObject != "undefined";
@@ -3206,7 +3206,7 @@ var sinon = function () {
         : false;
 
     /*jsl:ignore*/
-    var unsafeHeaders = {
+    const unsafeHeaders = {
       "Accept-Charset": true,
       "Accept-Encoding": true,
       Connection: true,
@@ -3254,18 +3254,18 @@ var sinon = function () {
     // where whitelisted requests are passed through to real XHR
     function each(collection, callback) {
       if (!collection) {return;}
-      for (var i = 0, l = collection.length; i < l; i += 1) {
+      for (let i = 0, l = collection.length; i < l; i += 1) {
         callback(collection[i]);
       }
     }
     function some(collection, callback) {
-      for (var index = 0; index < collection.length; index++) {
+      for (let index = 0; index < collection.length; index++) {
         if (callback(collection[index]) === true) {return true;}
       }
       return false;
     }
     // largest arity in XHR is 5 - XHR#open
-    var apply = function (obj, method, args) {
+    const apply = function (obj, method, args) {
       switch (args.length) {
         case 0:
           return obj[method]();
@@ -3286,9 +3286,9 @@ var sinon = function () {
     FakeXMLHttpRequest.addFilter = function (fn) {
       this.filters.push(fn);
     };
-    var IE6Re = /MSIE 6/;
+    const IE6Re = /MSIE 6/;
     FakeXMLHttpRequest.defake = function (fakeXhr, xhrArgs) {
-      var xhr = new sinon.xhr.workingXHR();
+      const xhr = new sinon.xhr.workingXHR();
       each(
         [
           "open",
@@ -3308,7 +3308,7 @@ var sinon = function () {
         }
       );
 
-      var copyAttrs = function (args) {
+      const copyAttrs = function (args) {
         each(args, function (attr) {
           try {
             fakeXhr[attr] = xhr[attr];
@@ -3318,7 +3318,7 @@ var sinon = function () {
         });
       };
 
-      var stateChange = function () {
+      const stateChange = function () {
         fakeXhr.readyState = xhr.readyState;
         if (xhr.readyState >= FakeXMLHttpRequest.HEADERS_RECEIVED) {
           copyAttrs(["status", "statusText"]);
@@ -3333,7 +3333,7 @@ var sinon = function () {
         {fakeXhr.onreadystatechange.call(fakeXhr);}
       };
       if (xhr.addEventListener) {
-        for (var event in fakeXhr.eventListeners) {
+        for (let event in fakeXhr.eventListeners) {
           if (fakeXhr.eventListeners.hasOwnProperty(event)) {
             each(fakeXhr.eventListeners[event], function (handler) {
               xhr.addEventListener(event, handler);
@@ -3362,7 +3362,7 @@ var sinon = function () {
 
     function verifyResponseBodyType(body) {
       if (typeof body != "string") {
-        var error = new Error(
+        const error = new Error(
           "Attempted to respond to fake XMLHttpRequest with " +
             body +
             ", which is not a string."
@@ -3386,8 +3386,8 @@ var sinon = function () {
         this.requestHeaders = {};
         this.sendFlag = false;
         if (sinon.FakeXMLHttpRequest.useFilters === true) {
-          var xhrArgs = arguments;
-          var defake = some(FakeXMLHttpRequest.filters, function (filter) {
+          const xhrArgs = arguments;
+          const defake = some(FakeXMLHttpRequest.filters, function (filter) {
             return filter.apply(this, xhrArgs);
           });
           if (defake) {
@@ -3429,7 +3429,7 @@ var sinon = function () {
       setResponseHeaders: function setResponseHeaders(headers) {
         this.responseHeaders = {};
 
-        for (var header in headers) {
+        for (let header in headers) {
           if (headers.hasOwnProperty(header)) {
             this.responseHeaders[header] = headers[header];
           }
@@ -3446,7 +3446,7 @@ var sinon = function () {
 
         if (!/^(get|head)$/i.test(this.method)) {
           if (this.requestHeaders["Content-Type"]) {
-            var value = this.requestHeaders["Content-Type"].split(";");
+            const value = this.requestHeaders["Content-Type"].split(";");
             this.requestHeaders["Content-Type"] = value[0] + ";charset=utf-8";
           } else {
             this.requestHeaders["Content-Type"] = "text/plain;charset=utf-8";
@@ -3492,7 +3492,7 @@ var sinon = function () {
 
         header = header.toLowerCase();
 
-        for (var h in this.responseHeaders) {
+        for (let h in this.responseHeaders) {
           if (h.toLowerCase() == header) {
             return this.responseHeaders[h];
           }
@@ -3506,9 +3506,9 @@ var sinon = function () {
           return "";
         }
 
-        var headers = "";
+        const headers = "";
 
-        for (var header in this.responseHeaders) {
+        for (let header in this.responseHeaders) {
           if (
             this.responseHeaders.hasOwnProperty(header) &&
             !/^Set-Cookie2?$/i.test(header)
@@ -3525,8 +3525,8 @@ var sinon = function () {
         verifyHeadersReceived(this);
         verifyResponseBodyType(body);
 
-        var chunkSize = this.chunkSize || 10;
-        var index = 0;
+        const chunkSize = this.chunkSize || 10;
+        const index = 0;
         this.responseText = "";
 
         do {
@@ -3538,7 +3538,7 @@ var sinon = function () {
           index += chunkSize;
         } while (index < body.length);
 
-        var type = this.getResponseHeader("Content-Type");
+        const type = this.getResponseHeader("Content-Type");
 
         if (
           this.responseText &&
@@ -3576,10 +3576,10 @@ var sinon = function () {
 
     // Borrowed from JSpec
     FakeXMLHttpRequest.parseXML = function parseXML(text) {
-      var xmlDoc;
+      const xmlDoc;
 
       if (typeof DOMParser != "undefined") {
-        var parser = new DOMParser();
+        const parser = new DOMParser();
         xmlDoc = parser.parseFromString(text, "text/xml");
       } else {
         xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
@@ -3677,7 +3677,7 @@ var sinon = function () {
   /**
    * @depend fake_xml_http_request.js
    */
-  /*jslint eqeqeq: false, onevar: false, regexp: false, plusplus: false*/
+  /*jslint eqeqeq: false, oneconst: false, regexp: false, plusplus: false*/
   /*global module, require, window*/
   /**
    * The Sinon "server" mimics a web server that receives requests from
@@ -3692,11 +3692,11 @@ var sinon = function () {
    */
 
   if (typeof sinon == "undefined") {
-    var sinon = {};
+    const sinon = {};
   }
 
   sinon.fakeServer = (function () {
-    var push = [].push;
+    const push = [].push;
     function F() {}
 
     function create(proto) {
@@ -3705,7 +3705,7 @@ var sinon = function () {
     }
 
     function responseArray(handler) {
-      var response = handler;
+      const response = handler;
 
       if (Object.prototype.toString.call(handler) != "[object Array]") {
         response = [200, {}, handler];
@@ -3721,15 +3721,15 @@ var sinon = function () {
       return response;
     }
 
-    var wloc = typeof window !== "undefined" ? window.location : {};
-    var rCurrLoc = new RegExp("^" + wloc.protocol + "//" + wloc.host);
+    const wloc = typeof window !== "undefined" ? window.location : {};
+    const rCurrLoc = new RegExp("^" + wloc.protocol + "//" + wloc.host);
 
     function matchOne(response, reqMethod, reqUrl) {
-      var rmeth = response.method;
-      var matchMethod =
+      const rmeth = response.method;
+      const matchMethod =
         !rmeth || rmeth.toLowerCase() == reqMethod.toLowerCase();
-      var url = response.url;
-      var matchUrl =
+      const url = response.url;
+      const matchUrl =
         !url ||
         url == reqUrl ||
         (typeof url.test == "function" && url.test(reqUrl));
@@ -3738,8 +3738,8 @@ var sinon = function () {
     }
 
     function match(response, request) {
-      var requestMethod = this.getHTTPMethod(request);
-      var requestUrl = request.url;
+      const requestMethod = this.getHTTPMethod(request);
+      const requestUrl = request.url;
 
       if (!/^https?:\/\//.test(requestUrl) || rCurrLoc.test(requestUrl)) {
         requestUrl = requestUrl.replace(rCurrLoc, "");
@@ -3747,8 +3747,8 @@ var sinon = function () {
 
       if (matchOne(response, this.getHTTPMethod(request), requestUrl)) {
         if (typeof response.response == "function") {
-          var ru = response.url;
-          var args = [request].concat(!ru ? [] : requestUrl.match(ru).slice(1));
+          const ru = response.url;
+          const args = [request].concat(!ru ? [] : requestUrl.match(ru).slice(1));
           return response.response.apply(response, args);
         }
 
@@ -3760,7 +3760,7 @@ var sinon = function () {
 
     return {
       create: function () {
-        var server = create(this);
+        const server = create(this);
         this.xhr = sinon.useFakeXMLHttpRequest();
         server.requests = [];
 
@@ -3772,7 +3772,7 @@ var sinon = function () {
       },
 
       addRequest: function addRequest(xhrObj) {
-        var server = this;
+        const server = this;
         push.call(this.requests, xhrObj);
 
         xhrObj.onSend = function () {
@@ -3791,7 +3791,7 @@ var sinon = function () {
 
       getHTTPMethod: function getHTTPMethod(request) {
         if (this.fakeHTTPMethods && /post/i.test(request.method)) {
-          var matches = (request.requestBody || "").match(/_method=([^\b;]+)/);
+          const matches = (request.requestBody || "").match(/_method=([^\b;]+)/);
           return !!matches ? matches[1] : request.method;
         }
 
@@ -3840,8 +3840,8 @@ var sinon = function () {
 
       respond: function respond() {
         if (arguments.length > 0) {this.respondWith.apply(this, arguments);}
-        var queue = this.queue || [];
-        var request;
+        const queue = this.queue || [];
+        const request;
 
         while ((request = queue.shift())) {
           this.processRequest(request);
@@ -3854,10 +3854,10 @@ var sinon = function () {
             return;
           }
 
-          var response = this.response || [404, {}, ""];
+          const response = this.response || [404, {}, ""];
 
           if (this.responses) {
-            for (var i = 0, l = this.responses.length; i < l; i++) {
+            for (let i = 0, l = this.responses.length; i < l; i++) {
               if (match.call(this, this.responses[i], request)) {
                 response = this.responses[i].response;
                 break;
@@ -3887,7 +3887,7 @@ var sinon = function () {
    * @depend fake_server.js
    * @depend fake_timers.js
    */
-  /*jslint browser: true, eqeqeq: false, onevar: false*/
+  /*jslint browser: true, eqeqeq: false, oneconst: false*/
   /*global sinon*/
   /**
    * Add-on for sinon.fakeServer that automatically handles a fake timer along with
@@ -3920,9 +3920,9 @@ var sinon = function () {
         }
 
         if (!this.longestTimeout) {
-          var clockSetTimeout = this.clock.setTimeout;
-          var clockSetInterval = this.clock.setInterval;
-          var server = this;
+          const clockSetTimeout = this.clock.setTimeout;
+          const clockSetInterval = this.clock.setInterval;
+          const server = this;
 
           this.clock.setTimeout = function (fn, timeout) {
             server.longestTimeout = Math.max(
@@ -3948,7 +3948,7 @@ var sinon = function () {
     };
 
     sinon.fakeServerWithClock.respond = function respond() {
-      var returnVal = sinon.fakeServer.respond.apply(this, arguments);
+      const returnVal = sinon.fakeServer.respond.apply(this, arguments);
 
       if (this.clock) {
         this.clock.tick(this.longestTimeout || 0);
@@ -3978,7 +3978,7 @@ var sinon = function () {
    * @depend util/fake_timers.js
    * @depend util/fake_server_with_clock.js
    */
-  /*jslint eqeqeq: false, onevar: false, plusplus: false*/
+  /*jslint eqeqeq: false, oneconst: false, plusplus: false*/
   /*global require, module*/
   /**
    * Manages fake collections as well as fake utilities such as Sinon's
@@ -3991,12 +3991,12 @@ var sinon = function () {
    */
 
   if (typeof module == "object" && typeof require == "function") {
-    var sinon = require("../sinon");
+    const sinon = require("../sinon");
     sinon.extend(sinon, require("./util/fake_timers"));
   }
 
   (function () {
-    var push = [].push;
+    const push = [].push;
 
     function exposeValue(sandbox, config, key, value) {
       if (!value) {
@@ -4011,7 +4011,7 @@ var sinon = function () {
     }
 
     function prepareSandboxFromConfig(config) {
-      var sandbox = sinon.create(sinon.sandbox);
+      const sandbox = sinon.create(sinon.sandbox);
 
       if (config.useFakeServer) {
         if (typeof config.useFakeServer == "object") {
@@ -4042,7 +4042,7 @@ var sinon = function () {
       serverPrototype: sinon.fakeServer,
 
       useFakeServer: function useFakeServer() {
-        var proto = this.serverPrototype || sinon.fakeServer;
+        const proto = this.serverPrototype || sinon.fakeServer;
 
         if (!proto || !proto.create) {
           return null;
@@ -4072,14 +4072,14 @@ var sinon = function () {
           return sinon.create(sinon.sandbox);
         }
 
-        var sandbox = prepareSandboxFromConfig(config);
+        const sandbox = prepareSandboxFromConfig(config);
         sandbox.args = sandbox.args || [];
-        var prop,
+        const prop,
           value,
           exposed = sandbox.inject({});
 
         if (config.properties) {
-          for (var i = 0, l = config.properties.length; i < l; i++) {
+          for (let i = 0, l = config.properties.length; i < l; i++) {
             prop = config.properties[i];
             value = exposed[prop] || (prop == "sandbox" && sandbox);
             exposeValue(sandbox, config, prop, value);
@@ -4105,7 +4105,7 @@ var sinon = function () {
    * @depend mock.js
    * @depend sandbox.js
    */
-  /*jslint eqeqeq: false, onevar: false, forin: true, plusplus: false*/
+  /*jslint eqeqeq: false, oneconst: false, forin: true, plusplus: false*/
   /*global module, require, sinon*/
   /**
    * Test function, sandboxes fakes
@@ -4117,7 +4117,7 @@ var sinon = function () {
    */
 
   (function (sinon) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
 
     if (!sinon && commonJSModule) {
@@ -4129,7 +4129,7 @@ var sinon = function () {
     }
 
     function test(callback) {
-      var type = typeof callback;
+      const type = typeof callback;
 
       if (type != "function") {
         throw new TypeError(
@@ -4138,12 +4138,12 @@ var sinon = function () {
       }
 
       return function () {
-        var config = sinon.getConfig(sinon.config);
+        const config = sinon.getConfig(sinon.config);
         config.injectInto =
           (config.injectIntoThis && this) || config.injectInto;
-        var sandbox = sinon.sandbox.create(config);
-        var exception, result;
-        var args = Array.prototype.slice.call(arguments).concat(sandbox.args);
+        const sandbox = sinon.sandbox.create(config);
+        const exception, result;
+        const args = Array.prototype.slice.call(arguments).concat(sandbox.args);
 
         try {
           result = callback.apply(this, args);
@@ -4181,7 +4181,7 @@ var sinon = function () {
    * @depend ../sinon.js
    * @depend test.js
    */
-  /*jslint eqeqeq: false, onevar: false, eqeqeq: false*/
+  /*jslint eqeqeq: false, oneconst: false, eqeqeq: false*/
   /*global module, require, sinon*/
   /**
    * Test case, sandboxes all test functions
@@ -4193,7 +4193,7 @@ var sinon = function () {
    */
 
   (function (sinon) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
 
     if (!sinon && commonJSModule) {
@@ -4210,7 +4210,7 @@ var sinon = function () {
           setUp.apply(this, arguments);
         }
 
-        var exception, result;
+        const exception, result;
 
         try {
           result = property.apply(this, arguments);
@@ -4240,13 +4240,13 @@ var sinon = function () {
       /*jsl:end*/
 
       prefix = prefix || "test";
-      var rPrefix = new RegExp("^" + prefix);
-      var methods = {},
+      const rPrefix = new RegExp("^" + prefix);
+      const methods = {},
         testName,
         property,
         method;
-      var setUp = tests.setUp;
-      var tearDown = tests.tearDown;
+      const setUp = tests.setUp;
+      const tearDown = tests.tearDown;
 
       for (testName in tests) {
         if (tests.hasOwnProperty(testName)) {
@@ -4284,7 +4284,7 @@ var sinon = function () {
    * @depend ../sinon.js
    * @depend stub.js
    */
-  /*jslint eqeqeq: false, onevar: false, nomen: false, plusplus: false*/
+  /*jslint eqeqeq: false, oneconst: false, nomen: false, plusplus: false*/
   /*global module, require, sinon*/
   /**
    * Assertions matching the test spy retrieval interface.
@@ -4296,10 +4296,10 @@ var sinon = function () {
    */
 
   (function (sinon, global) {
-    var commonJSModule =
+    const commonJSModule =
       typeof module == "object" && typeof require == "function";
-    var slice = Array.prototype.slice;
-    var assert;
+    const slice = Array.prototype.slice;
+    const assert;
 
     if (!sinon && commonJSModule) {
       sinon = require("../sinon");
@@ -4310,9 +4310,9 @@ var sinon = function () {
     }
 
     function verifyIsStub() {
-      var method;
+      const method;
 
-      for (var i = 0, l = arguments.length; i < l; ++i) {
+      for (let i = 0, l = arguments.length; i < l; ++i) {
         method = arguments[i];
 
         if (!method) {
@@ -4331,7 +4331,7 @@ var sinon = function () {
 
     function failAssertion(object, msg) {
       object = object || global;
-      var failMethod = object.fail || assert.fail;
+      const failMethod = object.fail || assert.fail;
       failMethod.call(object, msg);
     }
 
@@ -4344,8 +4344,8 @@ var sinon = function () {
       assert[name] = function (fake) {
         verifyIsStub(fake);
 
-        var args = slice.call(arguments, 1);
-        var failed = false;
+        const args = slice.call(arguments, 1);
+        const failed = false;
 
         if (typeof method == "function") {
           failed = !method(fake);
@@ -4374,7 +4374,7 @@ var sinon = function () {
       failException: "AssertError",
 
       fail: function fail(message) {
-        var error = new Error(message);
+        const error = new Error(message);
         error.name = this.failException || assert.failException;
 
         throw error;
@@ -4384,7 +4384,7 @@ var sinon = function () {
 
       callOrder: function assertCallOrder() {
         verifyIsStub.apply(null, arguments);
-        var expected = "",
+        const expected = "",
           actual = "";
 
         if (!sinon.calledInOrder(arguments)) {
@@ -4412,7 +4412,7 @@ var sinon = function () {
         verifyIsStub(method);
 
         if (method.callCount != count) {
-          var msg =
+          const msg =
             "expected %n to be called " +
             sinon.timesInWords(count) +
             " but was called %c%C";
@@ -4427,12 +4427,12 @@ var sinon = function () {
           throw new TypeError("target is null or undefined");
         }
 
-        var o = options || {};
-        var prefix = (typeof o.prefix == "undefined" && "assert") || o.prefix;
-        var includeFail =
+        const o = options || {};
+        const prefix = (typeof o.prefix == "undefined" && "assert") || o.prefix;
+        const includeFail =
           typeof o.includeFail == "undefined" || !!o.includeFail;
 
-        for (var method in this) {
+        for (let method in this) {
           if (method != "export" && (includeFail || !/^(fail)/.test(method))) {
             target[exposedName(prefix, method)] = this[method];
           }

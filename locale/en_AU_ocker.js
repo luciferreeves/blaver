@@ -5,4 +5,4 @@ const blaver = new Blaver({
 });
 blaver.locales["en_AU_ocker"] = require("../lib/locales/en_AU_ocker");
 blaver.locales["en"] = require("../lib/locales/en");
-module["exports"] = blaver;
+module.exports = blaver;
