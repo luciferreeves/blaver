@@ -27,7 +27,7 @@ describe("functional tests", function () {
   }
 });
 
-describe("blaver.fake functional tests", function () {
+describe.only("blaver.fake functional tests", function () {
   for(const locale in blaver.locales) {
     blaver.locale = locale;
     blaver.seed(1);

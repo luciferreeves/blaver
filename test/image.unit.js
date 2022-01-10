@@ -43,7 +43,7 @@ describe("image.js", function () {
     describe("avatar()", function () {
       it("return a random avatar from Pravatar", function () {
         assert.notStrictEqual(-1, blaver.image.lorempicsum.avatar().indexOf('https://i.pravatar.cc'));
-      })
+      });
     });
 
     describe("imageGrayscale()", function () {
@@ -90,7 +90,7 @@ describe("image.js", function () {
     describe("avatar()", function () {
       it("return a random avatar from Pravatar", function () {
         assert.notStrictEqual(-1, blaver.image.lorempixel.avatar().indexOf('https://i.pravatar.cc'));
-      })
+      });
     });
     describe("abstract()", function () {
       it("returns a random abstract image url", function () {
@@ -205,7 +205,7 @@ describe("image.js", function () {
         const food = blaver.image.unsplash.image(100, 200, 'keyword1,keyword2,keyword3');
         assert.strictEqual(food, 'https://source.unsplash.com/100x200?keyword1,keyword2,keyword3');
       });
-    })
+    });
     describe("food()", function () {
       it("returns a random food image url", function () {
         const food = blaver.image.unsplash.food();

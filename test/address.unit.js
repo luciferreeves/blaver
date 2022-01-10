@@ -105,7 +105,7 @@ describe("address.js", function () {
     it("trims trailing whitespace from the name", function() {
       blaver.address.streetSuffix.restore();
 
-      sinon.stub(blaver.address, 'streetSuffix').returns("")
+      sinon.stub(blaver.address, 'streetSuffix').returns("");
       const street_name = blaver.address.streetName();
       assert.ok(!street_name.match(/ $/));
     });
@@ -114,8 +114,8 @@ describe("address.js", function () {
   describe("streetAddress()", function () {
 
     const errorExpectDigits = function(expected){
-      return "The street number should be had " + expected + " digits"
-    }
+      return "The street number should be had " + expected + " digits";
+    };
 
     beforeEach(function () {
       sinon.spy(blaver.address, 'streetName');
@@ -130,7 +130,7 @@ describe("address.js", function () {
     it("occasionally returns a 5-digit street number", function () {
       sinon.stub(blaver.datatype, 'number').returns(0);
       const address = blaver.address.streetAddress();
-      const expected = 5
+      const expected = 5;
       const parts = address.split(' ');
 
       assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
@@ -143,7 +143,7 @@ describe("address.js", function () {
       sinon.stub(blaver.datatype, 'number').returns(1);
       const address = blaver.address.streetAddress();
       const parts = address.split(' ');
-      const expected = 4
+      const expected = 4;
 
       assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
       assert.ok(blaver.address.streetName.called);
@@ -155,7 +155,7 @@ describe("address.js", function () {
       sinon.stub(blaver.datatype, 'number').returns(2);
       const address = blaver.address.streetAddress();
       const parts = address.split(' ');
-      const expected = 3
+      const expected = 3;
 
       assert.strictEqual(parts[0].length, expected, errorExpectDigits(expected));
       assert.ok(blaver.address.streetName.called);
@@ -217,6 +217,15 @@ describe("address.js", function () {
       const countryCode = blaver.address.countryCode();
       assert.ok(countryCode);
       assert.ok(blaver.address.countryCode.called);
+      blaver.address.countryCode.restore();
+    });
+
+    it("returns random countryCode with argument passed", function () {
+      sinon.spy(blaver.address, 'countryCode');
+      const countryCode = blaver.address.countryCode("alpha-1");
+      assert.ok(countryCode);
+      assert.ok(blaver.address.countryCode.called);
+      assert.strictEqual(countryCode.length, 2, "The countryCode should be had 3 characters");
       blaver.address.countryCode.restore();
     });
 
@@ -394,7 +403,7 @@ describe("address.js", function () {
 
       assert.strictEqual(direction, expected, "The random direction should be equals " + expected);
       blaver.address.direction.restore();
-    })
+    });
 
     it("returns abbreviation when useAbbr is false", function () {
       sinon.stub(blaver.address, 'direction').returns('N');
@@ -402,16 +411,16 @@ describe("address.js", function () {
       const expected = 'N';
       assert.strictEqual(direction, expected, "The abbreviation of direction when useAbbr is false should be equals " + expected+ ". Current is " + direction);
       blaver.address.direction.restore();
-    })
+    });
 
     it("returns abbreviation when useAbbr is true", function () {
       const direction = blaver.address.direction(true);
       const expectedType = 'string';
-      const lengthDirection = direction.length
-      const prefixErrorMessage = "The abbreviation of direction when useAbbr is true should"
+      const lengthDirection = direction.length;
+      const prefixErrorMessage = "The abbreviation of direction when useAbbr is true should";
       assert.strictEqual(typeof direction, expectedType, prefixErrorMessage + " be typeof string. Current is" + typeof direction);
       assert.strictEqual(lengthDirection <= 2, true, prefixErrorMessage + " have a length less or equals 2. Current is " + lengthDirection);
-    })
+    });
 
     it("returns abbreviation when useAbbr is true", function () {
       sinon.stub(blaver.address, 'direction').returns('N');
@@ -419,9 +428,9 @@ describe("address.js", function () {
       const expected = 'N';
       assert.strictEqual(direction, expected, "The abbreviation of direction when useAbbr is true should be equals " + expected + ". Current is " + direction);
       blaver.address.direction.restore();
-    })
+    });
 
-  })
+  });
 
   describe("ordinalDirection()", function () {
     it("returns random ordinal direction", function () {
@@ -431,7 +440,7 @@ describe("address.js", function () {
 
       assert.strictEqual(ordinalDirection, expected, "The ransom ordinal direction should be equals " + expected + ". Current is " + ordinalDirection);
       blaver.address.ordinalDirection.restore();
-    })
+    });
 
     it("returns abbreviation when useAbbr is true", function () {
       sinon.stub(blaver.address, 'ordinalDirection').returns('W');
@@ -440,20 +449,20 @@ describe("address.js", function () {
 
       assert.strictEqual(ordinalDirection, expected, "The ordinal direction when useAbbr is true should be equals " + expected + ". Current is " + ordinalDirection);
       blaver.address.ordinalDirection.restore();
-    })
+    });
 
     it("returns abbreviation when useAbbr is true", function () {
       const ordinalDirection = blaver.address.ordinalDirection(true);
       const expectedType = 'string';
       const ordinalDirectionLength = ordinalDirection.length;
-      const prefixErrorMessage = "The ordinal direction when useAbbr is true should"
+      const prefixErrorMessage = "The ordinal direction when useAbbr is true should";
 
       assert.strictEqual(typeof ordinalDirection, expectedType, prefixErrorMessage + " be had typeof equals " + expectedType + ".Current is " + typeof ordinalDirection);
       assert.strictEqual(ordinalDirectionLength <= 2, true, prefixErrorMessage + " have a length less or equals 2. Current is " + ordinalDirectionLength);
-    })
+    });
 
 
-  })
+  });
 
   describe("cardinalDirection()", function () {
     it("returns random cardinal direction", function () {
@@ -463,7 +472,7 @@ describe("address.js", function () {
 
       assert.strictEqual(cardinalDirection, expected, "The random cardinal direction should be equals " + expected + ". Current is " + cardinalDirection);
       blaver.address.cardinalDirection.restore();
-    })
+    });
 
     it("returns abbreviation when useAbbr is true", function () {
       sinon.stub(blaver.address, 'cardinalDirection').returns('NW');
@@ -472,19 +481,19 @@ describe("address.js", function () {
 
       assert.strictEqual(cardinalDirection, expected, "The cardinal direction when useAbbr is true should be equals " + expected + ". Current is " + cardinalDirection);
       blaver.address.cardinalDirection.restore();
-    })
+    });
 
     it("returns abbreviation when useAbbr is true", function () {
       const cardinalDirection = blaver.address.cardinalDirection(true);
       const expectedType = 'string';
       const cardinalDirectionLength = cardinalDirection.length;
-      const prefixErrorMessage = "The cardinal direction when useAbbr is true should"
+      const prefixErrorMessage = "The cardinal direction when useAbbr is true should";
 
       assert.strictEqual(typeof cardinalDirection, expectedType, prefixErrorMessage + " be had typeof equals " + expectedType + ".Current is " + typeof ordinalDirection);
       assert.strictEqual(cardinalDirectionLength <= 2, true, prefixErrorMessage + " have a length less or equals 2. Current is " + cardinalDirectionLength);
-    })
+    });
 
-  })
+  });
 
   describe("nearbyGPSCoordinate()", function () {
     it("returns random gps coordinate within a distance of another one", function () {

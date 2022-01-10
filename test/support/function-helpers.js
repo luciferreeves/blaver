@@ -41,8 +41,9 @@ functionHelpers.modulesList = function modulesList () {
     .filter(isTestableModule)
     .reduce(function(result, mod) {
       result[mod] = Object.keys(blaver[mod]).filter(both(isMethodOf(mod), isTestableMethod(mod)));
+      
       return result;
     }, {});
       
   return modules;
-}
+};

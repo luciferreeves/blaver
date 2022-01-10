@@ -20,6 +20,7 @@ var defaultCompare = function(obj, key) {
   if (typeof obj[key] === 'undefined') {
     return -1;
   }
+  
   return 0;
 };
 
@@ -27,7 +28,7 @@ var defaultCompare = function(obj, key) {
 unique.errorMessage = function (now, code, opts) {
   console.error('error', code);
   console.log('found', Object.keys(found).length, 'unique entries before throwing error. \nretried:', currentIterations, '\ntotal time:', now - opts.startTime, 'ms');
-  throw new Error(code + ' for uniqueness check \n\nMay not be able to generate any more unique values with current settings. \nTry adjusting maxTime or maxRetries parameters for faker.unique()')
+  throw new Error(code + ' for uniqueness check \n\nMay not be able to generate any more unique values with current settings. \nTry adjusting maxTime or maxRetries parameters for faker.unique()');
 };
 
 unique.exec = function (method, args, opts) {
@@ -76,10 +77,12 @@ unique.exec = function (method, args, opts) {
   if (opts.compare(found, result) === -1 && opts.exclude.indexOf(result) === -1) {
     found[result] = result;
     opts.currentIterations = 0;
+    
     return result;
   } else {
     // console.log('conflict', result);
     opts.currentIterations++;
+    
     return unique.exec(method, args, opts);
   }
 };

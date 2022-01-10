@@ -13,10 +13,12 @@ module.exports = function (number) {
         num -= 9;
       }
     }
+    
     return num;
   });
   const sum = split.reduce(function (prev, curr) {
     return prev + curr;
   });
+  
   return sum % 10 === check;
 };

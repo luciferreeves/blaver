@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 process.env.NODE_ENV = 'test';
 
-const fs = require('fs');
 const Mocha = require('mocha');
 const optimist = require('optimist');
 const walk_dir = require('./support/walk_dir');
@@ -61,7 +60,7 @@ function run(cb) {
   });
 }
 
-run(function (err) {
+run(function () {
   mocha.run(function (failures) {
     process.exit(failures);
   });

@@ -8,12 +8,16 @@
     "url": "https://github.com/luciferreeves/blaver.git"
   },
   "scripts": {
-    "browser": "./node_modules/.bin/gulp browser",
-    "jsdoc": "./node_modules/.bin/gulp jsdoc",
-    "readme": "./node_modules/.bin/gulp readme",
-    "lint": "node_modules/.bin/eslint lib --fix",
-    "test": "node_modules/.bin/mocha test/*.*.js",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov"
+    "browser": "gulp browser",
+    "jsdoc": "gulp jsdoc",
+    "readme": "gulp readme",
+    "lint": "eslint lib --fix",
+    "test": "mocha test/*.*.js",
+    "test:file": "mocha",
+    "coverage": "nyc npm test",
+    "coverage:file": "nyc mocha",
+    "report": "nyc report --reporter=text-lcov",
+    "cov:rep": "npm test && npm run report"
   },
   "nyc": {
     "all": false,

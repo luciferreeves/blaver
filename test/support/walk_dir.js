@@ -1,19 +1,19 @@
-const fs = require("fs");
+var fs = require("fs");
 
-const methods = {
+var methods = {
   walk: function (dir, validation_function, cb) {
     if (arguments.length === 2) {
       cb = validation_function;
       validation_function = null;
     }
 
-    const results = [];
+    var results = [];
     fs.readdir(dir, function (err, list) {
       if (err) {
         return cb(err);
       }
 
-      const pending = list.length;
+      var pending = list.length;
 
       if (!pending) {
         return cb(null, results);
@@ -45,7 +45,7 @@ const methods = {
         });
       });
     });
-  },
+  }
 };
 
 module.exports = methods;
