@@ -1,0 +1,28 @@
+name: "\U0001F41E Bug report"
+description: Report an issue
+labels: [bug] # This will automatically assign the 'pending triage' label
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is. If you intend to submit a PR for this issue, tell us in the description. Thanks!
+      placeholder: Last night I was on my computer using blaver and it so happened...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Please list in a step-wise fashion what to do in order to reproduce the bug
+      placeholder: I wrote some code and wrote some more until I reached...
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Info
+      description: Anything else if you want to share?; e.g. version numbers
+      placeholder: I could have written my whole life story here but I know you guys will ignore it...
+    validations:
+      required: false
