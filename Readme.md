@@ -1,3 +1,9 @@
+# Update: Project Moved to [`faker`](https://github.com/faker-js/faker)
+
+For the best interest of the community, I am merging this project with [`faker`](https://github.com/faker-js/faker). [See Discussion](https://github.com/faker-js/faker/discussions/165) regarding this decision. The NPM package will be deprecated from now on and I will continue to contribute to [`faker`](https://github.com/faker-js/faker).
+
+Thank you.
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/luciferreeves/blaver/master/logos/logo-96.png">
 </p>
